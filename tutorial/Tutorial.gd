@@ -145,7 +145,7 @@ func on_player_attacked() -> void:
 
 
 func on_first_enemy_attack() -> void:
-	TipBody.text = "[p align=center][b]GOOD LUCK.[/b][/p][p] [/p][p]Hope you get out of here soon.[/p]"
+	TipBody.text = "[p align=center][b]GOOD LUCK.[/b][/p][p] [/p][p align=center]Hope you get out of here soon.[/p]"
 	TipPanel.set_anchors_preset(Control.PRESET_CENTER)
 	tipIndex += 1
 	show()
