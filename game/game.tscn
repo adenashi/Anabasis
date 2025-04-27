@@ -54,6 +54,15 @@ script = ExtResource("7_hb504")
 
 [node name="HandController" parent="." instance=ExtResource("8_j8tme")]
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("8_ee6o4")]
+visible = false
+
+[node name="StagePlacard" parent="CanvasLayer" instance=ExtResource("9_4cobl")]
+visible = false
+
 [node name="Field" parent="." node_paths=PackedStringArray("StartingPositions") instance=ExtResource("10_qf6n1")]
 StartingPositions = {
 NodePath("Path2D/Point1"): 0.0,
@@ -70,11 +79,3 @@ NodePath("Path2D/Point11"): 0.0,
 NodePath("Path2D/Point12"): 0.0,
 NodePath("Path2D/Point13"): 0.0
 }
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="HUD" parent="CanvasLayer" instance=ExtResource("8_ee6o4")]
-visible = false
-
-[node name="StagePlacard" parent="CanvasLayer" instance=ExtResource("9_4cobl")]
-visible = false

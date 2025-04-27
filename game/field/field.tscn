@@ -4,11 +4,12 @@
 
 [sub_resource type="Curve2D" id="Curve2D_tar8h"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 300, 500, 0, 0, 0, 0, 1620, 500)
+"points": PackedVector2Array(0, 0, 0, 0, 370, 500, 0, 0, 0, 0, 1550, 500)
 }
 point_count = 2
 
-[node name="Field" type="Node2D" node_paths=PackedStringArray("Path", "StartingPositions")]
+[node name="Field" type="Node2D" node_paths=PackedStringArray("Path", "StartingPositions", "AsiMarker", "EnemyMarker")]
+z_index = 500
 script = ExtResource("1_n4qxx")
 Path = NodePath("Path2D")
 StartingPositions = {
@@ -26,58 +27,66 @@ NodePath("Path2D/Point11"): 0.0,
 NodePath("Path2D/Point12"): 0.0,
 NodePath("Path2D/Point13"): 0.0
 }
+AsiMarker = NodePath("AsiMarker")
+EnemyMarker = NodePath("EnemyMarker")
 metadata/_edit_horizontal_guides_ = [500.0]
 
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource("Curve2D_tar8h")
 
 [node name="Point1" type="PathFollow2D" parent="Path2D"]
-position = Vector2(300, 500)
+position = Vector2(370, 500)
 
 [node name="Point2" type="PathFollow2D" parent="Path2D"]
-position = Vector2(405.59, 500)
+position = Vector2(475.594, 500)
 progress = 105.6
 
 [node name="Point3" type="PathFollow2D" parent="Path2D"]
-position = Vector2(511.198, 500)
+position = Vector2(581.2, 500)
 progress = 211.2
 
 [node name="Point4" type="PathFollow2D" parent="Path2D"]
-position = Vector2(616.799, 500)
+position = Vector2(686.799, 500)
 progress = 316.8
 
 [node name="Point5" type="PathFollow2D" parent="Path2D"]
-position = Vector2(722.399, 500)
+position = Vector2(792.4, 500)
 progress = 422.4
 
 [node name="Point6" type="PathFollow2D" parent="Path2D"]
-position = Vector2(828, 500)
+position = Vector2(898, 500)
 progress = 528.0
 
 [node name="Point7" type="PathFollow2D" parent="Path2D"]
-position = Vector2(933.6, 500)
+position = Vector2(1003.6, 500)
 progress = 633.6
 
 [node name="Point8" type="PathFollow2D" parent="Path2D"]
-position = Vector2(1039.2, 500)
+position = Vector2(1109.2, 500)
 progress = 739.2
 
 [node name="Point9" type="PathFollow2D" parent="Path2D"]
-position = Vector2(1144.8, 500)
+position = Vector2(1214.8, 500)
 progress = 844.8
 
 [node name="Point10" type="PathFollow2D" parent="Path2D"]
-position = Vector2(1250.4, 500)
+position = Vector2(1320.4, 500)
 progress = 950.4
 
 [node name="Point11" type="PathFollow2D" parent="Path2D"]
-position = Vector2(1356, 500)
+position = Vector2(1426.01, 500)
 progress = 1056.0
 
 [node name="Point12" type="PathFollow2D" parent="Path2D"]
-position = Vector2(1461.6, 500)
+position = Vector2(1531.65, 500)
 progress = 1161.6
 
 [node name="Point13" type="PathFollow2D" parent="Path2D"]
-position = Vector2(1620, 500)
+position = Vector2(1550, 500)
 progress = 1320.0
+
+[node name="AsiMarker" type="Marker2D" parent="."]
+position = Vector2(230, 500)
+
+[node name="EnemyMarker" type="Marker2D" parent="."]
+position = Vector2(1690, 500)

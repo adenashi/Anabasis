@@ -89,6 +89,7 @@ func do_defense() -> void:
 		var possibles : Array[int] = [5,10,15]
 		defense = possibles.pick_random()
 	
+	send_update("Defending for free move.")
 	Dispatch.EnemyDefends.emit(defense)
 
 

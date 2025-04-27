@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://tk7q77fb4bmm"]
+
+[ext_resource type="Texture2D" uid="uid://b4jfoesnenq7w" path="res://assets/effects/textures/spark_05_rotated.png" id="1_qc6l6"]
+[ext_resource type="Texture2D" uid="uid://c3fy6kpt02sml" path="res://assets/effects/textures/spark_06_rotated.png" id="2_f0sug"]
+[ext_resource type="Texture2D" uid="uid://coxlwchlw3slf" path="res://assets/effects/textures/spark_07.png" id="3_ma7i8"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_jx7o3"]
+frames = 3
+frame_0/texture = ExtResource("1_qc6l6")
+frame_0/duration = 0.05
+frame_1/texture = ExtResource("2_f0sug")
+frame_1/duration = 0.1
+frame_2/texture = ExtResource("3_ma7i8")
+frame_2/duration = 0.15
+
+[sub_resource type="Curve" id="Curve_5h82o"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0.34898, -0.449438), 0.0, 0.0, 0, 0, Vector2(0.491837, 0.494382), 1.116, 1.116, 0, 0, Vector2(0.979592, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_m8es1"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0.406122, -0.179775), 0.0, 2.75281, 0, 0, Vector2(0.5, 1), 0.412921, 0.412921, 0, 0, Vector2(1, 0.691011), 3.0815, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_hlsu5"]
+colors = PackedColorArray(0.545098, 1, 0.996078, 1, 0.996078, 0.388235, 0.886275, 1)
+
+[sub_resource type="Gradient" id="Gradient_m4lfb"]
+colors = PackedColorArray(0.545098, 1, 0.996078, 1, 0.992157, 0.635294, 0.533333, 1)
+
+[node name="BeamParticle" type="CPUParticles2D"]
+z_index = 450
+z_as_relative = false
+emitting = false
+amount = 1
+texture = SubResource("AnimatedTexture_jx7o3")
+one_shot = true
+explosiveness = 0.5
+emission_shape = 5
+emission_points = PackedVector2Array(0, 0)
+emission_normals = PackedVector2Array(-1.5, 0)
+emission_colors = PackedColorArray(1, 1, 1, 1)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 500.0
+initial_velocity_max = 500.0
+linear_accel_min = 21.9
+linear_accel_max = 21.9
+scale_amount_min = 3.0
+scale_amount_max = 3.0
+split_scale = true
+scale_curve_x = SubResource("Curve_5h82o")
+scale_curve_y = SubResource("Curve_m8es1")
+color = Color(0.545098, 1, 0.996078, 1)
+color_ramp = SubResource("Gradient_hlsu5")
+color_initial_ramp = SubResource("Gradient_m4lfb")

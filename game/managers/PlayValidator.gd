@@ -139,12 +139,14 @@ func check_selected_cards() -> void:
 			message += card.Name + " "
 		send_update(message)
 		send_defense()
+		Dispatch.PlayerMove.emit()
 	elif valid_full_sequence():
 		message = "Valid Full Sequence played: "
 		for card:BaseCard in selectedCards:
 			message += card.Name + " "
 		send_update(message)
 		send_both()
+		Dispatch.PlayerMove.emit()
 	elif valid_partial_sequence():
 		message = "Valid Attack Sequence played: "
 		for card:BaseCard in selectedCards:
@@ -153,6 +155,7 @@ func check_selected_cards() -> void:
 		if SaveData.TutorialOn:
 			Dispatch.PlayerAttacked.emit()
 		send_attack()
+		Dispatch.PlayerMove.emit()
 	else:
 		message = "Not a valid run or sequence: "
 		for card:BaseCard in selectedCards:

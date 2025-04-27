@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://cc8bfm3cd32m2"]
+
+[ext_resource type="Texture2D" uid="uid://d0bljdipy50ly" path="res://assets/effects/textures/circle_05.png" id="1_jhcks"]
+[ext_resource type="Texture2D" uid="uid://dn0g6370x3paq" path="res://assets/effects/textures/circle_02.png" id="2_cdte1"]
+[ext_resource type="Texture2D" uid="uid://bkpguto1d542q" path="res://assets/effects/textures/circle_03.png" id="3_drn5a"]
+[ext_resource type="Texture2D" uid="uid://b15a0iq1gjr1m" path="res://assets/effects/textures/circle_01.png" id="4_pefjs"]
+[ext_resource type="Texture2D" uid="uid://mhyxusgd6ur4" path="res://assets/effects/textures/circle_04.png" id="5_2a3yi"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_2oc6e"]
+frames = 5
+frame_0/texture = ExtResource("1_jhcks")
+frame_0/duration = 0.2
+frame_1/texture = ExtResource("2_cdte1")
+frame_1/duration = 0.2
+frame_2/texture = ExtResource("3_drn5a")
+frame_2/duration = 0.2
+frame_3/texture = ExtResource("4_pefjs")
+frame_3/duration = 0.2
+frame_4/texture = ExtResource("5_2a3yi")
+frame_4/duration = 0.2
+
+[sub_resource type="Gradient" id="Gradient_e7bxj"]
+colors = PackedColorArray(0.545098, 1, 0.996078, 1, 0.545098, 1, 0.996078, 0.180392)
+
+[node name="CircleParticle" type="CPUParticles2D"]
+z_index = 500
+z_as_relative = false
+emitting = false
+amount = 1
+texture = SubResource("AnimatedTexture_2oc6e")
+lifetime = 0.9
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, 0)
+gravity = Vector2(0, 0)
+scale_amount_max = 1.5
+color_ramp = SubResource("Gradient_e7bxj")
+hue_variation_min = -0.21
+hue_variation_max = 0.36

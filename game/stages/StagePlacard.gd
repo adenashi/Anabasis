@@ -148,7 +148,7 @@ func prepare_results_placard() -> void:
 
 
 func show_stage_results() -> void:
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.8).timeout
 	await set_time(currentResults.Time)
 	await set_reshuffles(currentResults.Reshuffles)
 	await set_score(currentResults.Score)
@@ -185,7 +185,7 @@ func raise() -> void:
 
 func lower() -> void:
 	reset_pos_tween()
-	posTween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
+	posTween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 	
 	posTween.tween_property(panel, "position:y", HIDDEN, 2.0)
 	

@@ -51,7 +51,6 @@ func _ready() -> void:
 	Validator.Deck = Deck
 	Validator.Combat = Combat
 	CurrentEnemy.Deck = Deck
-	CurrentEnemy.Player = Player
 	start_game()
 	await one_frame()
 	start_level()
@@ -186,6 +185,7 @@ func on_player_died() -> void:
 	Global.CurrentState = Global.GameState.INTERSTAGE
 	GameTimer.stop()
 	HUD.hide_all_buttons()
+	await get_tree().create_timer(2.0).timeout
 	Deck.discard_hand()
 	HUD.hide()
 	

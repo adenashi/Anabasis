@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://1llllgjdblmj"]
+
+[ext_resource type="Texture2D" uid="uid://bltdte7v7st11" path="res://assets/effects/textures/star_05.png" id="1_dv7dp"]
+[ext_resource type="Texture2D" uid="uid://b0hj8sehevrvm" path="res://assets/effects/textures/star_06.png" id="2_k3hm4"]
+[ext_resource type="Texture2D" uid="uid://b1gvdyjvxgr1l" path="res://assets/effects/textures/star_07.png" id="3_l5t4h"]
+[ext_resource type="Texture2D" uid="uid://brhheighwvat8" path="res://assets/effects/textures/star_08.png" id="4_4yv57"]
+[ext_resource type="Texture2D" uid="uid://dg4s2cun2ddxs" path="res://assets/effects/textures/star_09.png" id="5_yqhpi"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_flv3n"]
+frames = 5
+frame_0/texture = ExtResource("1_dv7dp")
+frame_0/duration = 0.1
+frame_1/texture = ExtResource("2_k3hm4")
+frame_1/duration = 0.1
+frame_2/texture = ExtResource("3_l5t4h")
+frame_2/duration = 0.1
+frame_3/texture = ExtResource("4_4yv57")
+frame_3/duration = 0.1
+frame_4/texture = ExtResource("5_yqhpi")
+frame_4/duration = 0.1
+
+[node name="StartParticle2" type="CPUParticles2D"]
+z_index = 500
+z_as_relative = false
+emitting = false
+amount = 1
+texture = SubResource("AnimatedTexture_flv3n")
+lifetime = 0.5
+one_shot = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 0)
+scale_amount_min = 0.5
