@@ -18,7 +18,7 @@ script = ExtResource("2_vy6qu")
 TipPanel = NodePath("TipPanel")
 TipBody = NodePath("TipPanel/TipPanel/VBoxContainer/TipBody")
 
-[node name="TipPanel" type="HBoxContainer" parent="."]
+[node name="TipPanel" type="VBoxContainer" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -26,40 +26,45 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -201.0
-offset_top = -116.0
-offset_right = 139.0
-offset_bottom = 117.0
+offset_left = -365.0
+offset_top = -124.0
+offset_right = 365.0
+offset_bottom = 124.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = -70
 
 [node name="Rufus" type="TextureRect" parent="TipPanel"]
 z_index = 1
-custom_minimum_size = Vector2(128, 128)
+custom_minimum_size = Vector2(300, 128)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("3_ridmi")
 expand_mode = 3
-stretch_mode = 5
+stretch_mode = 4
 
 [node name="TipPanel" type="PanelContainer" parent="TipPanel"]
 layout_mode = 2
+size_flags_horizontal = 8
 size_flags_vertical = 8
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TipPanel/TipPanel"]
 layout_mode = 2
 size_flags_vertical = 8
+theme_override_constants/separation = 24
 
 [node name="TipBody" type="RichTextLabel" parent="TipPanel/TipPanel/VBoxContainer"]
-custom_minimum_size = Vector2(250, 75)
+custom_minimum_size = Vector2(640, 100)
 layout_mode = 2
+theme_override_constants/line_separation = 12
 theme_override_fonts/normal_font = ExtResource("3_qk73h")
 theme_override_fonts/bold_font = ExtResource("4_ridmi")
 theme_override_font_sizes/normal_font_size = 24
 theme_override_font_sizes/bold_font_size = 28
 bbcode_enabled = true
+fit_content = true
+scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -69,4 +74,5 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "OK"
 
+[connection signal="item_rect_changed" from="TipPanel/TipPanel/VBoxContainer/TipBody" to="." method="on_label_size_changed"]
 [connection signal="pressed" from="TipPanel/TipPanel/VBoxContainer/OKButton" to="." method="on_ok_button_pressed"]
