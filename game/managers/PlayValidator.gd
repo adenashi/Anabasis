@@ -54,7 +54,15 @@ func on_card_selected(card : BaseCard) -> void:
 				c.show_action(ActionType.DEFENSE)
 			if SaveData.TutorialOn:
 				Dispatch.RunSelected.emit()
-		elif valid_sequence():
+		elif valid_full_sequence():
+			var att : int = 0
+			for c in selectedCards:
+				c.show_action(ActionType.ATTACK)
+				att += c.Value
+			Dispatch.UpdatePlayerAttack.emit(att)
+			if SaveData.TutorialOn:
+				Dispatch.SequenceSelected.emit()
+		elif valid_partial_sequence():
 			var att : int = 0
 			for c in selectedCards:
 				c.show_action(ActionType.ATTACK)
@@ -78,7 +86,13 @@ func on_card_deselected(card : BaseCard) -> void:
 		if valid_run():
 			for c in selectedCards:
 				c.show_action(ActionType.DEFENSE)
-		elif valid_sequence():
+		elif valid_full_sequence():
+			var att : int = 0
+			for c in selectedCards:
+				c.show_action(ActionType.ATTACK)
+				att += c.Value
+			Dispatch.UpdatePlayerAttack.emit(att)
+		elif valid_partial_sequence():
 			var att : int = 0
 			for c in selectedCards:
 				c.show_action(ActionType.ATTACK)
@@ -125,7 +139,13 @@ func check_selected_cards() -> void:
 			message += card.Name + " "
 		send_update(message)
 		send_defense()
-	elif valid_sequence():
+	elif valid_full_sequence():
+		message = "Valid Full Sequence played: "
+		for card:BaseCard in selectedCards:
+			message += card.Name + " "
+		send_update(message)
+		send_both()
+	elif valid_partial_sequence():
 		message = "Valid Attack Sequence played: "
 		for card:BaseCard in selectedCards:
 			message += card.Name + " "
@@ -153,12 +173,16 @@ func valid_run() -> bool: # Valid runs are added to Defense
 
 
 ## Checks if the selected cards are all of the same suit, and are of sequential values
-func valid_sequence() -> bool: # Valid sequences are Attacks
+func valid_full_sequence() -> bool: # Valid sequences are Attacks
 	var suit : BaseCard.CardSuit = selectedCards.front().Suit
 	for card:BaseCard in selectedCards:
 		if card.Suit != suit:
 			return false
 	
+	return valid_partial_sequence()
+
+
+func valid_partial_sequence() -> bool:
 	selectedCards.sort_custom(Util.sort_by_rank)
 	var start : int = selectedCards.front().Value
 	for i in range(1, selectedCards.size()):
@@ -183,6 +207,11 @@ func send_defense() -> void:
 			card.change_state(BaseCard.CardState.PLAYED)
 	Dispatch.AddDefense.emit(selectedCards)
 
+
+func send_both() -> void:
+	for card:BaseCard in selectedCards:
+			card.change_state(BaseCard.CardState.PLAYED)
+	Dispatch.DoAttackAndDefense.emit(selectedCards)
 
 #endregion
 

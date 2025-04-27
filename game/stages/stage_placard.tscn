@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://cdta86b2s4dni" path="res://assets/themes/global_theme.tres" id="1_bpiyq"]
 [ext_resource type="Script" uid="uid://b0hdhqnjxlgw2" path="res://game/stages/StagePlacard.gd" id="2_dkj1f"]
 
-[node name="StagePlacard" type="Control" node_paths=PackedStringArray("StartPanel", "StartHeading", "EnemyName", "EnemyAttack", "EnemyDefense", "EnemyHealth", "ResultsPanel", "ResultsHeading", "ResultsStageName", "ResultsEnemyName", "ResultsTimeLabel", "ResultsReshufflesLabel", "ResultsScoreLabel", "StageStartButton", "StageRetryButton", "StageNextButton")]
+[node name="StagePlacard" type="Control" node_paths=PackedStringArray("StartPanel", "StartHeading", "EnemyName", "EnemyAttack", "EnemyDefense", "EnemyHealth", "ResultsPanel", "ResultsHeading", "ResultsStageName", "ResultsEnemyName", "ResultsTimeLabel", "ResultsReshufflesLabel", "ResultsScoreLabel", "StageStartButton", "StageRetryButton", "StageNextButton", "StageMainMenuButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,6 +28,7 @@ ResultsScoreLabel = NodePath("ResultsPanel/VBoxContainer/VBoxContainer2/HBoxCont
 StageStartButton = NodePath("StartPanel/VBoxContainer/Buttons/StartStageButton")
 StageRetryButton = NodePath("ResultsPanel/VBoxContainer/Buttons/RetryStageButton")
 StageNextButton = NodePath("ResultsPanel/VBoxContainer/Buttons/NextStageButton")
+StageMainMenuButton = NodePath("ResultsPanel/VBoxContainer/Buttons/MainMenuButton")
 
 [node name="StartPanel" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -169,10 +170,14 @@ layout_mode = 2
 
 [node name="StageName" type="Label" parent="ResultsPanel/VBoxContainer/VBoxContainer/Stage"]
 layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 1
 uppercase = true
 
 [node name="StageEnemy" type="Label" parent="ResultsPanel/VBoxContainer/VBoxContainer/Stage"]
 layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 1
 uppercase = true
 
 [node name="HSeparator2" type="HSeparator" parent="ResultsPanel/VBoxContainer/VBoxContainer"]

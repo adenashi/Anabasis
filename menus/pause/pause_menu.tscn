@@ -10,8 +10,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ij46g"]
 resource_local_to_scene = true
 shader = ExtResource("3_mwcbr")
-shader_parameter/lod = 2.5
-shader_parameter/mix_percentage = 0.3
+shader_parameter/lod = 5.0
+shader_parameter/mix_percentage = 0.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w0vb2"]
 shader = ExtResource("2_wxfa8")

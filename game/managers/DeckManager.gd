@@ -67,7 +67,7 @@ func deal_card_to_hand(number_of_cards : int) -> void:
 			var card : BaseCard = PlayerDeck.pop_front()
 			CurrentHand.append(card)
 			card.change_state(BaseCard.CardState.HAND)
-			await Hand.add_card(card)
+			Hand.add_card(card)
 			cardsDealt += 1
 			Dispatch.UpdateDeckCount.emit(PlayerDeck.size())
 			await get_tree().create_timer(0.01).timeout

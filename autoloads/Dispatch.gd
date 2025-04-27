@@ -177,6 +177,10 @@ signal SpawnNewEnemy
 signal PlaceEnemy(enemy : EnemyData)
 
 ## [br] Emitters: [PlayValidator]
+## [br] Subscribers: [GM]
+signal PlayerMove
+
+## [br] Emitters: [PlayValidator]
 ## [br] Subscribers: [CombatManager]
 signal PerformAttack(cards : Array[BaseCard])
 
@@ -184,10 +188,13 @@ signal PerformAttack(cards : Array[BaseCard])
 ## [br] Subscribers: [CombatManager]
 signal AddDefense(cards : Array[BaseCard])
 
+## [br] Emitters: [PlayValidator]
+## [br] Subscribers: [CombatManager]
+signal DoAttackAndDefense(cards : Array[BaseCard])
+
 ## [br] Emitters: [CombatManager]
 ## [br] Subscribers: [PlayValidator]
 signal EndPlayerTurn
-
 
 ## [br] Emitters: [PlayValidator]
 ## [br] Subscribers: [CombatManager]

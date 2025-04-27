@@ -50,8 +50,8 @@ func _ready() -> void:
 func add_card(card : BaseCard) -> void:
 	card.flip_card(true)
 	card.reparent(CardHolder)
-	await get_tree().process_frame
-	await sort_hand_by_suit()
+	#await get_tree().process_frame
+	#await sort_hand_by_suit()
 
 
 func organize_hand() -> void:
@@ -62,7 +62,6 @@ func organize_hand() -> void:
 	for i in range(CardHolder.get_child_count()):
 		var angle = currentAngle
 		var pos : Vector2 = get_card_position(angle)
-		#CardHolder.get_child(i).update_transform(pos, (angle + 90))
 		CardHolder.get_child(i).update_transform(pos, 0)
 		currentAngle += separation
 	
@@ -114,14 +113,6 @@ func shift_away_from_hovered_card(card : BaseCard) -> void:
 	for i in range(CardHolder.get_child_count()):
 		if i == index:
 			CardHolder.get_child(i).start_hover_effect()
-		#else:
-			#var handRatio : float = 0.5
-			#if index > 0:
-				#handRatio = float(i) / float(CardHolder.get_child_count())
-			#if i < index:
-				#CardHolder.get_child(i).update_transform(CardHolder.get_child(i).handPosition, CardHolder.get_child(i).handRotation - (MaximumSpread * 2 * (SpreadCurve.sample(handRatio))))
-			#elif i > index:
-				#CardHolder.get_child(i).update_transform(CardHolder.get_child(i).handPosition, CardHolder.get_child(i).handRotation + (MaximumSpread * 2 * (SpreadCurve.sample(handRatio))))
 
 
 func reset_rotation(card : BaseCard) -> void:
@@ -133,14 +124,6 @@ func reset_rotation(card : BaseCard) -> void:
 	for i in range(CardHolder.get_child_count()):
 		if i == index:
 			CardHolder.get_child(i).end_hover_effect()
-		#else:
-			#var handRatio : float = 0.5
-			#if index > 0:
-				#handRatio = float(i) / float(CardHolder.get_child_count())
-			#if i < index:
-				#CardHolder.get_child(i).update_transform(CardHolder.get_child(i).handPosition, CardHolder.get_child(i).handRotation + (MaximumSpread * 2 * (SpreadCurve.sample(handRatio))))
-			#elif i > index:
-				#CardHolder.get_child(i).update_transform(CardHolder.get_child(i).handPosition, CardHolder.get_child(i).handRotation - (MaximumSpread * 2 * (SpreadCurve.sample(handRatio))))
 
 
 func reorder_hand() -> void:
@@ -162,6 +145,7 @@ func discard_card(card : BaseCard) -> void:
 	card.move_to_position(DiscardHolder.global_position, 0.05)
 	card.reparent(DiscardHolder)
 	card.z_index = 0
+	sorting = false
 
 #endregion
 

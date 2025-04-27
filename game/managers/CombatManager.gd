@@ -43,6 +43,7 @@ func _ready() -> void:
 	Dispatch.SpawnNewEnemy.connect(spawn_new_enemy)
 	Dispatch.AddDefense.connect(add_to_defense)
 	Dispatch.PerformAttack.connect(perform_attack)
+	Dispatch.DoAttackAndDefense.connect(add_defense_and_perform_attack)
 	add_available_enemies()
 
 
@@ -107,7 +108,6 @@ func perform_attack(cards : Array[BaseCard]) -> void:
 	if currentTurn != Turn.PLAYER:
 		return
 	
-	
 	var points : int = 0
 	
 	for card:BaseCard in cards:
@@ -168,6 +168,45 @@ func add_to_defense(cards : Array[BaseCard]) -> void:
 
 #endregion
 
+#region Attack and Defense
+
+func add_defense_and_perform_attack(cards : Array[BaseCard]) -> void:
+	if currentTurn != Turn.PLAYER:
+		return
+	
+	var defense : int = (cards.front().PointValue / 10) * cards.size()
+	Player.add_defense(defense)
+	send_update(str(defense) + " add to Player Defense.")
+	
+	var points : int = 0
+	
+	for card:BaseCard in cards:
+		var values : Array[int] = get_values(card)
+		points += values[1]
+		if CurrentEnemy.CurrentHealth > 0:
+			send_update(CurrentEnemy.Name + " takes " + str(values[0]) + " damage.")
+			CurrentEnemy.take_damage(values[0])
+	
+	if cards.size() > 3:
+		var bonus = cards.size() - 3
+		bonus *= Global.ExtraCardBonus
+		points += bonus
+	
+	Dispatch.AddPoints.emit(points)
+	
+	await Deck.discard_selected_cards(cards)
+	await one_frame()
+	if currentTurn == Turn.NONE:
+		
+		return
+	
+	send_update("Player turn completed.")
+	Dispatch.UpdatePlayerAttack.emit(0)
+	Dispatch.EndPlayerTurn.emit()
+	change_turn(Turn.ENEMY)
+
+#endregion
+
 #region Checking Charms
 
 func get_values(card : BaseCard) -> Array[int]:
@@ -185,6 +224,11 @@ func get_values(card : BaseCard) -> Array[int]:
 #region On Enemy Turn
 
 func perform_enemy_turn() -> void:
+	if Player.CurrentHealth < 0:
+		send_update("Player has died!")
+		change_turn(Turn.NONE)
+		return
+	
 	if currentTurn != Turn.ENEMY:
 		return
 	

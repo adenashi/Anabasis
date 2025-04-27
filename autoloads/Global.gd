@@ -20,6 +20,7 @@ var StartingHealth : int = 100
 var StartingDefense : int = 50
 var StagesToClear : int = 1
 
+var FreeDiscards : int = 3
 var ExtraCardBonus : int = 25
 
 var FinalTime : int

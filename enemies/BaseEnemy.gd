@@ -9,6 +9,8 @@ signal EnemyDied(enemy : BaseEnemy)
 
 #region Public Variables
 
+#region Stats
+
 var Name : String
 var Data : EnemyData
 
@@ -19,6 +21,15 @@ var CurrentHealth : int
 
 var MaxDefense : int
 var CurrentDefense : int
+
+#endregion
+
+#region References
+
+var Deck : DeckManager
+var Player : PlayerController
+
+#endregion
 
 #endregion
 
@@ -37,6 +48,55 @@ func init_enemy(data : EnemyData) -> void:
 #endregion
 
 #region Gameplay Functions
+
+func make_free_move() -> void:
+	var chance : int = randi_range(1,20)
+	if chance % 2 == 0:
+		do_defense()
+	else:
+		do_attack()
+
+
+func do_attack() -> void:
+	send_update("Attacking for free move.")
+	Player.take_damage(BaseAttack)
+
+
+func do_defense() -> void:
+	var limit : int = Deck.HandLimit
+	if Deck.Discard.size() < 9:
+		limit = Deck.Discard.size()
+	
+	var run : Array[BaseCard] = []
+	var defense : int = -1
+	
+	for i in range(0, limit):
+		var first : BaseCard = Deck.Discard[i]
+		var second : bool
+		var third : bool
+		for j in range(i, limit):
+			if Deck.Discard[j].Value == first.Value:
+				if !second:
+					second = true
+					continue
+				elif !third:
+					third = true
+					break
+		if second and third:
+			defense = first.PointValue / 10
+			break
+	
+	if defense == -1:
+		var possibles : Array[int] = [5,10,15]
+		defense = possibles.pick_random()
+	
+	CurrentDefense += defense * 3
+	if CurrentDefense > MaxDefense:
+		CurrentDefense = MaxDefense
+	
+	send_update("Adding " + str(defense * 3) + " Defense for free move.")
+	Dispatch.UpdateEnemyDefense.emit(MaxDefense, CurrentDefense)
+
 
 func take_damage(damage : int) -> void:
 	if CurrentDefense > 0:
@@ -76,6 +136,8 @@ func reset_hud() -> void:
 
 #region Debugging TODO: Delete Later!
 
-
+func send_update(update : String) -> void:
+	var color : String = Util.COLORS.colors[5].to_html(false)
+	print_rich("[color=#"+color+"]CE: " + update + "[/color]")
 
 #endregion

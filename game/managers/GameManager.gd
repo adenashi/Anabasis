@@ -27,6 +27,8 @@ var GameScore : int = 0
 
 var waitingForTutorial : bool = true
 
+var discardsSinceLastPlay : int = 0
+
 var TotalGameTime : int
 var TotalReshuffles : int
 var TotalScore : int
@@ -46,6 +48,8 @@ func _ready() -> void:
 	Deck.Player = Player
 	Validator.Deck = Deck
 	Validator.Combat = Combat
+	CurrentEnemy.Deck = Deck
+	CurrentEnemy.Player = Player
 	start_game()
 	await one_frame()
 	start_level()
@@ -55,6 +59,8 @@ func subscribe_to_signals() -> void:
 	GameTimer.timeout.connect(update_time)
 	Dispatch.PlaceEnemy.connect(on_enemy_placed)
 	Dispatch.ReadyToStartFirstStage.connect(on_tutorial_ready)
+	Dispatch.DiscardSelectedCards.connect(on_player_discard)
+	Dispatch.PlayerMove.connect(on_player_move)
 	Dispatch.PlayerDied.connect(on_player_died)
 	Dispatch.EnemyDied.connect(initiate_next_level)
 	Dispatch.AddPoints.connect(update_score)
@@ -117,13 +123,29 @@ func on_ready_to_start_stage() -> void:
 
 #endregion
 
+#region During Game
+
+func on_player_discard() -> void:
+	discardsSinceLastPlay += 1
+	if discardsSinceLastPlay >= Global.FreeDiscards:
+		CurrentEnemy.make_free_move()
+		discardsSinceLastPlay = 0
+
+
+func on_player_move() -> void:
+	discardsSinceLastPlay = 0
+
+#endregion
+
 #region End of Level 
 
 func initiate_next_level() -> void:
 	Global.CurrentState = Global.GameState.INTERSTAGE
 	Dispatch.AddPoints.emit(CurrentEnemy.Data.PointValue)
+	await one_frame()
 	HUD.hide_all_buttons()
 	GameTimer.stop()
+	Dispatch.DiscardSelectedCards.emit()
 	Deck.discard_hand()
 	HUD.hide()
 	playerWon = true

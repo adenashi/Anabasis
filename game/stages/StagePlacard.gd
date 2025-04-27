@@ -40,6 +40,7 @@ signal GoToNextStage
 @export var StageStartButton : Button
 @export var StageRetryButton : Button
 @export var StageNextButton : Button
+@export var StageMainMenuButton : Button
 
 #endregion
 
@@ -101,7 +102,12 @@ func on_next_enemy(enemy : EnemyData) -> void:
 func prepare_start_placard() -> void:
 	ResultsPanel.hide()
 	StartPanel.show()
+	EnemyName.text = ""
+	EnemyAttack.text = "0"
+	EnemyDefense.text = "0"
+	EnemyHealth.text = "0"
 	StartHeading.text = currentEnemy.Stage
+	StageMainMenuButton.hide()
 	StageStartButton.hide()
 	StageStartButton.disabled = true
 
@@ -114,6 +120,7 @@ func show_stage_start() -> void:
 	await set_enemy_health(currentEnemy.MaxHealth)
 	StageStartButton.show()
 	StageStartButton.disabled = false
+	StageMainMenuButton.show()
 
 
 func on_stage_cleared(results : Dictionary) -> void:
@@ -130,6 +137,10 @@ func prepare_results_placard() -> void:
 	ResultsHeading.text = currentResults.Result
 	ResultsStageName.text = currentEnemy.Stage
 	ResultsEnemyName.text = "Home of " + currentEnemy.Name
+	ResultsTimeLabel.text = "00:00:00"
+	ResultsReshufflesLabel.text = "0"
+	ResultsScoreLabel.text = "0"
+	StageMainMenuButton.hide()
 	StageRetryButton.hide()
 	StageRetryButton.disabled = true
 	StageNextButton.hide()
@@ -148,6 +159,7 @@ func show_stage_results() -> void:
 		"Defeat":
 			StageRetryButton.show()
 			StageRetryButton.disabled = false
+	StageMainMenuButton.show()
 
 
 func reset_placard() -> void:

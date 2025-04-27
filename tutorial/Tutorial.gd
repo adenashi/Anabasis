@@ -28,8 +28,9 @@ var firstTipDone : bool
 #region Initialization
 
 func _ready() -> void:
-	connect_to_signals()
 	Dispatch.ToggleTutorial.connect(toggle_tutorial)
+	if SaveData.TutorialOn:
+		connect_to_signals()
 
 #endregion
 
@@ -151,6 +152,7 @@ func on_first_enemy_attack() -> void:
 	show()
 	TipPanel.show()
 	Dispatch.EnemyAttacked.disconnect(on_first_enemy_attack)
+	Dispatch.ToggleTutorial.emit(false)
 
 
 #endregion
