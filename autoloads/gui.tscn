@@ -1,0 +1,36 @@
+[gd_scene load_steps=8 format=3 uid="uid://cqhscwtkw8egs"]
+
+[ext_resource type="Script" uid="uid://bsydofop3u7c0" path="res://Autoloads/GUI.gd" id="1_mm5ko"]
+[ext_resource type="PackedScene" uid="uid://hi338ppglm7m" path="res://menus/pause/pause_menu.tscn" id="2_bvxye"]
+[ext_resource type="PackedScene" uid="uid://ddqin8fivbwp5" path="res://menus/options/settings_menu.tscn" id="3_uh6n7"]
+[ext_resource type="PackedScene" uid="uid://bd0ts63cu65yf" path="res://common/ConfirmationPopup/confirmation_popup.tscn" id="4_jfpd4"]
+[ext_resource type="PackedScene" uid="uid://dntls2sgx2joi" path="res://common/SceneTransitioner/scene_transitioner.tscn" id="5_if8rd"]
+[ext_resource type="PackedScene" path="res://common/dev_build.tscn" id="6_bvxye"]
+[ext_resource type="Theme" uid="uid://cdta86b2s4dni" path="res://assets/themes/global_theme.tres" id="7_uh6n7"]
+
+[node name="GUI" type="CanvasLayer" node_paths=PackedStringArray("PauseMenu", "SettingsMenu", "ConfirmWindow", "Transitioner", "DevUI")]
+process_mode = 3
+layer = 3
+script = ExtResource("1_mm5ko")
+PauseMenu = NodePath("PauseMenu")
+SettingsMenu = NodePath("SettingsMenu")
+ConfirmWindow = NodePath("ConfirmationPopup")
+Transitioner = NodePath("SceneTransitioner")
+DevUI = NodePath("DevBuild")
+
+[node name="PauseMenu" parent="." instance=ExtResource("2_bvxye")]
+visible = false
+
+[node name="SettingsMenu" parent="." instance=ExtResource("3_uh6n7")]
+visible = false
+
+[node name="ConfirmationPopup" parent="." instance=ExtResource("4_jfpd4")]
+visible = false
+
+[node name="SceneTransitioner" parent="." instance=ExtResource("5_if8rd")]
+visible = false
+
+[node name="DevBuild" parent="." instance=ExtResource("6_bvxye")]
+modulate = Color(1, 1, 1, 0.264)
+size_flags_horizontal = 4
+theme = ExtResource("7_uh6n7")

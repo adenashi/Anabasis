@@ -1,0 +1,270 @@
+[gd_scene load_steps=10 format=3 uid="uid://c2vij5cyqaymj"]
+
+[ext_resource type="Theme" uid="uid://cdta86b2s4dni" path="res://assets/themes/global_theme.tres" id="1_0ivg5"]
+[ext_resource type="Script" uid="uid://bl62eg50vsnqh" path="res://hud/HUDController.gd" id="1_jvmdh"]
+[ext_resource type="Texture2D" uid="uid://qo02dj01i2er" path="res://hud/icons/pause.png" id="2_1rsjr"]
+[ext_resource type="Texture2D" uid="uid://bn5mp3h3w7pf4" path="res://hud/icons/arrow_rotate.png" id="3_tnm0g"]
+[ext_resource type="Texture2D" uid="uid://dkarsbndfls2d" path="res://hud/icons/award.png" id="4_ncsg0"]
+[ext_resource type="FontFile" uid="uid://dykq5v23q0j50" path="res://assets/fonts/BarlowCondensed-Medium.ttf" id="5_1kkc0"]
+[ext_resource type="Texture2D" uid="uid://bqo8rtloi4edn" path="res://hud/icons/cards_diagonal.png" id="5_1rsjr"]
+[ext_resource type="PackedScene" uid="uid://clnxxj7xyissd" path="res://player/player_hud.tscn" id="7_qv4qp"]
+[ext_resource type="PackedScene" uid="uid://b0fvrt4jjt2xe" path="res://enemies/enemy_hud.tscn" id="8_sh35x"]
+
+[node name="HUD" type="Control" node_paths=PackedStringArray("LevelLabel", "TimeLabel", "MovesLabel", "ScoreLabel", "DeckLabel", "DiscardLabel", "SortButtons", "ActionButtons")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_0ivg5")
+script = ExtResource("1_jvmdh")
+LevelLabel = NodePath("InnerControl/TopBar/Level/LevelLabel")
+TimeLabel = NodePath("InnerControl/TopBar/Level/TimeLabel")
+MovesLabel = NodePath("InnerControl/TopBar/Moves/MovesLabel")
+ScoreLabel = NodePath("InnerControl/TopBar/Score/ScoreLabel")
+DeckLabel = NodePath("InnerControl/Bottom/DeckIcon/DeckCount")
+DiscardLabel = NodePath("InnerControl/Bottom/DiscardIcon/DiscardCount")
+SortButtons = NodePath("InnerControl/Bottom/SortHandButtons")
+ActionButtons = NodePath("InnerControl/Bottom/ActionButtons")
+metadata/_edit_vertical_guides_ = [960.0]
+
+[node name="InnerControl" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TopBar" type="HBoxContainer" parent="InnerControl"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="PauseButton" type="TextureButton" parent="InnerControl/TopBar"]
+visible = false
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_vertical = 0
+texture_normal = ExtResource("2_1rsjr")
+texture_pressed = ExtResource("2_1rsjr")
+texture_hover = ExtResource("2_1rsjr")
+texture_disabled = ExtResource("2_1rsjr")
+texture_focused = ExtResource("2_1rsjr")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Moves" type="HBoxContainer" parent="InnerControl/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="TextureRect" type="TextureRect" parent="InnerControl/TopBar/Moves"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("3_tnm0g")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="MovesLabel" type="Label" parent="InnerControl/TopBar/Moves"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "0"
+
+[node name="Level" type="VBoxContainer" parent="InnerControl/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_stretch_ratio = 20.0
+theme_override_constants/separation = -16
+alignment = 1
+
+[node name="Label" type="Label" parent="InnerControl/TopBar/Level"]
+layout_mode = 2
+text = "Level"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="LevelLabel" type="Label" parent="InnerControl/TopBar/Level"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_1kkc0")
+theme_override_font_sizes/font_size = 72
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeLabel" type="Label" parent="InnerControl/TopBar/Level"]
+layout_mode = 2
+text = "00:00:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="HBoxContainer" parent="InnerControl/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+alignment = 2
+
+[node name="ScoreLabel" type="Label" parent="InnerControl/TopBar/Score"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="InnerControl/TopBar/Score"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("4_ncsg0")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="PlayerHUD" parent="InnerControl" instance=ExtResource("7_qv4qp")]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -105.0
+offset_bottom = 105.0
+grow_vertical = 2
+
+[node name="EnemyHUD" parent="InnerControl" instance=ExtResource("8_sh35x")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -161.0
+offset_top = -105.5
+offset_right = 0.0
+offset_bottom = 105.5
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Bottom" type="Control" parent="InnerControl"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -42.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="DeckIcon" type="TextureRect" parent="InnerControl/Bottom"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 48.0
+texture = ExtResource("5_1rsjr")
+expand_mode = 3
+stretch_mode = 5
+flip_h = true
+
+[node name="DeckCount" type="Label" parent="InnerControl/Bottom/DeckIcon"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -11.5
+offset_right = 18.0
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="DiscardIcon" type="TextureRect" parent="InnerControl/Bottom"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -48.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("5_1rsjr")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="DiscardCount" type="Label" parent="InnerControl/Bottom/DiscardIcon"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -11.5
+offset_right = 58.0
+offset_bottom = 11.5
+grow_vertical = 2
+text = "0"
+vertical_alignment = 2
+
+[node name="SortHandButtons" type="HBoxContainer" parent="InnerControl/Bottom"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = -40.0
+offset_right = 287.0
+grow_vertical = 0
+
+[node name="SortbySuitButton" type="Button" parent="InnerControl/Bottom/SortHandButtons"]
+layout_mode = 2
+text = "SORT x SUIT"
+
+[node name="SortbyRankButton" type="Button" parent="InnerControl/Bottom/SortHandButtons"]
+layout_mode = 2
+text = "SORT x RANK"
+
+[node name="ActionButtons" type="HBoxContainer" parent="InnerControl/Bottom"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -243.0
+offset_top = -40.0
+offset_right = -100.0
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 2
+
+[node name="PlayCardsButton" type="Button" parent="InnerControl/Bottom/ActionButtons"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "PLAY"
+
+[node name="DiscardCardsButton" type="Button" parent="InnerControl/Bottom/ActionButtons"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "DISCARD"
+
+[connection signal="pressed" from="InnerControl/TopBar/PauseButton" to="." method="on_pause_button_pressed"]
+[connection signal="pressed" from="InnerControl/Bottom/SortHandButtons/SortbySuitButton" to="." method="on_sort_by_suit_button_pressed"]
+[connection signal="pressed" from="InnerControl/Bottom/SortHandButtons/SortbyRankButton" to="." method="on_sort_by_rank_button_pressed"]
+[connection signal="pressed" from="InnerControl/Bottom/ActionButtons/PlayCardsButton" to="." method="on_play_cards_button_pressed"]
+[connection signal="pressed" from="InnerControl/Bottom/ActionButtons/DiscardCardsButton" to="." method="on_discard_cards_button_pressed"]

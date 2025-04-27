@@ -1,0 +1,403 @@
+[gd_scene load_steps=58 format=3 uid="uid://bcxakmx7kigwa"]
+
+[ext_resource type="Script" path="res://menus/stage_select/GameStarter.gd" id="1_421nm"]
+[ext_resource type="Theme" uid="uid://cdta86b2s4dni" path="res://assets/themes/global_theme.tres" id="1_nptuc"]
+[ext_resource type="Shader" uid="uid://dqf3tvysjbhu7" path="res://assets/shaders/blur.gdshader" id="2_83mmc"]
+[ext_resource type="ButtonGroup" path="res://menus/stage_select/challenge_button_group.tres" id="2_lvdyt"]
+[ext_resource type="Texture2D" uid="uid://bcm215otfcmmq" path="res://asi/sitting/covers/stage_1.png" id="3_idrss"]
+[ext_resource type="Texture2D" uid="uid://deyqhxsmrfbmn" path="res://assets/ui/grid_background.png" id="3_titss"]
+[ext_resource type="Texture2D" uid="uid://ctha27rh6y4r8" path="res://asi/sitting/covers/stage_2.png" id="4_hneha"]
+[ext_resource type="Texture2D" uid="uid://re8oix4cpj67" path="res://asi/sitting/covers/stage_3.png" id="5_j0ks7"]
+[ext_resource type="Texture2D" uid="uid://brxmgbwtqn53u" path="res://assets/ui/optionbutton_arrow.png" id="6_c14t3"]
+[ext_resource type="Script" uid="uid://c524xm6mk25cc" path="res://common/UI/TabButton.gd" id="6_titss"]
+[ext_resource type="Texture2D" uid="uid://b5h7j3vwe524g" path="res://asi/sitting/covers/stage_4.png" id="6_ub017"]
+[ext_resource type="Texture2D" uid="uid://bfhphyjr780xr" path="res://asi/sitting/covers/stage_5.png" id="7_78g7v"]
+[ext_resource type="FontFile" uid="uid://dykq5v23q0j50" path="res://Assets/Fonts/BarlowCondensed-Medium.ttf" id="7_h3bh4"]
+[ext_resource type="Texture2D" uid="uid://bw8x6bl0ptsmm" path="res://asi/sitting/covers/stage_6.png" id="8_4aw6c"]
+[ext_resource type="Texture2D" uid="uid://dw8qmffsnavfx" path="res://asi/sitting/covers/stage_7.png" id="9_ffr5j"]
+[ext_resource type="Texture2D" uid="uid://vygy1kn8llqd" path="res://asi/sitting/covers/stage_8.png" id="10_tf64d"]
+[ext_resource type="Texture2D" uid="uid://c3y8qif10qlw2" path="res://asi/sitting/covers/stage_9.png" id="11_8w862"]
+[ext_resource type="Texture2D" uid="uid://bciikehtfi6oy" path="res://asi/sitting/covers/stage_10.png" id="12_qk63n"]
+[ext_resource type="Texture2D" uid="uid://qejsp3cp22ja" path="res://asi/sitting/covers/stage_11.png" id="13_i7s84"]
+[ext_resource type="Texture2D" uid="uid://boglvlny7u1l1" path="res://asi/sitting/covers/stage_12.png" id="14_b2y8m"]
+[ext_resource type="Texture2D" uid="uid://cc4f6dbr25xfh" path="res://asi/sitting/covers/stage_13.png" id="15_nsc8h"]
+[ext_resource type="Texture2D" uid="uid://ddcb6vcw7a76a" path="res://asi/sitting/covers/stage_14.png" id="16_f5fre"]
+[ext_resource type="Texture2D" uid="uid://cr06v0sc0sctb" path="res://asi/sitting/covers/stage_15.png" id="17_kpysh"]
+[ext_resource type="Texture2D" uid="uid://crgmqy2xut3ly" path="res://asi/sitting/covers/stage_16.png" id="18_k4nr0"]
+[ext_resource type="Texture2D" uid="uid://osgn3qtvillr" path="res://asi/sitting/covers/stage_17.png" id="19_dnsdo"]
+[ext_resource type="Texture2D" uid="uid://bh8lvckhxogxk" path="res://asi/sitting/covers/stage_18.png" id="20_kj1nx"]
+[ext_resource type="Texture2D" uid="uid://bb5lxn5fb288c" path="res://asi/sitting/covers/stage_19.png" id="21_wjict"]
+[ext_resource type="Texture2D" uid="uid://dg5wmo282wsgw" path="res://asi/sitting/covers/stage_20.png" id="22_6s4yp"]
+[ext_resource type="Texture2D" uid="uid://ctha27rh6y4r8" path="res://asi/sitting/covers/stage_2.png" id="24_e4o5l"]
+[ext_resource type="Texture2D" uid="uid://df5mokjeq6fff" path="res://asi/sitting/asi_dark_lineless.png" id="24_j0ks7"]
+[ext_resource type="Texture2D" uid="uid://re8oix4cpj67" path="res://asi/sitting/covers/stage_3.png" id="25_3het5"]
+[ext_resource type="Texture2D" uid="uid://4rxct52du22v" path="res://asi/sitting/asi_holes_light.png" id="25_e4o5l"]
+[ext_resource type="Texture2D" uid="uid://b5h7j3vwe524g" path="res://asi/sitting/covers/stage_4.png" id="26_quwlx"]
+[ext_resource type="Texture2D" uid="uid://bmvychh586omi" path="res://asi/sitting/shadows.png" id="26_ub017"]
+[ext_resource type="Texture2D" uid="uid://bfhphyjr780xr" path="res://asi/sitting/covers/stage_5.png" id="27_45gkx"]
+[ext_resource type="Texture2D" uid="uid://bcm215otfcmmq" path="res://asi/sitting/covers/stage_1.png" id="27_78g7v"]
+[ext_resource type="Texture2D" uid="uid://bw8x6bl0ptsmm" path="res://asi/sitting/covers/stage_6.png" id="28_k7m7m"]
+[ext_resource type="Texture2D" uid="uid://dw8qmffsnavfx" path="res://asi/sitting/covers/stage_7.png" id="29_lot1k"]
+[ext_resource type="Texture2D" uid="uid://vygy1kn8llqd" path="res://asi/sitting/covers/stage_8.png" id="30_522e8"]
+[ext_resource type="Texture2D" uid="uid://c3y8qif10qlw2" path="res://asi/sitting/covers/stage_9.png" id="31_bgm42"]
+[ext_resource type="Texture2D" uid="uid://bciikehtfi6oy" path="res://asi/sitting/covers/stage_10.png" id="32_a2m5a"]
+[ext_resource type="Texture2D" uid="uid://qejsp3cp22ja" path="res://asi/sitting/covers/stage_11.png" id="33_ptqrv"]
+[ext_resource type="Texture2D" uid="uid://boglvlny7u1l1" path="res://asi/sitting/covers/stage_12.png" id="34_fc6lm"]
+[ext_resource type="Texture2D" uid="uid://cc4f6dbr25xfh" path="res://asi/sitting/covers/stage_13.png" id="35_jbls8"]
+[ext_resource type="Texture2D" uid="uid://ddcb6vcw7a76a" path="res://asi/sitting/covers/stage_14.png" id="36_t2t33"]
+[ext_resource type="Texture2D" uid="uid://cr06v0sc0sctb" path="res://asi/sitting/covers/stage_15.png" id="37_4mp88"]
+[ext_resource type="Texture2D" uid="uid://crgmqy2xut3ly" path="res://asi/sitting/covers/stage_16.png" id="38_g27jt"]
+[ext_resource type="Texture2D" uid="uid://osgn3qtvillr" path="res://asi/sitting/covers/stage_17.png" id="39_2c7oa"]
+[ext_resource type="Texture2D" uid="uid://bh8lvckhxogxk" path="res://asi/sitting/covers/stage_18.png" id="40_0fjhu"]
+[ext_resource type="Texture2D" uid="uid://bb5lxn5fb288c" path="res://asi/sitting/covers/stage_19.png" id="41_5uyo7"]
+[ext_resource type="Texture2D" uid="uid://dg5wmo282wsgw" path="res://asi/sitting/covers/stage_20.png" id="42_sko5g"]
+[ext_resource type="Texture2D" uid="uid://3hrqxf5svfx2" path="res://asi/Rufus.png" id="52_quwlx"]
+[ext_resource type="Texture2D" uid="uid://dk2ctsi86d2dx" path="res://asi/Sword.png" id="53_45gkx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g8pux"]
+shader = ExtResource("2_83mmc")
+shader_parameter/amount = 2.5
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_qmh6l"]
+color = Color(0.929412, 0.937255, 0.960784, 1)
+vertical = true
+
+[sub_resource type="Gradient" id="Gradient_e4o5l"]
+offsets = PackedFloat32Array(0, 0.284906, 0.598113)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0.521, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ffr5j"]
+gradient = SubResource("Gradient_e4o5l")
+width = 1920
+height = 1080
+fill_from = Vector2(0.995441, 0.0999662)
+fill_to = Vector2(0.402736, 0.0189125)
+
+[node name="GameStarter" type="Control" node_paths=PackedStringArray("InnerControl", "NumberLabel", "StageLabel", "MinusButton", "PlusButton", "Asi", "LightShaft", "AsiCover", "AsiLight", "Rufus", "Sword")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_nptuc")
+script = ExtResource("1_421nm")
+InnerControl = NodePath("InnerControl")
+NumberLabel = NodePath("InnerControl/StageNumberPicker/ChooseLevels/NumberPicker/VBoxContainer/LevelNumber")
+StageLabel = NodePath("InnerControl/StageNumberPicker/ChooseLevels/NumberPicker/VBoxContainer/StageLabel")
+MinusButton = NodePath("InnerControl/StageNumberPicker/ChooseLevels/NumberPicker/MinusButton")
+PlusButton = NodePath("InnerControl/StageNumberPicker/ChooseLevels/NumberPicker/PlusButton")
+Asi = NodePath("Asi")
+LightShaft = NodePath("SceneLight")
+AsiCover = NodePath("Asi/Cover")
+CoverImages = Array[Texture]([ExtResource("3_idrss"), ExtResource("4_hneha"), ExtResource("5_j0ks7"), ExtResource("6_ub017"), ExtResource("7_78g7v"), ExtResource("8_4aw6c"), ExtResource("9_ffr5j"), ExtResource("10_tf64d"), ExtResource("11_8w862"), ExtResource("12_qk63n"), ExtResource("13_i7s84"), ExtResource("14_b2y8m"), ExtResource("15_nsc8h"), ExtResource("16_f5fre"), ExtResource("17_kpysh"), ExtResource("18_k4nr0"), ExtResource("19_dnsdo"), ExtResource("20_kj1nx"), ExtResource("21_wjict"), ExtResource("22_6s4yp")])
+AsiLight = NodePath("Asi/AsiLight")
+LightMasks = Array[Texture]([ExtResource("27_78g7v"), ExtResource("24_e4o5l"), ExtResource("25_3het5"), ExtResource("26_quwlx"), ExtResource("27_45gkx"), ExtResource("28_k7m7m"), ExtResource("29_lot1k"), ExtResource("30_522e8"), ExtResource("31_bgm42"), ExtResource("32_a2m5a"), ExtResource("33_ptqrv"), ExtResource("34_fc6lm"), ExtResource("35_jbls8"), ExtResource("36_t2t33"), ExtResource("37_4mp88"), ExtResource("38_g27jt"), ExtResource("39_2c7oa"), ExtResource("40_0fjhu"), ExtResource("41_5uyo7"), ExtResource("42_sko5g")])
+Rufus = NodePath("Rufus")
+Sword = NodePath("Sword")
+
+[node name="BackgroundImage" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_titss")
+
+[node name="Asi" type="TextureRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.5)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 1280.0
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(0, 1080)
+texture = ExtResource("24_j0ks7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Lights" type="TextureRect" parent="Asi"]
+self_modulate = Color(1, 1, 1, 0.5)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("25_e4o5l")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Cover" type="TextureRect" parent="Asi"]
+modulate = Color(0.696871, 0.696871, 0.696871, 1)
+light_mask = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_idrss")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Shadows" type="TextureRect" parent="Asi"]
+modulate = Color(0.596498, 0.599528, 0.608618, 1)
+self_modulate = Color(1, 1, 1, 0.5)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("26_ub017")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AsiLight" type="PointLight2D" parent="Asi"]
+visible = false
+position = Vector2(640, 541)
+color = Color(1, 0, 0.271328, 1)
+energy = 1.83
+texture = ExtResource("27_78g7v")
+
+[node name="InnerControl" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 90.0
+offset_top = 24.0
+offset_right = -90.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="InnerControl"]
+material = SubResource("ShaderMaterial_g8pux")
+layout_mode = 0
+offset_left = -91.0
+offset_right = 398.0
+offset_bottom = 53.0
+theme_type_variation = &"HeadingPanel"
+
+[node name="HeaderLabel" type="Label" parent="InnerControl/PanelContainer"]
+layout_mode = 2
+theme_type_variation = &"HeadingLabel"
+text = "Choose Your Challenge"
+vertical_alignment = 1
+
+[node name="StageNumberPicker" type="Control" parent="InnerControl"]
+layout_mode = 1
+anchor_left = 0.653
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -400.0
+offset_bottom = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ChooseLevels" type="HBoxContainer" parent="InnerControl/StageNumberPicker"]
+custom_minimum_size = Vector2(870, 840)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -435.0
+offset_top = -420.0
+offset_right = 435.0
+offset_bottom = 420.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="Presets" type="VBoxContainer" parent="InnerControl/StageNumberPicker/ChooseLevels"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="LevelsButton1" type="Button" parent="InnerControl/StageNumberPicker/ChooseLevels/Presets"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+theme_type_variation = &"TabButtonSelected"
+theme_override_font_sizes/font_size = 72
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("2_lvdyt")
+text = "1"
+script = ExtResource("6_titss")
+
+[node name="LevelsButton3" type="Button" parent="InnerControl/StageNumberPicker/ChooseLevels/Presets"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+theme_type_variation = &"TabButtonNormal"
+theme_override_font_sizes/font_size = 72
+toggle_mode = true
+button_group = ExtResource("2_lvdyt")
+text = "3"
+script = ExtResource("6_titss")
+
+[node name="LevelsButton5" type="Button" parent="InnerControl/StageNumberPicker/ChooseLevels/Presets"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+theme_type_variation = &"TabButtonNormal"
+theme_override_font_sizes/font_size = 72
+toggle_mode = true
+button_group = ExtResource("2_lvdyt")
+text = "5"
+script = ExtResource("6_titss")
+
+[node name="LevelsButton10" type="Button" parent="InnerControl/StageNumberPicker/ChooseLevels/Presets"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+theme_type_variation = &"TabButtonNormal"
+theme_override_font_sizes/font_size = 72
+toggle_mode = true
+button_group = ExtResource("2_lvdyt")
+text = "10"
+script = ExtResource("6_titss")
+
+[node name="LevelsButton15" type="Button" parent="InnerControl/StageNumberPicker/ChooseLevels/Presets"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+theme_type_variation = &"TabButtonNormal"
+theme_override_font_sizes/font_size = 72
+toggle_mode = true
+button_group = ExtResource("2_lvdyt")
+text = "15"
+script = ExtResource("6_titss")
+
+[node name="LevelsButton20" type="Button" parent="InnerControl/StageNumberPicker/ChooseLevels/Presets"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+theme_type_variation = &"TabButtonNormal"
+theme_override_font_sizes/font_size = 72
+toggle_mode = true
+button_group = ExtResource("2_lvdyt")
+text = "20"
+script = ExtResource("6_titss")
+
+[node name="VSeparator" type="VSeparator" parent="InnerControl/StageNumberPicker/ChooseLevels"]
+layout_mode = 2
+theme_override_constants/separation = 98
+theme_override_styles/separator = SubResource("StyleBoxLine_qmh6l")
+
+[node name="NumberPicker" type="VBoxContainer" parent="InnerControl/StageNumberPicker/ChooseLevels"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="PlusButton" type="TextureButton" parent="InnerControl/StageNumberPicker/ChooseLevels/NumberPicker"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("6_c14t3")
+texture_pressed = ExtResource("6_c14t3")
+texture_hover = ExtResource("6_c14t3")
+texture_focused = ExtResource("6_c14t3")
+ignore_texture_size = true
+stretch_mode = 5
+flip_v = true
+
+[node name="VBoxContainer" type="HBoxContainer" parent="InnerControl/StageNumberPicker/ChooseLevels/NumberPicker"]
+custom_minimum_size = Vector2(316, 0)
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="LevelNumber" type="Label" parent="InnerControl/StageNumberPicker/ChooseLevels/NumberPicker/VBoxContainer"]
+layout_mode = 2
+size_flags_stretch_ratio = 4.55
+theme_override_fonts/font = ExtResource("7_h3bh4")
+theme_override_font_sizes/font_size = 246
+text = "1"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="StageLabel" type="Label" parent="InnerControl/StageNumberPicker/ChooseLevels/NumberPicker/VBoxContainer"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 36
+text = "Stage"
+uppercase = true
+
+[node name="MinusButton" type="TextureButton" parent="InnerControl/StageNumberPicker/ChooseLevels/NumberPicker"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+disabled = true
+texture_normal = ExtResource("6_c14t3")
+texture_pressed = ExtResource("6_c14t3")
+texture_hover = ExtResource("6_c14t3")
+texture_focused = ExtResource("6_c14t3")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BottomRow" type="HBoxContainer" parent="InnerControl"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 12
+alignment = 2
+
+[node name="MainMenuButton" type="Button" parent="InnerControl/BottomRow"]
+custom_minimum_size = Vector2(145, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+text = "MAIN MENU"
+alignment = 0
+
+[node name="ConfirmButton" type="Button" parent="InnerControl/BottomRow"]
+custom_minimum_size = Vector2(145, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "FORWARD"
+alignment = 2
+
+[node name="SceneLight" type="PointLight2D" parent="."]
+position = Vector2(377, 539)
+texture = SubResource("GradientTexture2D_ffr5j")
+
+[node name="Rufus" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = 1460.0
+offset_top = 51.0
+offset_right = 1717.0
+offset_bottom = 318.0
+texture = ExtResource("52_quwlx")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Sword" type="TextureRect" parent="."]
+offset_left = 1270.0
+offset_top = -1653.0
+offset_right = 1455.0
+offset_bottom = -701.0
+texture = ExtResource("53_45gkx")
+stretch_mode = 5
+
+[connection signal="toggled" from="InnerControl/StageNumberPicker/ChooseLevels/Presets/LevelsButton1" to="." method="on_one_button_pressed"]
+[connection signal="toggled" from="InnerControl/StageNumberPicker/ChooseLevels/Presets/LevelsButton3" to="." method="on_three_button_pressed"]
+[connection signal="toggled" from="InnerControl/StageNumberPicker/ChooseLevels/Presets/LevelsButton5" to="." method="on_five_button_pressed"]
+[connection signal="toggled" from="InnerControl/StageNumberPicker/ChooseLevels/Presets/LevelsButton10" to="." method="on_ten_button_pressed"]
+[connection signal="toggled" from="InnerControl/StageNumberPicker/ChooseLevels/Presets/LevelsButton15" to="." method="on_fifteen_button_pressed"]
+[connection signal="toggled" from="InnerControl/StageNumberPicker/ChooseLevels/Presets/LevelsButton20" to="." method="on_twenty_two_button_pressed"]
+[connection signal="pressed" from="InnerControl/StageNumberPicker/ChooseLevels/NumberPicker/PlusButton" to="." method="on_plus_button_pressed"]
+[connection signal="pressed" from="InnerControl/StageNumberPicker/ChooseLevels/NumberPicker/MinusButton" to="." method="on_minus_button_pressed"]
+[connection signal="pressed" from="InnerControl/BottomRow/MainMenuButton" to="." method="on_main_menu_button_pressed"]
+[connection signal="pressed" from="InnerControl/BottomRow/ConfirmButton" to="." method="on_confirm_button_pressed"]

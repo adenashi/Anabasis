@@ -1,0 +1,61 @@
+[gd_scene load_steps=12 format=3 uid="uid://guh7jvkhdo7b"]
+
+[ext_resource type="Script" uid="uid://b4psrspcm4q81" path="res://game/managers/GameManager.gd" id="1_l8g03"]
+[ext_resource type="Texture2D" uid="uid://dsjpgnlgjiyti" path="res://assets/backgrounds/stage_esmuri.png" id="2_3vho3"]
+[ext_resource type="Script" uid="uid://bwayfna8g0pxy" path="res://game/managers/PlayValidator.gd" id="2_j8tme"]
+[ext_resource type="Script" uid="uid://do8q05e3rp6m2" path="res://game/managers/CombatManager.gd" id="3_3vho3"]
+[ext_resource type="Script" uid="uid://cfyabigsetple" path="res://game/managers/DeckManager.gd" id="4_qf6n1"]
+[ext_resource type="Script" uid="uid://cdmpeyscvt20n" path="res://game/managers/StageManager.gd" id="5_vsp63"]
+[ext_resource type="Script" uid="uid://dlvervr6h1xjx" path="res://enemies/BaseEnemy.gd" id="6_b686c"]
+[ext_resource type="Script" uid="uid://da1c16hbwnff1" path="res://player/PlayerController.gd" id="7_hb504"]
+[ext_resource type="PackedScene" uid="uid://c2vij5cyqaymj" path="res://hud/hud.tscn" id="8_ee6o4"]
+[ext_resource type="PackedScene" uid="uid://1r41btepnyom" path="res://cards/hand_controller.tscn" id="8_j8tme"]
+[ext_resource type="PackedScene" uid="uid://7mi1f315i5km" path="res://game/stages/stage_placard.tscn" id="9_4cobl"]
+
+[node name="Game" type="Node" node_paths=PackedStringArray("Validator", "Combat", "Deck", "Stage", "CurrentEnemy", "Player", "GameTimer", "HUD")]
+script = ExtResource("1_l8g03")
+Validator = NodePath("PlayValidator")
+Combat = NodePath("CombatManager")
+Deck = NodePath("DeckManager")
+Stage = NodePath("StageManager")
+CurrentEnemy = NodePath("CurrentEnemy")
+Player = NodePath("PlayerController")
+GameTimer = NodePath("GameTimer")
+HUD = NodePath("CanvasLayer/HUD")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("2_3vho3")
+
+[node name="PlayValidator" type="Node" parent="."]
+script = ExtResource("2_j8tme")
+
+[node name="CombatManager" type="Node" parent="."]
+script = ExtResource("3_3vho3")
+
+[node name="DeckManager" type="Node" parent="." node_paths=PackedStringArray("Hand")]
+script = ExtResource("4_qf6n1")
+Hand = NodePath("../HandController")
+HandLimit = 9
+
+[node name="StageManager" type="Node" parent="." node_paths=PackedStringArray("Placard")]
+script = ExtResource("5_vsp63")
+Placard = NodePath("../CanvasLayer/StagePlacard")
+
+[node name="CurrentEnemy" type="Node" parent="."]
+script = ExtResource("6_b686c")
+
+[node name="PlayerController" type="Node" parent="."]
+script = ExtResource("7_hb504")
+
+[node name="GameTimer" type="Timer" parent="."]
+
+[node name="HandController" parent="." instance=ExtResource("8_j8tme")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("8_ee6o4")]
+visible = false
+
+[node name="StagePlacard" parent="CanvasLayer" instance=ExtResource("9_4cobl")]
+visible = false

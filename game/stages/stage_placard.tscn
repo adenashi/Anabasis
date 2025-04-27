@@ -1,0 +1,256 @@
+[gd_scene load_steps=3 format=3 uid="uid://7mi1f315i5km"]
+
+[ext_resource type="Theme" uid="uid://cdta86b2s4dni" path="res://assets/themes/global_theme.tres" id="1_bpiyq"]
+[ext_resource type="Script" uid="uid://b0hdhqnjxlgw2" path="res://game/stages/StagePlacard.gd" id="2_dkj1f"]
+
+[node name="StagePlacard" type="Control" node_paths=PackedStringArray("StartPanel", "StartHeading", "EnemyName", "EnemyAttack", "EnemyDefense", "EnemyHealth", "ResultsPanel", "ResultsHeading", "ResultsStageName", "ResultsEnemyName", "ResultsTimeLabel", "ResultsReshufflesLabel", "ResultsScoreLabel", "StageStartButton", "StageRetryButton", "StageNextButton")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bpiyq")
+script = ExtResource("2_dkj1f")
+StartPanel = NodePath("StartPanel")
+StartHeading = NodePath("StartPanel/VBoxContainer/StartHeading")
+EnemyName = NodePath("StartPanel/VBoxContainer/VBoxContainer2/HBoxContainer/EnemyName")
+EnemyAttack = NodePath("StartPanel/VBoxContainer/VBoxContainer2/HBoxContainer2/EnemyAttack")
+EnemyDefense = NodePath("StartPanel/VBoxContainer/VBoxContainer2/HBoxContainer3/EnemyArmor")
+EnemyHealth = NodePath("StartPanel/VBoxContainer/VBoxContainer2/HBoxContainer4/EnemyHealth")
+ResultsPanel = NodePath("ResultsPanel")
+ResultsHeading = NodePath("ResultsPanel/VBoxContainer/ResultsHeading")
+ResultsStageName = NodePath("ResultsPanel/VBoxContainer/VBoxContainer/Stage/StageName")
+ResultsEnemyName = NodePath("ResultsPanel/VBoxContainer/VBoxContainer/Stage/StageEnemy")
+ResultsTimeLabel = NodePath("ResultsPanel/VBoxContainer/VBoxContainer2/HBoxContainer/TimeLabel")
+ResultsReshufflesLabel = NodePath("ResultsPanel/VBoxContainer/VBoxContainer2/HBoxContainer2/ReshufflesLabel")
+ResultsScoreLabel = NodePath("ResultsPanel/VBoxContainer/VBoxContainer2/HBoxContainer3/ScoreLabel")
+StageStartButton = NodePath("StartPanel/VBoxContainer/Buttons/StartStageButton")
+StageRetryButton = NodePath("ResultsPanel/VBoxContainer/Buttons/RetryStageButton")
+StageNextButton = NodePath("ResultsPanel/VBoxContainer/Buttons/NextStageButton")
+
+[node name="StartPanel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -395.0
+offset_top = -216.0
+offset_right = 395.0
+offset_bottom = 216.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StartPanel"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="StartHeading" type="Label" parent="StartPanel/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeadingLabel"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="HSeparator2" type="HSeparator" parent="StartPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="StartPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="HBoxContainer" type="HBoxContainer" parent="StartPanel/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="StartPanel/VBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Denizen"
+uppercase = true
+
+[node name="EnemyName" type="Label" parent="StartPanel/VBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 2
+uppercase = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="StartPanel/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="StartPanel/VBoxContainer/VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Attack"
+uppercase = true
+
+[node name="EnemyAttack" type="Label" parent="StartPanel/VBoxContainer/VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 2
+uppercase = true
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="StartPanel/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="StartPanel/VBoxContainer/VBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Armor"
+uppercase = true
+
+[node name="EnemyArmor" type="Label" parent="StartPanel/VBoxContainer/VBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 2
+uppercase = true
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="StartPanel/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="StartPanel/VBoxContainer/VBoxContainer2/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Health"
+uppercase = true
+
+[node name="EnemyHealth" type="Label" parent="StartPanel/VBoxContainer/VBoxContainer2/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 2
+uppercase = true
+
+[node name="HSeparator" type="HSeparator" parent="StartPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Buttons" type="HBoxContainer" parent="StartPanel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="StartStageButton" type="Button" parent="StartPanel/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "START"
+
+[node name="ResultsPanel" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -395.0
+offset_top = -214.5
+offset_right = 395.0
+offset_bottom = 214.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ResultsPanel"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="ResultsHeading" type="Label" parent="ResultsPanel/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeadingLabel"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ResultsPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="HSeparator" type="HSeparator" parent="ResultsPanel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Stage" type="HBoxContainer" parent="ResultsPanel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="StageName" type="Label" parent="ResultsPanel/VBoxContainer/VBoxContainer/Stage"]
+layout_mode = 2
+uppercase = true
+
+[node name="StageEnemy" type="Label" parent="ResultsPanel/VBoxContainer/VBoxContainer/Stage"]
+layout_mode = 2
+uppercase = true
+
+[node name="HSeparator2" type="HSeparator" parent="ResultsPanel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="ResultsPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ResultsPanel/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ResultsPanel/VBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Time"
+uppercase = true
+
+[node name="TimeLabel" type="Label" parent="ResultsPanel/VBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 2
+uppercase = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ResultsPanel/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ResultsPanel/VBoxContainer/VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Reshuffles"
+uppercase = true
+
+[node name="ReshufflesLabel" type="Label" parent="ResultsPanel/VBoxContainer/VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 2
+uppercase = true
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="ResultsPanel/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ResultsPanel/VBoxContainer/VBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Score"
+uppercase = true
+
+[node name="ScoreLabel" type="Label" parent="ResultsPanel/VBoxContainer/VBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 2
+uppercase = true
+
+[node name="HSeparator" type="HSeparator" parent="ResultsPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Buttons" type="HBoxContainer" parent="ResultsPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="MainMenuButton" type="Button" parent="ResultsPanel/VBoxContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "MAIN MENU"
+
+[node name="RetryStageButton" type="Button" parent="ResultsPanel/VBoxContainer/Buttons"]
+visible = false
+layout_mode = 2
+text = "RETRY"
+
+[node name="NextStageButton" type="Button" parent="ResultsPanel/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "FORWARD"
+
+[connection signal="pressed" from="StartPanel/VBoxContainer/Buttons/StartStageButton" to="." method="on_continue_button_pressed"]
+[connection signal="pressed" from="ResultsPanel/VBoxContainer/Buttons/MainMenuButton" to="." method="on_main_menu_button_pressed"]
+[connection signal="pressed" from="ResultsPanel/VBoxContainer/Buttons/RetryStageButton" to="." method="on_retry_stage_button_pressed"]
+[connection signal="pressed" from="ResultsPanel/VBoxContainer/Buttons/NextStageButton" to="." method="on_next_stage_button_pressed"]

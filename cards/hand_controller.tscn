@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://1r41btepnyom"]
+
+[ext_resource type="Script" uid="uid://d3yy3thiyy81a" path="res://cards/HandController.gd" id="1_er44s"]
+
+[sub_resource type="Curve" id="Curve_ccr6b"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ccr6b"]
+radius = 1500.0
+
+[node name="HandController" type="Node2D" node_paths=PackedStringArray("CardHolder", "SortHolder", "DeckHolder", "DiscardHolder", "DebugShape")]
+script = ExtResource("1_er44s")
+CardHolder = NodePath("CardHolder")
+SortHolder = NodePath("SortHolder")
+DeckHolder = NodePath("DeckHolder")
+DiscardHolder = NodePath("DiscardHolder")
+HandRadius = 1500
+SpreadCurve = SubResource("Curve_ccr6b")
+DebugShape = NodePath("DebugShape")
+
+[node name="CardHolder" type="Node2D" parent="."]
+position = Vector2(960, 960)
+
+[node name="SortHolder" type="Node2D" parent="."]
+position = Vector2(960, 960)
+
+[node name="DeckHolder" type="Node2D" parent="."]
+position = Vector2(-640, 960)
+
+[node name="DiscardHolder" type="Node2D" parent="."]
+position = Vector2(2650, 960)
+
+[node name="DebugShape" type="CollisionShape2D" parent="."]
+position = Vector2(960, 2394)
+shape = SubResource("CircleShape2D_ccr6b")
+
+[connection signal="child_order_changed" from="CardHolder" to="." method="reorder_hand"]

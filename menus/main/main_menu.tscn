@@ -1,0 +1,1459 @@
+[gd_scene load_steps=17 format=3 uid="uid://btu7wqw3l2le1"]
+
+[ext_resource type="Theme" uid="uid://cdta86b2s4dni" path="res://assets/themes/global_theme.tres" id="1_lkur8"]
+[ext_resource type="Script" path="res://menus/main/MainMenuController.gd" id="1_wotb1"]
+[ext_resource type="Shader" uid="uid://dqf3tvysjbhu7" path="res://assets/shaders/blur.gdshader" id="2_qq57v"]
+[ext_resource type="Texture2D" uid="uid://deyqhxsmrfbmn" path="res://assets/ui/grid_background.png" id="3_o0cfa"]
+[ext_resource type="FontFile" uid="uid://76obvcak3ako" path="res://Assets/Fonts/Megrim-Regular.ttf" id="4_c3tdx"]
+[ext_resource type="Texture2D" uid="uid://df5mokjeq6fff" path="res://asi/sitting/asi_dark_lineless.png" id="4_gsxsj"]
+[ext_resource type="PackedScene" uid="uid://bd0ts63cu65yf" path="res://common/ConfirmationPopup/confirmation_popup.tscn" id="4_y4ryc"]
+[ext_resource type="Texture2D" uid="uid://4rxct52du22v" path="res://asi/sitting/asi_holes_light.png" id="5_e5cb7"]
+[ext_resource type="Texture2D" uid="uid://bcm215otfcmmq" path="res://asi/sitting/covers/stage_1.png" id="6_no1ml"]
+[ext_resource type="Texture2D" uid="uid://bmvychh586omi" path="res://asi/sitting/shadows.png" id="7_op8kx"]
+[ext_resource type="PackedScene" uid="uid://bcxakmx7kigwa" path="res://menus/stage_select/game_starter.tscn" id="11_e5cb7"]
+[ext_resource type="Shader" uid="uid://b0n1i03vxwmb7" path="res://assets/shaders/darkenedblur.gdshader" id="11_no1ml"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7f67a"]
+shader = ExtResource("2_qq57v")
+shader_parameter/amount = 2.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y4ryc"]
+shader = ExtResource("11_no1ml")
+shader_parameter/lod = 2.5
+shader_parameter/mix_percentage = 0.3
+
+[sub_resource type="Gradient" id="Gradient_gsxsj"]
+offsets = PackedFloat32Array(0, 0.284906, 0.598113)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0.521, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rm7yp"]
+gradient = SubResource("Gradient_gsxsj")
+width = 1920
+height = 1080
+fill_from = Vector2(0.995441, 0.0999662)
+fill_to = Vector2(0.402736, 0.0189125)
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("MainScreen", "RecordsScreen", "CreditsScreen", "ExitScreen", "GameStart", "BestTimeLabels", "ReshuffleLabels", "HighScoreLabels", "Confirmation", "Asi", "LightShaft")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_lkur8")
+script = ExtResource("1_wotb1")
+MainScreen = NodePath("Main")
+RecordsScreen = NodePath("Records")
+CreditsScreen = NodePath("Credits")
+ExitScreen = NodePath("Exit")
+GameStart = NodePath("GameStarter")
+BestTimeLabels = [NodePath("Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer1/BestTimeOneStage"), NodePath("Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer2/BestTimeTwoStages"), NodePath("Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer3/BestTimeThreeStages"), NodePath("Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer4/BestTimeFourStages"), NodePath("Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer5/BestTimeFiveStages"), NodePath("Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer6/BestTimeSixStages"), NodePath("Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer7/BestTimeSevenStages"), NodePath("Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer8/BestTimeEightStages"), NodePath("Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer9/BestTimeNineStages"), NodePath("Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer10/BestTimeTenStages"), NodePath("Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer11/BestTimeElevenStages"), NodePath("Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer12/BestTimeTwelveStages"), NodePath("Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer13/BestTimeThirteenStages"), NodePath("Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer14/BestTimeFourteenStages"), NodePath("Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer15/BestTimeFifteenStages"), NodePath("Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer16/BestTimeSixteenStages"), NodePath("Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer17/BestTimeSeventeenStages"), NodePath("Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer18/BestTimeEighteenStages"), NodePath("Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer19/BestTimeNineteenStages"), NodePath("Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer20/BestTimeTwentyStages")]
+ReshuffleLabels = [NodePath("Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer1/ReshufflesOneStage"), NodePath("Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer2/ReshufflesTwoStages"), NodePath("Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer3/ReshufflesThreeStages"), NodePath("Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer4/ReshufflesFourStages"), NodePath("Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer5/ReshufflesFiveStages"), NodePath("Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer6/ReshufflesSixStages"), NodePath("Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer7/ReshufflesSevenStages"), NodePath("Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer8/ReshufflesEightStages"), NodePath("Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer9/ReshufflesNineStages"), NodePath("Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer10/ReshufflesTenStages"), NodePath("Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer11/ReshufflesElevenStages"), NodePath("Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer12/ReshufflesTwelveStages"), NodePath("Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer13/ReshufflesThirteenStages"), NodePath("Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer14/ReshufflesFourteenStages"), NodePath("Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer15/ReshufflesFifteenStages"), NodePath("Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer16/ReshufflesSixteenStages"), NodePath("Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer17/ReshufflesSeventeenStages"), NodePath("Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer18/ReshufflesEighteenStages"), NodePath("Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer19/ReshufflesNineteenStages"), NodePath("Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer20/ReshufflesTwentyStages")]
+HighScoreLabels = [NodePath("Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer1/HighScoreOneStage"), NodePath("Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer2/HighScoreTwoStages"), NodePath("Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer3/HighScoreThreeStages"), NodePath("Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer4/HighScoreFourStages"), NodePath("Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer5/HighScoreFiveStages"), NodePath("Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer6/HighScoreSixStages"), NodePath("Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer7/HighScoreSevenStages"), NodePath("Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer8/HighScoreEightStages"), NodePath("Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer9/HighScoreNineStages"), NodePath("Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer10/HighScoreTenStages"), NodePath("Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer11/HighScoreElevenStages"), NodePath("Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer12/HighScoreTwelveStages"), NodePath("Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer13/HighScoreThirteenStages"), NodePath("Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer14/HighScoreFourteenStages"), NodePath("Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer15/HighScoreFifteenStages"), NodePath("Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer16/HighScoreSixteenStages"), NodePath("Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer17/HighScoreSeventeenStages"), NodePath("Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer18/HighScoreEighteenStages"), NodePath("Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer19/HighScoreNineteenStages"), NodePath("Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer20/HighScoreTwentyStages")]
+Confirmation = NodePath("Records/DeleteRecordsConfirmation")
+Asi = NodePath("Asi")
+LightShaft = NodePath("SceneLight")
+
+[node name="BackgroundPlaceholder" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("3_o0cfa")
+stretch_mode = 5
+
+[node name="1440pReferenceRect" type="ReferenceRect" parent="."]
+visible = false
+custom_minimum_size = Vector2(1440, 1080)
+layout_mode = 0
+offset_left = 270.0
+offset_right = 1710.0
+offset_bottom = 1080.0
+pivot_offset = Vector2(720, 540)
+border_width = 2.0
+
+[node name="Asi" type="TextureRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.5)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 1280.0
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(0, 1080)
+texture = ExtResource("4_gsxsj")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Lights" type="TextureRect" parent="Asi"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_e5cb7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Cover" type="TextureRect" parent="Asi"]
+modulate = Color(0.596498, 0.599528, 0.608618, 1)
+light_mask = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_no1ml")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Shadows" type="TextureRect" parent="Asi"]
+modulate = Color(0.596498, 0.599528, 0.608618, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_op8kx")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Main" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameTitle" type="Label" parent="Main"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -508.5
+offset_top = 181.0
+offset_right = 508.5
+offset_bottom = 449.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.929412, 0.937255, 0.960784, 1)
+theme_override_colors/font_outline_color = Color(0.929412, 0.937255, 0.960784, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("4_c3tdx")
+theme_override_font_sizes/font_size = 196
+text = "anabasis"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -175.0
+offset_top = -501.0
+offset_right = 175.0
+offset_bottom = -83.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 24
+
+[node name="NewGameButton" type="Button" parent="Main/VBoxContainer"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+theme_type_variation = &"TabButtonSelected"
+text = "BEGIN"
+
+[node name="Record" type="Button" parent="Main/VBoxContainer"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+theme_type_variation = &"TabButtonNormal"
+text = "RECORDS"
+
+[node name="SettingsButton" type="Button" parent="Main/VBoxContainer"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+theme_type_variation = &"TabButtonNormal"
+text = "OPTIONS"
+
+[node name="CreditsButton" type="Button" parent="Main/VBoxContainer"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+theme_type_variation = &"TabButtonNormal"
+text = "CREDITS"
+
+[node name="ExitButton" type="Button" parent="Main/VBoxContainer"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+theme_type_variation = &"TabButtonNormal"
+text = "QUIT"
+
+[node name="Records" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 90.0
+offset_top = 24.0
+offset_right = -90.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="Records"]
+material = SubResource("ShaderMaterial_7f67a")
+layout_mode = 0
+offset_left = -91.0
+offset_right = 202.0
+offset_bottom = 53.0
+theme_type_variation = &"HeadingPanel"
+
+[node name="Label" type="Label" parent="Records/PanelContainer2"]
+layout_mode = 2
+theme_type_variation = &"HeadingLabel"
+text = "Records"
+uppercase = true
+
+[node name="PanelContainer" type="PanelContainer" parent="Records"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -466.0
+offset_top = -335.0
+offset_right = 562.0
+offset_bottom = 335.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Records/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="BestTime" type="VBoxContainer" parent="Records/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Best Time"
+
+[node name="HSeparator" type="HSeparator" parent="Records/PanelContainer/HBoxContainer/BestTime"]
+layout_mode = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/BestTime"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "Stages"
+
+[node name="Label2" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "Time"
+horizontal_alignment = 2
+
+[node name="HSeparator2" type="HSeparator" parent="Records/PanelContainer/HBoxContainer/BestTime"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Records/PanelContainer/HBoxContainer/BestTime"]
+layout_mode = 2
+
+[node name="HBoxContainer1" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer1"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "One"
+
+[node name="BestTimeOneStage" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer1"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Two"
+
+[node name="BestTimeTwoStages" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Three"
+
+[node name="BestTimeThreeStages" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Four"
+
+[node name="BestTimeFourStages" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Five"
+
+[node name="BestTimeFiveStages" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Six"
+
+[node name="BestTimeSixStages" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Seven"
+
+[node name="BestTimeSevenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer8"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Eight"
+
+[node name="BestTimeEightStages" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer8"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer9" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer9"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Nine"
+
+[node name="BestTimeNineStages" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer9"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer10" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer10"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Ten"
+
+[node name="BestTimeTenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer10"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer11" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer11"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Eleven"
+
+[node name="BestTimeElevenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer11"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer12" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer12"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Twelve"
+
+[node name="BestTimeTwelveStages" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer12"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer13" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer13"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Thirteen"
+
+[node name="BestTimeThirteenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer13"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer14" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer14"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Fourteen"
+
+[node name="BestTimeFourteenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer14"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer15" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer15"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Fifteen"
+
+[node name="BestTimeFifteenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer15"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer16" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer16"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Sixteen"
+
+[node name="BestTimeSixteenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer16"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer17" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer17"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Seventeen"
+
+[node name="BestTimeSeventeenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer17"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer18" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer18"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Eighteen"
+
+[node name="BestTimeEighteenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer18"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer19" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer19"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Nineteen"
+
+[node name="BestTimeNineteenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer19"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer20" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer20"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Twenty"
+
+[node name="BestTimeTwentyStages" type="Label" parent="Records/PanelContainer/HBoxContainer/BestTime/VBoxContainer/HBoxContainer20"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="VSeparator" type="VSeparator" parent="Records/PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="LeastReshuffles" type="VBoxContainer" parent="Records/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Least Reshuffles"
+
+[node name="HSeparator" type="HSeparator" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles"]
+layout_mode = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "Stages"
+
+[node name="Label2" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "Reshuffles"
+horizontal_alignment = 2
+
+[node name="HSeparator2" type="HSeparator" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles"]
+layout_mode = 2
+
+[node name="HBoxContainer1" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer1"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "One"
+
+[node name="ReshufflesOneStage" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer1"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Two"
+
+[node name="ReshufflesTwoStages" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Three"
+
+[node name="ReshufflesThreeStages" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Four"
+
+[node name="ReshufflesFourStages" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Five"
+
+[node name="ReshufflesFiveStages" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Six"
+
+[node name="ReshufflesSixStages" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Seven"
+
+[node name="ReshufflesSevenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer8"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Eight"
+
+[node name="ReshufflesEightStages" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer8"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer9" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer9"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Nine"
+
+[node name="ReshufflesNineStages" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer9"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer10" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer10"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Ten"
+
+[node name="ReshufflesTenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer10"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer11" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer11"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Eleven"
+
+[node name="ReshufflesElevenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer11"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer12" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer12"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Twelve"
+
+[node name="ReshufflesTwelveStages" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer12"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer13" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer13"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Thirteen"
+
+[node name="ReshufflesThirteenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer13"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer14" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer14"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Fourteen"
+
+[node name="ReshufflesFourteenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer14"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer15" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer15"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Fifteen"
+
+[node name="ReshufflesFifteenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer15"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer16" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer16"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Sixteen"
+
+[node name="ReshufflesSixteenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer16"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer17" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer17"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Seventeen"
+
+[node name="ReshufflesSeventeenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer17"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer18" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer18"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Eighteen"
+
+[node name="ReshufflesEighteenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer18"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer19" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer19"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Nineteen"
+
+[node name="ReshufflesNineteenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer19"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer20" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer20"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Twenty"
+
+[node name="ReshufflesTwentyStages" type="Label" parent="Records/PanelContainer/HBoxContainer/LeastReshuffles/VBoxContainer/HBoxContainer20"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="VSeparator2" type="VSeparator" parent="Records/PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="HighScores" type="VBoxContainer" parent="Records/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "High Score"
+
+[node name="HSeparator" type="HSeparator" parent="Records/PanelContainer/HBoxContainer/HighScores"]
+layout_mode = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/HighScores"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "Stages"
+
+[node name="Label2" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "Score"
+horizontal_alignment = 2
+
+[node name="HSeparator2" type="HSeparator" parent="Records/PanelContainer/HBoxContainer/HighScores"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Records/PanelContainer/HBoxContainer/HighScores"]
+layout_mode = 2
+
+[node name="HBoxContainer1" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer1"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "One"
+
+[node name="HighScoreOneStage" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer1"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Two"
+
+[node name="HighScoreTwoStages" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Three"
+
+[node name="HighScoreThreeStages" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Four"
+
+[node name="HighScoreFourStages" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Five"
+
+[node name="HighScoreFiveStages" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Six"
+
+[node name="HighScoreSixStages" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Seven"
+
+[node name="HighScoreSevenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer8"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Eight"
+
+[node name="HighScoreEightStages" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer8"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer9" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer9"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Nine"
+
+[node name="HighScoreNineStages" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer9"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer10" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer10"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Ten"
+
+[node name="HighScoreTenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer10"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer11" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer11"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Eleven"
+
+[node name="HighScoreElevenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer11"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer12" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer12"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Twelve"
+
+[node name="HighScoreTwelveStages" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer12"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer13" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer13"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Thirteen"
+
+[node name="HighScoreThirteenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer13"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer14" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer14"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Fourteen"
+
+[node name="HighScoreFourteenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer14"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer15" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer15"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Fifteen"
+
+[node name="HighScoreFifteenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer15"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer16" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer16"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Sixteen"
+
+[node name="HighScoreSixteenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer16"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer17" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer17"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Seventeen"
+
+[node name="HighScoreSeventeenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer17"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer18" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer18"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Eighteen"
+
+[node name="HighScoreEighteenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer18"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer19" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer19"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Nineteen"
+
+[node name="HighScoreNineteenStages" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer19"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="HBoxContainer20" type="HBoxContainer" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer20"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Twenty"
+
+[node name="HighScoreTwentyStages" type="Label" parent="Records/PanelContainer/HBoxContainer/HighScores/VBoxContainer/HBoxContainer20"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--"
+horizontal_alignment = 2
+
+[node name="BackFromRecordsButton" type="Button" parent="Records"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -69.0
+offset_top = -34.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "BACK"
+alignment = 2
+
+[node name="ClearRecordsButton" type="Button" parent="Records"]
+custom_minimum_size = Vector2(145, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+offset_right = 145.0
+grow_vertical = 0
+text = "CLEAR RECORDS"
+alignment = 0
+
+[node name="DeleteRecordsConfirmation" parent="Records" instance=ExtResource("4_y4ryc")]
+visible = false
+layout_mode = 1
+
+[node name="Credits" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 90.0
+offset_top = 24.0
+offset_right = -90.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="Credits"]
+material = SubResource("ShaderMaterial_7f67a")
+layout_mode = 0
+offset_left = -90.0
+offset_right = 176.0
+offset_bottom = 53.0
+theme_type_variation = &"HeadingPanel"
+
+[node name="Label" type="Label" parent="Credits/PanelContainer2"]
+layout_mode = 2
+theme_type_variation = &"HeadingLabel"
+text = "Credits"
+uppercase = true
+
+[node name="PanelContainer" type="PanelContainer" parent="Credits"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -174.0
+offset_top = -141.5
+offset_right = 174.0
+offset_bottom = 141.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Credits/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Credits/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Role" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Game Design"
+
+[node name="Contributor" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Credits/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Role" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Programming"
+
+[node name="Contributor" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Credits/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Role" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Writing"
+
+[node name="Contributor" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Credits/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Role" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Art"
+
+[node name="Contributor" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 2
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="Credits/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Role" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Visual Effects"
+
+[node name="Contributor" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 2
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="Credits/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Role" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Music"
+
+[node name="Contributor" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 2
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Credits/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Role" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Sound Effects"
+
+[node name="Contributor" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 2
+
+[node name="BackFromCreditsButton" type="Button" parent="Credits"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "BACK"
+alignment = 2
+
+[node name="Exit" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackgroundBlur" type="ColorRect" parent="Exit"]
+material = SubResource("ShaderMaterial_y4ryc")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0745098, 0.0901961, 0.137255, 1)
+
+[node name="PanelContainer" type="PanelContainer" parent="Exit"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -73.5
+offset_bottom = 73.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Exit/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 36
+
+[node name="HeaderLabel" type="Label" parent="Exit/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeadingLabel"
+text = "Exit Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="BodyLabel" type="Label" parent="Exit/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Are you sure?"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Exit/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="CancelButton" type="Button" parent="Exit/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(145, 0)
+layout_mode = 2
+text = "CANCEL"
+
+[node name="ConfirmButton" type="Button" parent="Exit/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(145, 0)
+layout_mode = 2
+text = "CONFIRM"
+
+[node name="SceneLight" type="PointLight2D" parent="."]
+position = Vector2(377, 539)
+texture = SubResource("GradientTexture2D_rm7yp")
+
+[node name="GameStarter" parent="." instance=ExtResource("11_e5cb7")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="Main/VBoxContainer/NewGameButton" to="." method="on_play_button_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/Record" to="." method="on_records_button_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/SettingsButton" to="." method="on_settings_button_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/CreditsButton" to="." method="on_credits_button_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/ExitButton" to="." method="on_exit_button_pressed"]
+[connection signal="pressed" from="Records/BackFromRecordsButton" to="." method="on_back_from_records_button_pressed"]
+[connection signal="pressed" from="Records/ClearRecordsButton" to="." method="on_delete_records_button_pressed"]
+[connection signal="pressed" from="Credits/BackFromCreditsButton" to="." method="on_back_from_credits_button_pressed"]
+[connection signal="pressed" from="Exit/PanelContainer/VBoxContainer/HBoxContainer/CancelButton" to="." method="on_cancel_exit_button_pressed"]
+[connection signal="pressed" from="Exit/PanelContainer/VBoxContainer/HBoxContainer/ConfirmButton" to="." method="on_confirm_exit_button_pressed"]

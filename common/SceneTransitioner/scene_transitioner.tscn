@@ -1,0 +1,222 @@
+[gd_scene load_steps=32 format=3 uid="uid://dntls2sgx2joi"]
+
+[ext_resource type="Script" uid="uid://woipj1bllwo1" path="res://common/SceneTransitioner/SceneTransitioner.gd" id="1_7nfxi"]
+[ext_resource type="Theme" uid="uid://cdta86b2s4dni" path="res://assets/themes/global_theme.tres" id="1_ehwgl"]
+[ext_resource type="Texture2D" uid="uid://deyqhxsmrfbmn" path="res://assets/ui/grid_background.png" id="3_heo2c"]
+[ext_resource type="Texture2D" uid="uid://2i3eo8djt1gt" path="res://asi/with_sword/light_masks/with_sword_stage_1.png" id="3_uqcyv"]
+[ext_resource type="Texture2D" uid="uid://jv3vko00oumg" path="res://asi/with_sword/light_masks/with_sword_stage_2.png" id="4_f1s3e"]
+[ext_resource type="Texture2D" uid="uid://df5mokjeq6fff" path="res://asi/sitting/asi_dark_lineless.png" id="4_vwu3l"]
+[ext_resource type="Texture2D" uid="uid://cngs3a5x84fid" path="res://asi/with_sword/light_masks/with_sword_stage_3.png" id="5_qblds"]
+[ext_resource type="Texture2D" uid="uid://4rxct52du22v" path="res://asi/sitting/asi_holes_light.png" id="5_s3s1c"]
+[ext_resource type="Texture2D" uid="uid://bcm215otfcmmq" path="res://asi/sitting/covers/stage_1.png" id="6_1tyuy"]
+[ext_resource type="Texture2D" uid="uid://dis0g2prl0kku" path="res://asi/with_sword/light_masks/with_sword_stage_4.png" id="6_5pxyo"]
+[ext_resource type="Texture2D" uid="uid://bl7vmf5e2xl0c" path="res://asi/with_sword/light_masks/with_sword_stage_5.png" id="7_4ns1x"]
+[ext_resource type="Texture2D" uid="uid://bmvychh586omi" path="res://asi/sitting/shadows.png" id="7_o7teh"]
+[ext_resource type="Texture2D" uid="uid://dog4ncm15x6a8" path="res://asi/with_sword/light_masks/with_sword_stage_6.png" id="8_v16uy"]
+[ext_resource type="Texture2D" uid="uid://2vkduqnu84gr" path="res://asi/with_sword/light_masks/with_sword_stage_7.png" id="9_kiomw"]
+[ext_resource type="Texture2D" uid="uid://bvywvemwi4nl4" path="res://asi/with_sword/light_masks/with_sword_stage_8.png" id="10_lnoai"]
+[ext_resource type="Texture2D" uid="uid://cfwymmv245wn1" path="res://asi/with_sword/light_masks/with_sword_stage_9.png" id="11_o2uwv"]
+[ext_resource type="Texture2D" uid="uid://dbws37wctsbxn" path="res://asi/with_sword/light_masks/with_sword_stage_10.png" id="12_pnsod"]
+[ext_resource type="Texture2D" uid="uid://cfgpgm1wy584y" path="res://asi/with_sword/light_masks/with_sword_stage_11.png" id="13_of1d8"]
+[ext_resource type="Texture2D" uid="uid://df32a2mhisrol" path="res://asi/with_sword/light_masks/with_sword_stage_12.png" id="14_vabam"]
+[ext_resource type="Texture2D" uid="uid://rcfqfrqijc48" path="res://asi/with_sword/light_masks/with_sword_stage_13.png" id="15_aceoa"]
+[ext_resource type="Texture2D" uid="uid://b0nkwp7535rwt" path="res://asi/with_sword/light_masks/with_sword_stage_14.png" id="16_c6g7t"]
+[ext_resource type="Texture2D" uid="uid://bmf0xuufy4s12" path="res://asi/with_sword/light_masks/with_sword_stage_15.png" id="17_c1aec"]
+[ext_resource type="Texture2D" uid="uid://dciaqnh8efk2i" path="res://asi/with_sword/light_masks/with_sword_stage_16.png" id="18_he1eq"]
+[ext_resource type="Texture2D" uid="uid://bnbwn7iy1osia" path="res://asi/with_sword/light_masks/with_sword_stage_17.png" id="19_abhkl"]
+[ext_resource type="Texture2D" uid="uid://drnlwklglbkn3" path="res://asi/with_sword/light_masks/with_sword_stage_18.png" id="20_wf5rd"]
+[ext_resource type="Texture2D" uid="uid://bdef60rk1uj86" path="res://asi/with_sword/light_masks/with_sword_stage_19.png" id="21_ei7x3"]
+[ext_resource type="Texture2D" uid="uid://by8wi4amryequ" path="res://asi/with_sword/light_masks/with_sword_stage_20.png" id="22_ivs61"]
+[ext_resource type="Texture2D" uid="uid://d3dty5tnh5slj" path="res://asi/with_sword/Asi_With_Sword.png" id="28_nvx13"]
+[ext_resource type="Texture2D" uid="uid://3hrqxf5svfx2" path="res://asi/Rufus.png" id="29_n5dso"]
+
+[sub_resource type="Gradient" id="Gradient_4aw6c"]
+offsets = PackedFloat32Array(0, 0.284906, 0.598113)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0.521, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nchua"]
+gradient = SubResource("Gradient_4aw6c")
+width = 1920
+height = 1080
+fill_from = Vector2(0.995441, 0.0999662)
+fill_to = Vector2(0.402736, 0.0189125)
+
+[node name="SceneTransitioner" type="ColorRect" node_paths=PackedStringArray("LoadingLabel", "HintLabel", "AsiSitting", "LightShaft", "AsiWithSword", "AsiCover", "Rufus", "RufusPanel", "RufusTip")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ehwgl")
+color = Color(0.0745098, 0.0901961, 0.137255, 1)
+script = ExtResource("1_7nfxi")
+LoadingLabel = NodePath("Control/VBoxContainer/LoadingLabel")
+HintLabel = NodePath("Control/VBoxContainer/HintText")
+Hints = Array[String](["The good news is the Denizens won't attack unless you do.
+The bad news is that they also consider defending yourself an attack.
+Be careful out there."])
+AsiSitting = NodePath("AsiSitting")
+LightShaft = NodePath("SceneLight")
+AsiWithSword = NodePath("AsiWithSword")
+AsiCover = NodePath("AsiWithSword/Cover")
+AsiLightMasks = Array[Texture]([ExtResource("3_uqcyv"), ExtResource("4_f1s3e"), ExtResource("5_qblds"), ExtResource("6_5pxyo"), ExtResource("7_4ns1x"), ExtResource("8_v16uy"), ExtResource("9_kiomw"), ExtResource("10_lnoai"), ExtResource("11_o2uwv"), ExtResource("12_pnsod"), ExtResource("13_of1d8"), ExtResource("14_vabam"), ExtResource("15_aceoa"), ExtResource("16_c6g7t"), ExtResource("17_c1aec"), ExtResource("18_he1eq"), ExtResource("19_abhkl"), ExtResource("20_wf5rd"), ExtResource("21_ei7x3"), ExtResource("22_ivs61")])
+Rufus = NodePath("Rufus")
+RufusPanel = NodePath("RufusPanel")
+RufusTip = NodePath("RufusPanel/RufusTip")
+RufusDialogue = Array[String](["I heard that Urzagrim and Nivar are dating now.
+
+Never thought I'd see the day that Nivar actually admitted to his feelings."])
+metadata/_edit_vertical_guides_ = [1830.0]
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_heo2c")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -353.0
+offset_right = 220.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 256
+
+[node name="HintText" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.545098, 1, 0.996078, 1)
+theme_override_font_sizes/font_size = 36
+horizontal_alignment = 1
+uppercase = true
+
+[node name="LoadingLabel" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeadingLabel"
+text = "Loading"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="AsiSitting" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 158.0
+offset_right = 1438.0
+grow_vertical = 2
+pivot_offset = Vector2(0, 1080)
+texture = ExtResource("4_vwu3l")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Lights" type="TextureRect" parent="AsiSitting"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_s3s1c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Cover" type="TextureRect" parent="AsiSitting"]
+modulate = Color(0.596498, 0.599528, 0.608618, 1)
+light_mask = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_1tyuy")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Shadows" type="TextureRect" parent="AsiSitting"]
+modulate = Color(0.596498, 0.599528, 0.608618, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_o7teh")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AsiWithSword" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 158.0
+offset_right = 1438.0
+grow_vertical = 2
+pivot_offset = Vector2(0, 1080)
+texture = ExtResource("28_nvx13")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Cover" type="TextureRect" parent="AsiWithSword"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_uqcyv")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SceneLight" type="PointLight2D" parent="."]
+position = Vector2(377, 539)
+texture = SubResource("GradientTexture2D_nchua")
+
+[node name="RufusPanel" type="PanelContainer" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 1525.0
+offset_top = 237.0
+offset_right = 1828.0
+offset_bottom = 705.0
+
+[node name="RufusTip" type="Label" parent="RufusPanel"]
+custom_minimum_size = Vector2(270, 0)
+layout_mode = 2
+autowrap_mode = 2
+
+[node name="Rufus" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 1460.0
+offset_top = 51.0
+offset_right = 1717.0
+offset_bottom = 318.0
+texture = ExtResource("29_n5dso")
+expand_mode = 3
+stretch_mode = 5
