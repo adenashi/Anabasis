@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://guh7jvkhdo7b"]
+[gd_scene load_steps=13 format=3 uid="uid://guh7jvkhdo7b"]
 
 [ext_resource type="Script" uid="uid://b4psrspcm4q81" path="res://game/managers/GameManager.gd" id="1_l8g03"]
 [ext_resource type="Texture2D" uid="uid://dsjpgnlgjiyti" path="res://assets/backgrounds/stage_esmuri.png" id="2_3vho3"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://c2vij5cyqaymj" path="res://hud/hud.tscn" id="8_ee6o4"]
 [ext_resource type="PackedScene" uid="uid://1r41btepnyom" path="res://cards/hand_controller.tscn" id="8_j8tme"]
 [ext_resource type="PackedScene" uid="uid://7mi1f315i5km" path="res://game/stages/stage_placard.tscn" id="9_4cobl"]
+[ext_resource type="PackedScene" uid="uid://cg4jooyqj4b75" path="res://game/field/field.tscn" id="10_qf6n1"]
 
 [node name="Game" type="Node" node_paths=PackedStringArray("Validator", "Combat", "Deck", "Stage", "CurrentEnemy", "Player", "GameTimer", "HUD")]
 script = ExtResource("1_l8g03")
@@ -30,8 +31,9 @@ texture = ExtResource("2_3vho3")
 [node name="PlayValidator" type="Node" parent="."]
 script = ExtResource("2_j8tme")
 
-[node name="CombatManager" type="Node" parent="."]
+[node name="CombatManager" type="Node" parent="." node_paths=PackedStringArray("Field")]
 script = ExtResource("3_3vho3")
+Field = NodePath("../Field")
 
 [node name="DeckManager" type="Node" parent="." node_paths=PackedStringArray("Hand")]
 script = ExtResource("4_qf6n1")
@@ -51,6 +53,23 @@ script = ExtResource("7_hb504")
 [node name="GameTimer" type="Timer" parent="."]
 
 [node name="HandController" parent="." instance=ExtResource("8_j8tme")]
+
+[node name="Field" parent="." node_paths=PackedStringArray("StartingPositions") instance=ExtResource("10_qf6n1")]
+StartingPositions = {
+NodePath("Path2D/Point1"): 0.0,
+NodePath("Path2D/Point2"): 0.0,
+NodePath("Path2D/Point3"): 0.0,
+NodePath("Path2D/Point4"): 0.0,
+NodePath("Path2D/Point5"): 0.0,
+NodePath("Path2D/Point6"): 0.0,
+NodePath("Path2D/Point7"): 0.0,
+NodePath("Path2D/Point8"): 0.0,
+NodePath("Path2D/Point9"): 0.0,
+NodePath("Path2D/Point10"): 0.0,
+NodePath("Path2D/Point11"): 0.0,
+NodePath("Path2D/Point12"): 0.0,
+NodePath("Path2D/Point13"): 0.0
+}
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
