@@ -18,6 +18,42 @@ signal ShowAsi
 
 #endregion
 
+#region Tutorial
+
+## [br] Emitters: [SettingsMenuController]
+## [br] Subscribers: [TutorialController]
+signal ToggleTutorial(on : bool)
+
+## [br] Emitters: [GameManager]
+## [br] Subscribers: [TutorialController]
+signal FirstStageReached
+
+## [br] Emitters: [TutorialController]
+## [br] Subscribers: [GameManager]
+signal ReadyToStartFirstStage
+
+## [br] Emitters: [PlayValidator]
+## [br] Subscribers: [TutorialController]
+signal RunSelected
+
+## [br] Emitters: [PlayValidator]
+## [br] Subscribers: [TutorialController]
+signal SequenceSelected
+
+## [br] Emitters: [PlayValidator]
+## [br] Subscribers: [TutorialController]
+signal InvalidCardsSelected
+
+## [br] Emitters: [PlayValidator]
+## [br] Subscribers: [TutorialController]
+signal PlayerAttacked
+
+## [br] Emitters: [CombatManager]
+## [br] Subscribers: [TutorialController]
+signal EnemyAttacked
+
+#endregion
+
 #region HUD Updates
 
 ## [br] Emitters: [PlayerController]
@@ -27,6 +63,10 @@ signal UpdatePlayerHealth(max : int, value : int)
 ## [br] Emitters: [CombatManager], [PlayerController]
 ## [br] Subscribers: [PlayerHUD]
 signal UpdatePlayerDefense(max : int, value : int)
+
+## [br] Emitters: [PlayValidator], [CombatManager]
+## [br] Subscribers: [PlayerHUD]
+signal UpdatePlayerAttack(amount : int)
 
 ## [br] Emitters: [BaseEnemy]
 ## [br] Subscribers: [EnemyHUD]

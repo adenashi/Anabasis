@@ -25,6 +25,8 @@ var GameScore : int = 0
 
 #region Private Variables
 
+var waitingForTutorial : bool = true
+
 var TotalGameTime : int
 var TotalReshuffles : int
 var TotalScore : int
@@ -52,6 +54,7 @@ func _ready() -> void:
 func subscribe_to_signals() -> void:
 	GameTimer.timeout.connect(update_time)
 	Dispatch.PlaceEnemy.connect(on_enemy_placed)
+	Dispatch.ReadyToStartFirstStage.connect(on_tutorial_ready)
 	Dispatch.PlayerDied.connect(on_player_died)
 	Dispatch.EnemyDied.connect(initiate_next_level)
 	Dispatch.AddPoints.connect(update_score)
@@ -92,7 +95,16 @@ func on_enemy_placed(data : EnemyData) -> void:
 	CurrentEnemy.init_enemy(data)
 
 
+func on_tutorial_ready() -> void:
+	waitingForTutorial = false
+
+
 func on_ready_to_start_stage() -> void:
+	if CurrentLevel == 1 and SaveData.TutorialOn:
+		Dispatch.FirstStageReached.emit()
+		while waitingForTutorial:
+			await one_frame()
+	
 	Global.CurrentState = Global.GameState.IN_GAME
 	Player.update_max_defense(Global.StartingDefense + (10*CurrentLevel))
 	Player.restore_to_full_health()

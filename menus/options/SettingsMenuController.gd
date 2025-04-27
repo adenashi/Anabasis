@@ -150,6 +150,7 @@ func on_vsync_toggled(isOn : bool) -> void:
 func on_tutorial_toggled(isOn : bool) -> void:
 	tutorialOn = isOn
 	SaveData.TutorialOn = tutorialOn
+	Dispatch.ToggleTutorial.emit(tutorialOn)
 
 
 func on_back_clicked() -> void:

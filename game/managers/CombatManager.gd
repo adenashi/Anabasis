@@ -131,6 +131,7 @@ func perform_attack(cards : Array[BaseCard]) -> void:
 		return
 	
 	send_update("Player turn completed.")
+	Dispatch.UpdatePlayerAttack.emit(0)
 	Dispatch.EndPlayerTurn.emit()
 	change_turn(Turn.ENEMY)
 
@@ -190,6 +191,8 @@ func perform_enemy_turn() -> void:
 	await get_tree().create_timer(1.2).timeout
 	send_update("Enemy Turn begins.")
 	var enemyAttack : int = CurrentEnemy.BaseAttack - currentEnemyDebuff
+	if SaveData.TutorialOn:
+		Dispatch.EnemyAttacked.emit()
 	send_update(str(enemyAttack) + " Damage to Player.")
 	Player.take_damage(enemyAttack)
 	

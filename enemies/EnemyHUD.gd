@@ -11,6 +11,8 @@ const SEGMENT_HEIGHT : float = 9.0
 
 @export_group("Controls")
 @export var CardImage : TextureRect
+@export var EnemyAttack : Label
+@export var EnemyName : Label
 
 @export_subgroup("Health Bar")
 @export var HealthSegments : PanelContainer
@@ -38,6 +40,8 @@ func _ready() -> void:
 func on_new_enemy(enemy : EnemyData) -> void:
 	var img = load(enemy.Portrait)
 	CardImage.texture = img
+	EnemyName.text = enemy.Name
+	EnemyAttack.text = str(enemy.Attack)
 	update_health(enemy.MaxHealth, enemy.MaxHealth)
 	update_defense(enemy.MaxDefense, enemy.MaxDefense)
 

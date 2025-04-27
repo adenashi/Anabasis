@@ -52,12 +52,21 @@ func on_card_selected(card : BaseCard) -> void:
 		if valid_run():
 			for c in selectedCards:
 				c.show_action(ActionType.DEFENSE)
+			if SaveData.TutorialOn:
+				Dispatch.RunSelected.emit()
 		elif valid_sequence():
+			var att : int = 0
 			for c in selectedCards:
 				c.show_action(ActionType.ATTACK)
+				att += c.Value
+			Dispatch.UpdatePlayerAttack.emit(att)
+			if SaveData.TutorialOn:
+				Dispatch.SequenceSelected.emit()
 		else:
 			for c in selectedCards:
 				c.show_action(ActionType.NONE)
+			if SaveData.TutorialOn:
+				Dispatch.InvalidCardsSelected.emit()
 
 
 func on_card_deselected(card : BaseCard) -> void:
@@ -70,8 +79,15 @@ func on_card_deselected(card : BaseCard) -> void:
 			for c in selectedCards:
 				c.show_action(ActionType.DEFENSE)
 		elif valid_sequence():
+			var att : int = 0
 			for c in selectedCards:
 				c.show_action(ActionType.ATTACK)
+				att += c.Value
+			Dispatch.UpdatePlayerAttack.emit(att)
+		else:
+			if SaveData.TutorialOn:
+				Dispatch.InvalidCardsSelected.emit()
+			Dispatch.UpdatePlayerAttack.emit(0)
 
 
 func on_discard_selected_cards() -> void:
@@ -114,6 +130,8 @@ func check_selected_cards() -> void:
 		for card:BaseCard in selectedCards:
 			message += card.Name + " "
 		send_update(message)
+		if SaveData.TutorialOn:
+			Dispatch.PlayerAttacked.emit()
 		send_attack()
 	else:
 		message = "Not a valid run or sequence: "

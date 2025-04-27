@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://cqhscwtkw8egs"]
+[gd_scene load_steps=9 format=3 uid="uid://cqhscwtkw8egs"]
 
-[ext_resource type="Script" uid="uid://bsydofop3u7c0" path="res://Autoloads/GUI.gd" id="1_mm5ko"]
+[ext_resource type="Script" uid="uid://bsydofop3u7c0" path="res://autoloads/GUI.gd" id="1_mm5ko"]
 [ext_resource type="PackedScene" uid="uid://hi338ppglm7m" path="res://menus/pause/pause_menu.tscn" id="2_bvxye"]
 [ext_resource type="PackedScene" uid="uid://ddqin8fivbwp5" path="res://menus/options/settings_menu.tscn" id="3_uh6n7"]
 [ext_resource type="PackedScene" uid="uid://bd0ts63cu65yf" path="res://common/ConfirmationPopup/confirmation_popup.tscn" id="4_jfpd4"]
 [ext_resource type="PackedScene" uid="uid://dntls2sgx2joi" path="res://common/SceneTransitioner/scene_transitioner.tscn" id="5_if8rd"]
-[ext_resource type="PackedScene" path="res://common/dev_build.tscn" id="6_bvxye"]
+[ext_resource type="PackedScene" uid="uid://bvc4xkmypouiw" path="res://common/dev_build.tscn" id="6_bvxye"]
+[ext_resource type="PackedScene" uid="uid://dmfxaqejewmky" path="res://tutorial/tutorial.tscn" id="6_jjqar"]
 [ext_resource type="Theme" uid="uid://cdta86b2s4dni" path="res://assets/themes/global_theme.tres" id="7_uh6n7"]
 
 [node name="GUI" type="CanvasLayer" node_paths=PackedStringArray("PauseMenu", "SettingsMenu", "ConfirmWindow", "Transitioner", "DevUI")]
@@ -28,6 +29,9 @@ visible = false
 visible = false
 
 [node name="SceneTransitioner" parent="." instance=ExtResource("5_if8rd")]
+visible = false
+
+[node name="Tutorial" parent="." instance=ExtResource("6_jjqar")]
 visible = false
 
 [node name="DevBuild" parent="." instance=ExtResource("6_bvxye")]

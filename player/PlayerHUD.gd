@@ -11,6 +11,7 @@ const SEGMENT_HEIGHT : float = 9.0
 
 @export_group("Controls")
 @export var CardImage : TextureRect
+@export var PlayerAttack : Label
 
 @export_subgroup("Health Bar")
 @export var HealthSegments : PanelContainer
@@ -29,6 +30,7 @@ const SEGMENT_HEIGHT : float = 9.0
 func _ready() -> void:
 	Dispatch.UpdatePlayerHealth.connect(update_health)
 	Dispatch.UpdatePlayerDefense.connect(update_defense)
+	Dispatch.UpdatePlayerAttack.connect(update_attack)
 
 #endregion
 
@@ -53,6 +55,10 @@ func update_defense(segments : int, value : int) -> void:
 		DefenseFull.custom_minimum_size.y = SEGMENT_HEIGHT * ceili(segments / 20)
 	else:
 		DefenseFull.hide()
+
+
+func update_attack(amount : int) -> void:
+	PlayerAttack.text = str(amount)
 
 #endregion
 

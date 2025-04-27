@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://b0fvrt4jjt2xe"]
+[gd_scene load_steps=14 format=3 uid="uid://b0fvrt4jjt2xe"]
 
 [ext_resource type="Script" uid="uid://da284r44a7yqx" path="res://enemies/EnemyHUD.gd" id="1_pj5tm"]
 [ext_resource type="Texture2D" uid="uid://dn00wae1rpmih" path="res://cards/assets/card_blank.png" id="2_1cr2r"]
 [ext_resource type="Texture2D" uid="uid://bhoj87yuq6iyx" path="res://assets/ui/segment_empty.png" id="2_e0rbg"]
+[ext_resource type="Texture2D" uid="uid://dq13k0w50lphx" path="res://assets/ui/sword.png" id="2_kuqdb"]
 [ext_resource type="Texture2D" uid="uid://3hejcvufsjak" path="res://assets/ui/segment_full.png" id="3_cllx4"]
+[ext_resource type="Theme" uid="uid://cdta86b2s4dni" path="res://assets/themes/global_theme.tres" id="3_krfnt"]
 [ext_resource type="Texture2D" uid="uid://bgmama865ri6g" path="res://assets/ui/CardSilhouette.png" id="3_py827"]
 [ext_resource type="Texture2D" uid="uid://c1rip6bh6ciwa" path="res://assets/ui/skull.png" id="3_qt3o7"]
 [ext_resource type="Texture2D" uid="uid://bfsd0cekcrefe" path="res://assets/ui/shield.png" id="5_xoao5"]
@@ -14,14 +16,16 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hefqa"]
 
-[node name="EnemyHUD" type="Control" node_paths=PackedStringArray("CardImage", "HealthSegments", "HealthEmpty", "HealthFull", "DefenseSegments", "DefenseEmpty", "DefenseFull")]
-custom_minimum_size = Vector2(160, 210)
+[node name="EnemyHUD" type="Control" node_paths=PackedStringArray("CardImage", "EnemyAttack", "EnemyName", "HealthSegments", "HealthEmpty", "HealthFull", "DefenseSegments", "DefenseEmpty", "DefenseFull")]
+custom_minimum_size = Vector2(160, 236)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 161.0
 offset_bottom = 211.0
 script = ExtResource("1_pj5tm")
 CardImage = NodePath("VBoxContainer/HBoxContainer/EnemyCard/CardImage")
+EnemyAttack = NodePath("VBoxContainer/HBoxContainer3/EnemyAttack")
+EnemyName = NodePath("VBoxContainer/HBoxContainer3/EnemyName")
 HealthSegments = NodePath("VBoxContainer/HBoxContainer2/HealthBar")
 HealthEmpty = NodePath("VBoxContainer/HBoxContainer2/HealthBar/Empty")
 HealthFull = NodePath("VBoxContainer/HBoxContainer2/HealthBar/Empty/Full")
@@ -33,6 +37,34 @@ DefenseFull = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/DefenseBar/Def
 layout_mode = 1
 offset_right = 140.0
 offset_bottom = 190.0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer3"]
+modulate = Color(0.996078, 0.388235, 0.886275, 1)
+layout_mode = 2
+texture = ExtResource("2_kuqdb")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="EnemyAttack" type="Label" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme = ExtResource("3_krfnt")
+theme_type_variation = &"HeadingLabel"
+theme_override_font_sizes/font_size = 18
+text = "0"
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="EnemyName" type="Label" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_krfnt")
+theme_type_variation = &"HeadingLabel"
+theme_override_font_sizes/font_size = 18
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
