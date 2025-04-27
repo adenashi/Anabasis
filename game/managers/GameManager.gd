@@ -45,7 +45,9 @@ func _ready() -> void:
 	Combat.CurrentEnemy = CurrentEnemy
 	CurrentEnemy.EnemyDied.connect(Combat.on_enemy_died)
 	Combat.Player = Player
+	Combat.Field.Player = Player
 	Deck.Player = Player
+	Combat.Field.Enemy = CurrentEnemy
 	Validator.Deck = Deck
 	Validator.Combat = Combat
 	CurrentEnemy.Deck = Deck

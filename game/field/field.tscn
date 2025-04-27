@@ -1,0 +1,83 @@
+[gd_scene load_steps=3 format=3 uid="uid://cg4jooyqj4b75"]
+
+[ext_resource type="Script" uid="uid://ibv416gprvw7" path="res://game/field/FieldController.gd" id="1_n4qxx"]
+
+[sub_resource type="Curve2D" id="Curve2D_tar8h"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 300, 500, 0, 0, 0, 0, 1620, 500)
+}
+point_count = 2
+
+[node name="Field" type="Node2D" node_paths=PackedStringArray("Path", "StartingPositions")]
+script = ExtResource("1_n4qxx")
+Path = NodePath("Path2D")
+StartingPositions = {
+NodePath("Path2D/Point1"): 0.0,
+NodePath("Path2D/Point2"): 0.0,
+NodePath("Path2D/Point3"): 0.0,
+NodePath("Path2D/Point4"): 0.0,
+NodePath("Path2D/Point5"): 0.0,
+NodePath("Path2D/Point6"): 0.0,
+NodePath("Path2D/Point7"): 0.0,
+NodePath("Path2D/Point8"): 0.0,
+NodePath("Path2D/Point9"): 0.0,
+NodePath("Path2D/Point10"): 0.0,
+NodePath("Path2D/Point11"): 0.0,
+NodePath("Path2D/Point12"): 0.0,
+NodePath("Path2D/Point13"): 0.0
+}
+metadata/_edit_horizontal_guides_ = [500.0]
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_tar8h")
+
+[node name="Point1" type="PathFollow2D" parent="Path2D"]
+position = Vector2(300, 500)
+
+[node name="Point2" type="PathFollow2D" parent="Path2D"]
+position = Vector2(405.59, 500)
+progress = 105.6
+
+[node name="Point3" type="PathFollow2D" parent="Path2D"]
+position = Vector2(511.198, 500)
+progress = 211.2
+
+[node name="Point4" type="PathFollow2D" parent="Path2D"]
+position = Vector2(616.799, 500)
+progress = 316.8
+
+[node name="Point5" type="PathFollow2D" parent="Path2D"]
+position = Vector2(722.399, 500)
+progress = 422.4
+
+[node name="Point6" type="PathFollow2D" parent="Path2D"]
+position = Vector2(828, 500)
+progress = 528.0
+
+[node name="Point7" type="PathFollow2D" parent="Path2D"]
+position = Vector2(933.6, 500)
+progress = 633.6
+
+[node name="Point8" type="PathFollow2D" parent="Path2D"]
+position = Vector2(1039.2, 500)
+progress = 739.2
+
+[node name="Point9" type="PathFollow2D" parent="Path2D"]
+position = Vector2(1144.8, 500)
+progress = 844.8
+
+[node name="Point10" type="PathFollow2D" parent="Path2D"]
+position = Vector2(1250.4, 500)
+progress = 950.4
+
+[node name="Point11" type="PathFollow2D" parent="Path2D"]
+position = Vector2(1356, 500)
+progress = 1056.0
+
+[node name="Point12" type="PathFollow2D" parent="Path2D"]
+position = Vector2(1461.6, 500)
+progress = 1161.6
+
+[node name="Point13" type="PathFollow2D" parent="Path2D"]
+position = Vector2(1620, 500)
+progress = 1320.0

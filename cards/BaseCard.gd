@@ -42,7 +42,6 @@ const NORMAL_COLOR : Color = Color(1.0, 1.0, 1.0)
 @export var RankLabelReversed : Label
 @export var SuitIconReversed : TextureRect
 
-
 #endregion
 
 #region Public Variables

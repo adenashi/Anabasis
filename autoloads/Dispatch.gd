@@ -64,7 +64,7 @@ signal UpdatePlayerHealth(max : int, value : int)
 ## [br] Subscribers: [PlayerHUD]
 signal UpdatePlayerDefense(max : int, value : int)
 
-## [br] Emitters: [PlayValidator], [CombatManager]
+## [br] Emitters: [PlayValidator], [FieldManager]
 ## [br] Subscribers: [PlayerHUD]
 signal UpdatePlayerAttack(amount : int)
 
@@ -192,13 +192,21 @@ signal AddDefense(cards : Array[BaseCard])
 ## [br] Subscribers: [CombatManager]
 signal DoAttackAndDefense(cards : Array[BaseCard])
 
-## [br] Emitters: [CombatManager]
+## [br] Emitters: [FieldController]
 ## [br] Subscribers: [PlayValidator]
 signal EndPlayerTurn
 
 ## [br] Emitters: [PlayValidator]
 ## [br] Subscribers: [CombatManager]
 signal StartEnemyTurn
+
+## [br] Emitters: [CombatManager], [BaseEnemy]
+## [br] Subscribers: [FieldManager]
+signal EnemyAttacks
+
+## [br] Emitters: [BaseEnemy]
+## [br] Subscribers: [FieldManager]
+signal EnemyDefends(amount : int)
 
 ## [br] Emitters: [CombatManager]
 ## [br] Subscribers: [GM]

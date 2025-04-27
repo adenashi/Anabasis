@@ -27,7 +27,6 @@ var CurrentDefense : int
 #region References
 
 var Deck : DeckManager
-var Player : PlayerController
 
 #endregion
 
@@ -59,7 +58,7 @@ func make_free_move() -> void:
 
 func do_attack() -> void:
 	send_update("Attacking for free move.")
-	Player.take_damage(BaseAttack)
+	Dispatch.EnemyAttacks.emit()
 
 
 func do_defense() -> void:
@@ -90,12 +89,7 @@ func do_defense() -> void:
 		var possibles : Array[int] = [5,10,15]
 		defense = possibles.pick_random()
 	
-	CurrentDefense += defense * 3
-	if CurrentDefense > MaxDefense:
-		CurrentDefense = MaxDefense
-	
-	send_update("Adding " + str(defense * 3) + " Defense for free move.")
-	Dispatch.UpdateEnemyDefense.emit(MaxDefense, CurrentDefense)
+	Dispatch.EnemyDefends.emit(defense)
 
 
 func take_damage(damage : int) -> void:

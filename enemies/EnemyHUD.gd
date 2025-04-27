@@ -26,6 +26,12 @@ const SEGMENT_HEIGHT : float = 9.0
 
 #endregion
 
+#region Private Variables
+
+var segmentTween : Tween
+
+#endregion
+
 #region Initialization
 
 func _ready() -> void:

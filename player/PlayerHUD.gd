@@ -25,6 +25,12 @@ const SEGMENT_HEIGHT : float = 9.0
 
 #endregion
 
+#region Private Variables
+
+var segmentTween : Tween
+
+#endregion
+
 #region Initialization
 
 func _ready() -> void:
@@ -59,6 +65,32 @@ func update_defense(segments : int, value : int) -> void:
 
 func update_attack(amount : int) -> void:
 	PlayerAttack.text = str(amount)
+
+#endregion
+
+#region Aesthetics
+
+func show_armor_loss(amount : int) -> void:
+	pass
+
+
+func show_armor_gain(amount : int) -> void:
+	pass
+
+
+func show_health_loss(amount : int) -> void:
+	pass
+
+
+func show_health_gain(amount : int) -> void:
+	pass
+
+
+func reset_segment_tween() -> void:
+	if segmentTween:
+		segmentTween.kill()
+	
+	segmentTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 
 #endregion
 

@@ -20,39 +20,74 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("1_0ivg5")
 script = ExtResource("1_jvmdh")
-LevelLabel = NodePath("InnerControl/TopBar/Level/LevelLabel")
-TimeLabel = NodePath("InnerControl/TopBar/Level/TimeLabel")
-MovesLabel = NodePath("InnerControl/TopBar/Moves/MovesLabel")
-ScoreLabel = NodePath("InnerControl/TopBar/Score/ScoreLabel")
+LevelLabel = NodePath("InnerControl/Level/Level/LevelLabel")
+TimeLabel = NodePath("InnerControl/Level/Level/TimeLabel")
+MovesLabel = NodePath("InnerControl/ReshufflesScore/Moves/MovesLabel")
+ScoreLabel = NodePath("InnerControl/ReshufflesScore/Score/ScoreLabel")
 DeckLabel = NodePath("InnerControl/Bottom/DeckIcon/DeckCount")
 DiscardLabel = NodePath("InnerControl/Bottom/DiscardIcon/DiscardCount")
 SortButtons = NodePath("InnerControl/Bottom/SortHandButtons")
 ActionButtons = NodePath("InnerControl/Bottom/ActionButtons")
 metadata/_edit_vertical_guides_ = [960.0]
+metadata/_edit_horizontal_guides_ = [500.0]
 
 [node name="InnerControl" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 24.0
+offset_left = 90.0
 offset_top = 24.0
-offset_right = -24.0
+offset_right = -90.0
 offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="TopBar" type="HBoxContainer" parent="InnerControl"]
+[node name="Level" type="HBoxContainer" parent="InnerControl"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 23.0
+offset_bottom = 124.0
 grow_horizontal = 2
-theme_override_constants/separation = 16
+
+[node name="Level" type="VBoxContainer" parent="InnerControl/Level"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_stretch_ratio = 20.0
+theme_override_constants/separation = -16
 alignment = 1
 
-[node name="PauseButton" type="TextureButton" parent="InnerControl/TopBar"]
+[node name="Label" type="Label" parent="InnerControl/Level/Level"]
+layout_mode = 2
+text = "Stage"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="LevelLabel" type="Label" parent="InnerControl/Level/Level"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_1kkc0")
+theme_override_font_sizes/font_size = 72
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeLabel" type="Label" parent="InnerControl/Level/Level"]
+layout_mode = 2
+text = "00:00:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ReshufflesScore" type="HBoxContainer" parent="InnerControl"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 39.0
+grow_horizontal = 2
+theme_override_constants/separation = 16
+
+[node name="PauseButton" type="TextureButton" parent="InnerControl/ReshufflesScore"]
 visible = false
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
@@ -65,66 +100,38 @@ texture_focused = ExtResource("2_1rsjr")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="Moves" type="HBoxContainer" parent="InnerControl/TopBar"]
+[node name="Moves" type="HBoxContainer" parent="InnerControl/ReshufflesScore"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_constants/separation = 8
 
-[node name="TextureRect" type="TextureRect" parent="InnerControl/TopBar/Moves"]
+[node name="TextureRect" type="TextureRect" parent="InnerControl/ReshufflesScore/Moves"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = ExtResource("3_tnm0g")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="MovesLabel" type="Label" parent="InnerControl/TopBar/Moves"]
+[node name="MovesLabel" type="Label" parent="InnerControl/ReshufflesScore/Moves"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "0"
 
-[node name="Level" type="VBoxContainer" parent="InnerControl/TopBar"]
+[node name="Score" type="HBoxContainer" parent="InnerControl/ReshufflesScore"]
 layout_mode = 2
-size_flags_horizontal = 6
-size_flags_stretch_ratio = 20.0
-theme_override_constants/separation = -16
-alignment = 1
-
-[node name="Label" type="Label" parent="InnerControl/TopBar/Level"]
-layout_mode = 2
-text = "Level"
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true
-
-[node name="LevelLabel" type="Label" parent="InnerControl/TopBar/Level"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("5_1kkc0")
-theme_override_font_sizes/font_size = 72
-text = "1"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="TimeLabel" type="Label" parent="InnerControl/TopBar/Level"]
-layout_mode = 2
-text = "00:00:00"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Score" type="HBoxContainer" parent="InnerControl/TopBar"]
-layout_mode = 2
-size_flags_horizontal = 8
+size_flags_horizontal = 10
 size_flags_vertical = 0
 theme_override_constants/separation = 8
 alignment = 2
 
-[node name="ScoreLabel" type="Label" parent="InnerControl/TopBar/Score"]
+[node name="ScoreLabel" type="Label" parent="InnerControl/ReshufflesScore/Score"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "0"
 horizontal_alignment = 2
 
-[node name="TextureRect" type="TextureRect" parent="InnerControl/TopBar/Score"]
+[node name="TextureRect" type="TextureRect" parent="InnerControl/ReshufflesScore/Score"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = ExtResource("4_ncsg0")
@@ -136,8 +143,8 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -105.0
-offset_bottom = 105.0
+offset_top = -158.0
+offset_bottom = 78.0
 grow_vertical = 2
 
 [node name="EnemyHUD" parent="InnerControl" instance=ExtResource("8_sh35x")]
@@ -148,9 +155,9 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -161.0
-offset_top = -105.5
+offset_top = -158.0
 offset_right = 0.0
-offset_bottom = 105.5
+offset_bottom = 78.0
 grow_horizontal = 0
 grow_vertical = 2
 
@@ -227,17 +234,22 @@ anchors_preset = -1
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 100.0
-offset_top = -40.0
-offset_right = 287.0
+offset_top = -60.0
+offset_right = 210.0
 grow_vertical = 0
+theme_override_constants/separation = 12
 
 [node name="SortbySuitButton" type="Button" parent="InnerControl/Bottom/SortHandButtons"]
 layout_mode = 2
-text = "SORT x SUIT"
+theme_override_constants/line_spacing = -8
+text = "SORT
+SUIT"
 
 [node name="SortbyRankButton" type="Button" parent="InnerControl/Bottom/SortHandButtons"]
 layout_mode = 2
-text = "SORT x RANK"
+theme_override_constants/line_spacing = -8
+text = "SORT
+RANK"
 
 [node name="ActionButtons" type="HBoxContainer" parent="InnerControl/Bottom"]
 layout_mode = 1
@@ -251,6 +263,7 @@ offset_top = -40.0
 offset_right = -100.0
 grow_horizontal = 0
 grow_vertical = 0
+theme_override_constants/separation = 12
 alignment = 2
 
 [node name="PlayCardsButton" type="Button" parent="InnerControl/Bottom/ActionButtons"]
@@ -263,7 +276,7 @@ custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 text = "DISCARD"
 
-[connection signal="pressed" from="InnerControl/TopBar/PauseButton" to="." method="on_pause_button_pressed"]
+[connection signal="pressed" from="InnerControl/ReshufflesScore/PauseButton" to="." method="on_pause_button_pressed"]
 [connection signal="pressed" from="InnerControl/Bottom/SortHandButtons/SortbySuitButton" to="." method="on_sort_by_suit_button_pressed"]
 [connection signal="pressed" from="InnerControl/Bottom/SortHandButtons/SortbyRankButton" to="." method="on_sort_by_rank_button_pressed"]
 [connection signal="pressed" from="InnerControl/Bottom/ActionButtons/PlayCardsButton" to="." method="on_play_cards_button_pressed"]

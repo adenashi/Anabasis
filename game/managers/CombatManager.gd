@@ -17,6 +17,12 @@ const ENEMIES = preload("uid://bt8m2els0rd13")
 
 #endregion
 
+#region Exports
+
+@export var Field : FieldController
+
+#endregion
+
 #region Public Variables
 
 var Deck : DeckManager
@@ -39,6 +45,7 @@ var AvailableEnemies : Array[int] = []
 #region Initialization
 
 func _ready() -> void:
+	Dispatch.EndPlayerTurn.connect(start_enemy_turn)
 	Dispatch.StartEnemyTurn.connect(start_enemy_turn)
 	Dispatch.SpawnNewEnemy.connect(spawn_new_enemy)
 	Dispatch.AddDefense.connect(add_to_defense)
@@ -112,9 +119,7 @@ func perform_attack(cards : Array[BaseCard]) -> void:
 	
 	for card:BaseCard in cards:
 		var values : Array[int] = get_values(card)
-		if CurrentEnemy.CurrentHealth > 0:
-			send_update(CurrentEnemy.Name + " takes " + str(values[0]) + " damage.")
-			CurrentEnemy.take_damage(values[0])
+		send_update(CurrentEnemy.Name + " takes " + str(values[0]) + " damage.")
 		points += values[1]
 	
 	if cards.size() > 3:
@@ -122,8 +127,9 @@ func perform_attack(cards : Array[BaseCard]) -> void:
 		bonus *= Global.ExtraCardBonus
 		points += bonus
 	
-	Dispatch.AddPoints.emit(points)
 	
+	await Field.show_player_attack(cards)
+	Dispatch.AddPoints.emit(points)
 	await Deck.discard_selected_cards(cards)
 	await one_frame()
 	if currentTurn == Turn.NONE:
@@ -131,9 +137,8 @@ func perform_attack(cards : Array[BaseCard]) -> void:
 		return
 	
 	send_update("Player turn completed.")
-	Dispatch.UpdatePlayerAttack.emit(0)
 	Dispatch.EndPlayerTurn.emit()
-	change_turn(Turn.ENEMY)
+	Dispatch.UpdatePlayerAttack.emit(0)
 
 #endregion
 
@@ -144,7 +149,6 @@ func add_to_defense(cards : Array[BaseCard]) -> void:
 		return
 	
 	var defense : int = (cards.front().PointValue / 10) * cards.size()
-	Player.add_defense(defense)
 	send_update(str(defense) + " add to Player Defense.")
 	
 	var points : int = 0
@@ -153,8 +157,9 @@ func add_to_defense(cards : Array[BaseCard]) -> void:
 		var values : Array[int] = get_values(card)
 		points += values[1]
 	
-	Dispatch.AddPoints.emit(points)
 	
+	await Field.show_player_defense(cards)
+	Dispatch.AddPoints.emit(points)
 	await Deck.discard_selected_cards(cards)
 	await one_frame()
 	if currentTurn == Turn.NONE:
@@ -164,7 +169,6 @@ func add_to_defense(cards : Array[BaseCard]) -> void:
 	
 	send_update("Player turn completed.")
 	Dispatch.EndPlayerTurn.emit()
-	change_turn(Turn.ENEMY)
 
 #endregion
 
@@ -175,7 +179,6 @@ func add_defense_and_perform_attack(cards : Array[BaseCard]) -> void:
 		return
 	
 	var defense : int = (cards.front().PointValue / 10) * cards.size()
-	Player.add_defense(defense)
 	send_update(str(defense) + " add to Player Defense.")
 	
 	var points : int = 0
@@ -183,17 +186,16 @@ func add_defense_and_perform_attack(cards : Array[BaseCard]) -> void:
 	for card:BaseCard in cards:
 		var values : Array[int] = get_values(card)
 		points += values[1]
-		if CurrentEnemy.CurrentHealth > 0:
-			send_update(CurrentEnemy.Name + " takes " + str(values[0]) + " damage.")
-			CurrentEnemy.take_damage(values[0])
+		send_update(CurrentEnemy.Name + " takes " + str(values[0]) + " damage.")
 	
 	if cards.size() > 3:
 		var bonus = cards.size() - 3
 		bonus *= Global.ExtraCardBonus
 		points += bonus
 	
-	Dispatch.AddPoints.emit(points)
 	
+	await Field.show_player_double_action(cards)
+	Dispatch.AddPoints.emit(points)
 	await Deck.discard_selected_cards(cards)
 	await one_frame()
 	if currentTurn == Turn.NONE:
@@ -201,13 +203,12 @@ func add_defense_and_perform_attack(cards : Array[BaseCard]) -> void:
 		return
 	
 	send_update("Player turn completed.")
-	Dispatch.UpdatePlayerAttack.emit(0)
 	Dispatch.EndPlayerTurn.emit()
-	change_turn(Turn.ENEMY)
+	Dispatch.UpdatePlayerAttack.emit(0)
 
 #endregion
 
-#region Checking Charms
+#region Getting Values
 
 func get_values(card : BaseCard) -> Array[int]:
 	var values : Array[int] = [0,0]
@@ -238,8 +239,8 @@ func perform_enemy_turn() -> void:
 	if SaveData.TutorialOn:
 		Dispatch.EnemyAttacked.emit()
 	send_update(str(enemyAttack) + " Damage to Player.")
-	Player.take_damage(enemyAttack)
 	
+	await Field.show_enemy_attack()
 	await one_frame()
 	if Player.CurrentHealth < 0:
 		send_update("Player has died!")

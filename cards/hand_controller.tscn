@@ -32,6 +32,7 @@ position = Vector2(-640, 960)
 position = Vector2(2650, 960)
 
 [node name="DebugShape" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(960, 2394)
 shape = SubResource("CircleShape2D_ccr6b")
 

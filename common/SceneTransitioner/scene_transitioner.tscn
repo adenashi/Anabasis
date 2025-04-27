@@ -52,9 +52,9 @@ color = Color(0.0745098, 0.0901961, 0.137255, 1)
 script = ExtResource("1_7nfxi")
 LoadingLabel = NodePath("Control/VBoxContainer/LoadingLabel")
 HintLabel = NodePath("Control/VBoxContainer/HintText")
-Hints = Array[String](["The good news is the Denizens won't attack unless you do.
-The bad news is that they also consider defending yourself an attack.
-Be careful out there."])
+Hints = Array[String](["If you discard three times in a row, your enemy will get a free move.
+
+Be careful out there.", "The more cards you play at once, the higher your score.", "Suited Sequences will increase you Armor before being launched as an Attack."])
 AsiSitting = NodePath("AsiSitting")
 LightShaft = NodePath("SceneLight")
 AsiWithSword = NodePath("AsiWithSword")

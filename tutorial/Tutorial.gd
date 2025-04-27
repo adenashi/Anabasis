@@ -93,7 +93,7 @@ func on_first_stage_started() -> void:
 	TipBody.text = "[p align=center][b]WELCOME TO THE ABYSS.[/b][/p][p align=center][b]USE YOUR CARDS TO CLIMB YOUR WAY OUT.[/b][/p]"
 	TipBody.text += "[p] [/p]"
 	TipBody.text += "[ul][p] Runs (3 of more cards of the same rank) will add to your [img=16]res://assets/ui/shield.png[/img] Armor.[/p]"
-	TipBody.text += "[p] Sequences (3 or more cards of the same suit in sequential order) become your  [img=16]res://assets/ui/sword.png[/img] Attack against the enemy.[/p]"
+	TipBody.text += "[p] Sequences (3 or more cards in sequential order) become your  [img=16]res://assets/ui/sword.png[/img] Attack against the enemy.[/p]"
 	TipBody.text += "[p] Use your attacks to break through the enemy's [img=16]res://assets/ui/shield.png[/img] Armor and deplete their [img=16]res://assets/ui/skull.png[/img] Health in order to clear the stage.[/p][/ul]"
 	TipBody.text += "[p] [/p]"
 	TipBody.text += "[p align=center]But act wisely -- whenever you attack or defend, the enemy will retaliate.[/p]"
