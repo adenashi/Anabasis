@@ -191,6 +191,7 @@ func on_player_died() -> void:
 	GameTimer.stop()
 	HUD.hide_all_buttons()
 	await get_tree().create_timer(2.0).timeout
+	Dispatch.DiscardSelectedCards.emit()
 	Deck.discard_hand()
 	HUD.hide()
 	
