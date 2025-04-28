@@ -87,6 +87,7 @@ func start_game() -> void:
 #region New Level
 
 func start_level() -> void:
+	AM.play_sfx("Transition", "NewStage")
 	Stage.go_to_next_stage()
 
 
@@ -107,10 +108,13 @@ func on_tutorial_ready() -> void:
 
 
 func on_ready_to_start_stage() -> void:
+	send_update("Starting Stage " + str(CurrentLevel))
 	if CurrentLevel == 1 and SaveData.TutorialOn:
 		Dispatch.FirstStageReached.emit()
 		while waitingForTutorial:
 			await one_frame()
+	else:
+		waitingForTutorial = false
 	
 	Global.change_state(Global.GameState.IN_GAME)
 	Player.update_max_defense(Global.StartingDefense + (10*CurrentLevel))
@@ -161,6 +165,7 @@ func initiate_next_level() -> void:
 			"Enemy": CurrentEnemy,
 			"Result": "Victory"
 		}
+		AM.play_sfx("Transition", "PlayerWon")
 		Stage.show_stage_results(results)
 		update_culmulative_results()
 	else:
@@ -196,6 +201,7 @@ func on_player_died() -> void:
 		"Enemy": CurrentEnemy,
 		"Result": "Defeat"
 	}
+	AM.play_sfx("Transition", "PlayerLost")
 	Stage.show_stage_results(results)
 	update_culmulative_results()
 	playerWon = false
@@ -221,12 +227,14 @@ func reenter_combat_mode() -> void:
 		Combat.start_combat()
 	else:
 		Global.change_state(Global.GameState.INTERSTAGE)
+		AM.play_sfx("Transition", "NewStage")
 		Stage.go_to_next_stage()
 
 
 func on_player_won() -> void:
 	Global.change_state(Global.GameState.ENDING)
 	update_final_results()
+	AM.play_sfx("Transition", "PlayerWon")
 	GUI.Transitioner.transition_to_victory()
 
 

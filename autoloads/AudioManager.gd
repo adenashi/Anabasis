@@ -62,12 +62,22 @@ const AMBIENCE = 3
 
 #region Private Variables
 
-var _currentTrack : int
+var _currentTrack : int = -1
 
 var musicVol : float
 var musicTween : Tween
 var ambVol : float
 var ambienceTween : Tween
+
+#endregion
+
+#region Initialization
+
+func _ready() -> void:
+	adjust_global_volume(SaveData.GlobalVolume)
+	adjust_music_volume(SaveData.MusicVolume)
+	adjust_effect_volume(SaveData.EffectsVolume)
+	adjust_ambience_volume(SaveData.AmbienceVolume)
 
 #endregion
 
@@ -83,7 +93,7 @@ func _process(_delta : float) -> void:
 
 ## Adjusts the volume of the Global Audio Bus.
 func adjust_global_volume(newVol : float) -> void:
-	AudioServer.set_bus_volume_db(GLOBAL,(newVol))
+	AudioServer.set_bus_volume_db(GLOBAL,linear_to_db(newVol))
 
 
 ## Adjust the volume of the Music Audio Bus.
@@ -94,7 +104,7 @@ func adjust_music_volume(newVol : float) -> void:
 
 ## Adjust the volume of the Effects Audio Bus.
 func adjust_effect_volume(newVol : float) -> void:
-	AudioServer.set_bus_volume_db(EFFECTS,(newVol))
+	AudioServer.set_bus_volume_db(EFFECTS,linear_to_db(newVol))
 
 
 func adjust_ambience_volume(newVol : float) -> void:
@@ -107,11 +117,26 @@ func adjust_ambience_volume(newVol : float) -> void:
 
 ## Finds the AudioStream associated with the given key and plays it through the
 ## [param Effects] AudioStreamPlayer.
-func play_sfx(effect : String) -> void:
-	if !EffectsTracks.has(effect):
+func play_sfx(type: String, effect : String = "", index : int = -1) -> void:
+	var track : AudioStream
+	match type:
+		"Game":
+			if index == -1:
+				track = EffectsTracks.Game[effect].pick_random()
+			else:
+				track = EffectsTracks.Game[effect][index]
+		"Transition":
+			track = EffectsTracks.Transition[effect][0]
+		"UI":
+			if index == -1:
+				track = EffectsTracks.UI[effect].pick_random()
+			else:
+				track = EffectsTracks.UI[effect][index]
+	
+	if !track:
 		return
 	
-	Effects.stream = EffectsTracks[effect]
+	Effects.stream = track
 	Effects.play()
 
 
@@ -131,7 +156,7 @@ func cross_fade_ambience(nextTrack : String) -> void:
 
 
 func ambience_volume(vol : float) -> void:
-	AudioServer.set_bus_volume_db(AMBIENCE,(vol))
+	AudioServer.set_bus_volume_db(AMBIENCE,linear_to_db(vol))
 
 
 func switch_ambience_tracks(newTrack : String) -> void:
@@ -166,7 +191,7 @@ func cross_fade_music(nextTrack : int) -> void:
 
 
 func music_volume(vol : float) -> void:
-	AudioServer.set_bus_volume_db(MUSIC,(vol))
+	AudioServer.set_bus_volume_db(MUSIC,linear_to_db(vol))
 
 
 func switch_music_tracks(newTrack : int) -> void:

@@ -59,6 +59,7 @@ func _ready() -> void:
 ## Calls the GUIManager to transition to the game scene.
 func on_play_button_pressed() -> void:
 	fade_out_main_menu()
+	AM.play_sfx("UI", "Confirm", 0)
 	GameStart.show()
 	GameStart.move_asi()
 
@@ -141,7 +142,7 @@ func switch_screens(currentScreen : Control, newScreen) -> void:
 	reset_tween()
 	switchTween.tween_property(currentScreen, "modulate:a", 0.0, FADE_SPEED)
 	currentScreen.hide()
-	
+	AM.play_sfx("UI", "Confirm", 1)
 	newScreen.show()
 	switchTween = create_tween()
 	switchTween.tween_property(newScreen, "modulate:a", 1.0, FADE_SPEED)

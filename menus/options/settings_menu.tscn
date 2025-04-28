@@ -13,7 +13,7 @@ shader_parameter/amount = 0.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kf2ok"]
 
-[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("Tabs", "TabButtons", "GlobalVolSlider", "MusicVolSlider", "EffectsVolSlider", "AmbienceVolSlider", "ResolutionDropdown", "FullscreenToggle", "VSyncToggle", "TutorialToggle")]
+[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("Tabs", "TabButtons", "GlobalVolSlider", "GlobalLabel", "MusicVolSlider", "MusicLabel", "EffectsVolSlider", "EffectsLabel", "AmbienceVolSlider", "AmbienceLabel", "ResolutionDropdown", "FullscreenToggle", "VSyncToggle", "TutorialToggle")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,9 +25,13 @@ script = ExtResource("1_0hxq5")
 Tabs = NodePath("InnerControl/TabContainer")
 TabButtons = NodePath("InnerControl/TabButtons")
 GlobalVolSlider = NodePath("InnerControl/TabContainer/AudioSettings/Global/HBoxContainer/GlobalVolume")
+GlobalLabel = NodePath("InnerControl/TabContainer/AudioSettings/Global/HBoxContainer/GlobalLabel")
 MusicVolSlider = NodePath("InnerControl/TabContainer/AudioSettings/Music/HBoxContainer/MusicVolume")
+MusicLabel = NodePath("InnerControl/TabContainer/AudioSettings/Music/HBoxContainer/MusicLabel")
 EffectsVolSlider = NodePath("InnerControl/TabContainer/AudioSettings/Effects/HBoxContainer2/EffectsVolume")
+EffectsLabel = NodePath("InnerControl/TabContainer/AudioSettings/Effects/HBoxContainer2/EffectsLabel")
 AmbienceVolSlider = NodePath("InnerControl/TabContainer/AudioSettings/Ambience/HBoxContainer2/AmbienceVolume")
+AmbienceLabel = NodePath("InnerControl/TabContainer/AudioSettings/Ambience/HBoxContainer2/AmbienceLabel")
 ResolutionDropdown = NodePath("InnerControl/TabContainer/VideoSettings/Resolution/Resolution")
 FullscreenToggle = NodePath("InnerControl/TabContainer/VideoSettings/Fullscreen/Fullscreen")
 VSyncToggle = NodePath("InnerControl/TabContainer/VideoSettings/VSync/VSync")
@@ -184,7 +188,7 @@ max_value = 1.0
 step = 0.0
 value = 0.78
 
-[node name="Label" type="Label" parent="InnerControl/TabContainer/AudioSettings/Global/HBoxContainer"]
+[node name="GlobalLabel" type="Label" parent="InnerControl/TabContainer/AudioSettings/Global/HBoxContainer"]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 text = "78"
@@ -210,7 +214,7 @@ max_value = 1.0
 step = 0.0
 value = 0.78
 
-[node name="Label" type="Label" parent="InnerControl/TabContainer/AudioSettings/Music/HBoxContainer"]
+[node name="MusicLabel" type="Label" parent="InnerControl/TabContainer/AudioSettings/Music/HBoxContainer"]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 text = "78"
@@ -235,7 +239,7 @@ max_value = 1.0
 step = 0.0
 value = 0.78
 
-[node name="Label" type="Label" parent="InnerControl/TabContainer/AudioSettings/Effects/HBoxContainer2"]
+[node name="EffectsLabel" type="Label" parent="InnerControl/TabContainer/AudioSettings/Effects/HBoxContainer2"]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 text = "78"
@@ -260,7 +264,7 @@ max_value = 1.0
 step = 0.0
 value = 0.78
 
-[node name="Label" type="Label" parent="InnerControl/TabContainer/AudioSettings/Ambience/HBoxContainer2"]
+[node name="AmbienceLabel" type="Label" parent="InnerControl/TabContainer/AudioSettings/Ambience/HBoxContainer2"]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 text = "78"

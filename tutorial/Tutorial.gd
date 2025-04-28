@@ -12,10 +12,6 @@ const SPACING : float = 24.0
 @export var TipPanel : VBoxContainer
 @export var TipBody : RichTextLabel
 
-@export_group("Control Refs")
-@export var Player : PlayerHUD
-@export var Enemy : EnemyHUD
-
 #endregion
 
 #region Private Variables

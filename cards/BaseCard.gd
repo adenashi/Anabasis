@@ -188,6 +188,7 @@ func move_to_position(destination : Vector2, speed : float) -> void:
 	if hoverTween:
 		hoverTween.kill()
 	reset_move_tween()
+	AM.play_sfx("Game", "Cards")
 	moveTween.tween_property(self, "global_position", destination, speed)
 	await moveTween.finished
 	moveTween = null
@@ -209,6 +210,7 @@ func start_hover_effect() -> void:
 	if moveTween:
 		moveTween.kill()
 	reset_hover_tween()
+	AM.play_sfx("Game", "Cards")
 	hoverTween.set_trans(Tween.TRANS_ELASTIC).set_parallel()
 	hoverTween.tween_property(self, "rotation_degrees", 0.0, HOVER_SPEED)
 	hoverTween.tween_property(self, "scale", Vector2.ONE * HOVER_SCALE, HOVER_SPEED)

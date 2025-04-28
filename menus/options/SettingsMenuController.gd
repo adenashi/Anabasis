@@ -25,9 +25,13 @@ const RES_OPTIONS = [
 
 @export_group("UI")
 @export var GlobalVolSlider : HSlider
+@export var GlobalLabel : Label
 @export var MusicVolSlider : HSlider
+@export var MusicLabel : Label
 @export var EffectsVolSlider : HSlider
+@export var EffectsLabel : Label
 @export var AmbienceVolSlider : HSlider
+@export var AmbienceLabel : Label
 @export var ResolutionDropdown : OptionButton
 @export var FullscreenToggle : CheckButton
 @export var VSyncToggle : CheckButton
@@ -64,6 +68,7 @@ func set_prefs() -> void:
 	globalVol = SaveData.GlobalVolume
 	musicVol = SaveData.MusicVolume
 	effectsVol = SaveData.EffectsVolume
+	ambienceVol = SaveData.AmbienceVolume
 	resolution = SaveData.Resolution
 	fullScreen = SaveData.FullScreen
 	vSync = SaveData.VSyncOn
@@ -74,12 +79,19 @@ func set_prefs() -> void:
 func set_ui() -> void:
 	GlobalVolSlider.max_value = 1.0
 	GlobalVolSlider.value = globalVol
+	GlobalLabel.text = str(int(round(globalVol * 100)))
 	
 	MusicVolSlider.max_value = 1.0
 	MusicVolSlider.value = musicVol
+	MusicLabel.text = str(int(round(musicVol * 100)))
 	
 	EffectsVolSlider.max_value = 1.0
 	EffectsVolSlider.value = effectsVol
+	EffectsLabel.text = str(int(round(effectsVol * 100)))
+	
+	AmbienceVolSlider.max_value = 1.0
+	AmbienceVolSlider.value = ambienceVol
+	AmbienceLabel.text = str(int(round(ambienceVol * 100)))
 	
 	for i in range(RES_OPTIONS.size()):
 		var label : String = "{x} x {y}".format({"x":RES_OPTIONS[i].x, "y":RES_OPTIONS[i].y})
@@ -100,24 +112,28 @@ func show_tab(_is_on : bool, tab : int) -> void:
 	Tabs.current_tab = tab
 
 func on_global_vol_changed(newValue : float) -> void:
+	GlobalLabel.text = str(int(round(globalVol * 100)))
 	globalVol = newValue
 	AM.adjust_global_volume(globalVol)
 	SaveData.GlobalVolume = globalVol
 
 
 func on_music_vol_changed(newValue : float) -> void:
+	MusicLabel.text = str(int(round(musicVol * 100)))
 	musicVol = newValue
 	AM.adjust_music_volume(musicVol)
 	SaveData.MusicVolume = musicVol
 
 
 func on_effects_vol_changed(newValue : float) -> void:
+	EffectsLabel.text = str(int(round(effectsVol * 100)))
 	effectsVol = newValue
 	AM.adjust_effect_volume(effectsVol)
 	SaveData.EffectsVolume = effectsVol
 
 
 func on_ambience_vol_changed(newValue : float) -> void:
+	AmbienceLabel.text = str(int(round(ambienceVol * 100)))
 	ambienceVol = newValue
 	AM.adjust_ambience_volume(ambienceVol)
 	SaveData.AmbienceVolume = ambienceVol

@@ -63,8 +63,10 @@ func spawn_attack_effect(point : PathFollow2D) -> void:
 	add_child(slash)
 	slash.global_position = point.global_position
 	slash.emitting = true
+	AM.play_sfx("Game", "Attack")
 	card.hide()
 	await slash.finished
+	AM.play_sfx("Game", "Impact")
 	Enemy.take_damage(card.Value)
 	slash.queue_free()
 
@@ -80,6 +82,7 @@ func spawn_defense_effect(amount : int, defense : int) -> void:
 		add_child(circle)
 		circle.position = AsiMarker.position
 		circle.emitting = true
+		AM.play_sfx("Game", "Defense")
 		await circle.finished
 		Player.add_defense(defense)
 		circle.queue_free()
@@ -101,10 +104,12 @@ func show_enemy_attack() -> void:
 	starStart.emitting = true
 	beam.position = EnemyMarker.position
 	beam.emitting = true
+	AM.play_sfx("Game", "Attack")
 	await beam.finished
 	add_child(starEnd)
 	starEnd.position = AsiMarker.position
 	starEnd.emitting = true
+	AM.play_sfx("Game", "Impact")
 	await starEnd.finished
 	Player.take_damage(Enemy.BaseAttack)
 	starStart.queue_free()
@@ -118,6 +123,7 @@ func show_enemy_defense(amount : int) -> void:
 		add_child(circle)
 		circle.position = EnemyMarker.position
 		circle.emitting = true
+		AM.play_sfx("Game", "Defense")
 		await circle.finished
 		Enemy.CurrentDefense += amount
 		if Enemy.CurrentDefense > Enemy.MaxDefense:

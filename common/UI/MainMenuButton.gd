@@ -4,7 +4,8 @@ class_name MainMenuButton extends Button
 #region Initialization
 
 func _ready() -> void:
-	pass
+	mouse_entered.connect(func(): AM.play_sfx("UI", "Hover"))
+	pressed.connect(func(): AM.play_sfx("UI", "Click"))
 
 #endregion
 

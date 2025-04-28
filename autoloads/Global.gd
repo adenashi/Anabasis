@@ -37,9 +37,27 @@ func _ready() -> void:
 
 #endregion
 
+#region UI Audio Signals
+
+func install_sounds(node : Node) -> void:
+	for i in node.get_children():
+		if i is Button:
+			if !i.mouse_entered.is_connected(AM.play_sfx):
+				i.mouse_entered.connect(func(): AM.play_sfx("UI", "Hover"))
+			if !i.pressed.is_connected(AM.play_sfx):
+				i.pressed.connect(func(): AM.play_sfx("UI", "Click"))
+		
+		install_sounds(i)
+
+#endregion
+
 #region Housekeeping Methods
 
 func change_state(newState : GameState) -> void:
+	var root_path : String = "/root/"
+	install_sounds(get_node(root_path))
+	
+	CurrentState = newState
 	match CurrentState:
 		GameState.IDLE:
 			AM.cross_fade_ambience("Menus")
