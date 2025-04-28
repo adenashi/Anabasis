@@ -69,12 +69,12 @@ func on_new_enemy(enemy : EnemyData) -> void:
 func update_health(segments : int, value : int) -> void:
 	HealthEmpty.custom_minimum_size.x = SEGMENT_HEIGHT * roundi(segments / 10)
 	if value > health:
-		add_health(value - health)
+		await add_health(value - health)
 	elif value < health:
 		if value == 0:
 			HealthFull.hide()
 		else:
-			remove_health(segments - value)
+			await remove_health(segments - value)
 	
 	health = value
 
@@ -82,12 +82,12 @@ func update_health(segments : int, value : int) -> void:
 func update_defense(segments : int, value : int) -> void:
 	DefenseEmpty.custom_minimum_size.y = SEGMENT_HEIGHT * roundi(segments / 10)
 	if value > defense:
-		add_defense(value - defense)
+		await add_defense(value - defense)
 	elif value < defense:
 		if value == 0:
 			DefenseFull.hide()
 		else:
-			remove_defense(segments - value)
+			await remove_defense(segments - value)
 	
 	defense = value
 
