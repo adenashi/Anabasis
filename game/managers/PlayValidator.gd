@@ -108,6 +108,7 @@ func on_discard_selected_cards() -> void:
 	await Deck.discard_selected_cards(selectedCards)
 	await one_frame()
 	send_update("Clearing Selected Cards Array.")
+	Dispatch.UpdatePlayerAttack.emit(0)
 	selectedCards.clear()
 
 
