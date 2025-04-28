@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dehrtgyleb8at"]
+[gd_scene load_steps=45 format=3 uid="uid://dehrtgyleb8at"]
 
 [ext_resource type="Script" uid="uid://tpduortw4fy7" path="res://autoloads/AudioManager.gd" id="1_ue73k"]
 [ext_resource type="AudioStream" uid="uid://doy8401sh1hut" path="res://assets/audio/effects/transitions/Fantasy UI Vol (93).wav" id="2_tp26y"]
@@ -33,12 +33,17 @@
 [ext_resource type="AudioStream" uid="uid://b2v3gsldxyyrl" path="res://assets/audio/effects/game/attack/Fireball 3.ogg" id="12_y70lk"]
 [ext_resource type="AudioStream" uid="uid://dhq4q7jnnfoe7" path="res://assets/audio/effects/game/impact/lowFrequency_explosion_000.ogg" id="13_fug2n"]
 [ext_resource type="AudioStream" uid="uid://dfhdd1yw30lun" path="res://assets/audio/effects/game/impact/lowFrequency_explosion_001.ogg" id="14_pf041"]
+[ext_resource type="AudioStream" uid="uid://dbr6cxke22bih" path="res://assets/audio/effects/game/attack/EM_LIGHT_LAUNCH_01.ogg" id="15_c8e0c"]
 [ext_resource type="AudioStream" uid="uid://cvb3xs7no0gy6" path="res://assets/audio/effects/game/defense/forceField_000.ogg" id="15_hw6t6"]
+[ext_resource type="AudioStream" uid="uid://btujgh6ah1tct" path="res://assets/audio/effects/game/attack/EM_FIRE_CAST_01.ogg" id="16_1wtqu"]
 [ext_resource type="AudioStream" uid="uid://h0jdv0rxb3er" path="res://assets/audio/music/portal.wav" id="16_mpej3"]
 [ext_resource type="AudioStream" uid="uid://bpeiavyjb2uvc" path="res://assets/audio/effects/ui/hover/snap0.mp3" id="16_xy6rp"]
+[ext_resource type="AudioStream" uid="uid://cxh83ccnea2tp" path="res://assets/audio/effects/game/attack/EM_FIRE_CAST_02.ogg" id="17_jm7c2"]
 [ext_resource type="AudioStream" uid="uid://cxb0wgxfeiwkp" path="res://assets/audio/music/sequence1.wav" id="20_sxsmp"]
 [ext_resource type="AudioStream" uid="uid://cxjum4v7u6188" path="res://assets/audio/music/sequence2.wav" id="21_b8nu5"]
+[ext_resource type="AudioStream" uid="uid://b1ipmparpkrbu" path="res://assets/audio/effects/game/impact/EM_LIGHT_IMPACT_01.ogg" id="22_woeov"]
 [ext_resource type="AudioStream" uid="uid://bagdhi5c05j0g" path="res://assets/audio/music/synthesis.wav" id="25_3wjdk"]
+[ext_resource type="AudioStream" uid="uid://g55xk02rsbdm" path="res://assets/audio/effects/game/impact/EM_FIRE_IMPACT_01.ogg" id="25_jm7c2"]
 
 [node name="AudioManager" type="Node" node_paths=PackedStringArray("Music", "Effects", "Ambience")]
 process_mode = 3
@@ -49,10 +54,10 @@ Ambience = NodePath("Ambience")
 MusicTracks = Array[AudioStream]([ExtResource("5_iyxm4"), ExtResource("6_pil18"), ExtResource("7_7trak"), ExtResource("10_ve1w3"), ExtResource("11_5kaej"), ExtResource("12_nlyc3"), ExtResource("16_mpej3"), ExtResource("20_sxsmp"), ExtResource("21_b8nu5"), ExtResource("25_3wjdk")])
 EffectsTracks = {
 "Game": {
-"Attack": [ExtResource("10_lmhjh"), ExtResource("11_xy6rp"), ExtResource("12_y70lk")],
+"Attack": [ExtResource("10_lmhjh"), ExtResource("11_xy6rp"), ExtResource("12_y70lk"), ExtResource("15_c8e0c"), ExtResource("16_1wtqu"), ExtResource("17_jm7c2")],
 "Cards": [ExtResource("2_vovef"), ExtResource("3_a4ose")],
 "Defense": [ExtResource("7_fug2n"), ExtResource("15_hw6t6")],
-"Impact": [ExtResource("13_fug2n"), ExtResource("14_pf041")]
+"Impact": [ExtResource("13_fug2n"), ExtResource("14_pf041"), ExtResource("22_woeov"), ExtResource("25_jm7c2")]
 },
 "Transition": {
 "NewStage": [ExtResource("2_tp26y")],

@@ -16,19 +16,22 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hefqa"]
 
-[node name="EnemyHUD" type="Control" node_paths=PackedStringArray("CardImage", "EnemyAttack", "EnemyName", "HealthSegments", "HealthEmpty", "HealthFull", "DefenseSegments", "DefenseEmpty", "DefenseFull")]
-custom_minimum_size = Vector2(160, 236)
+[node name="EnemyHUD" type="Control" node_paths=PackedStringArray("CardImage", "EnemyAttack", "EnemyName", "HealthLabel", "HealthSegments", "HealthEmpty", "HealthFull", "DefenseLabel", "DefenseSegments", "DefenseEmpty", "DefenseFull")]
+custom_minimum_size = Vector2(177, 242)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 161.0
 offset_bottom = 211.0
+pivot_offset = Vector2(88, 121)
 script = ExtResource("1_pj5tm")
 CardImage = NodePath("VBoxContainer/HBoxContainer/EnemyCard/CardImage")
 EnemyAttack = NodePath("VBoxContainer/HBoxContainer3/EnemyAttack")
 EnemyName = NodePath("VBoxContainer/HBoxContainer3/EnemyName")
+HealthLabel = NodePath("VBoxContainer/HBoxContainer2/HealthLabel")
 HealthSegments = NodePath("VBoxContainer/HBoxContainer2/HealthBar")
 HealthEmpty = NodePath("VBoxContainer/HBoxContainer2/HealthBar/Empty")
 HealthFull = NodePath("VBoxContainer/HBoxContainer2/HealthBar/Empty/Full")
+DefenseLabel = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/DefenseLabel")
 DefenseSegments = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/DefenseBar")
 DefenseEmpty = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/DefenseBar/DefenseEmptyValue")
 DefenseFull = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/DefenseBar/DefenseEmptyValue/DefenseFullValue")
@@ -68,6 +71,7 @@ theme_override_font_sizes/font_size = 18
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 16
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -75,29 +79,43 @@ alignment = 2
 
 [node name="DefenseBar" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
 theme_override_styles/panel = SubResource("StyleBoxEmpty_e0rbg")
 
 [node name="DefenseEmptyValue" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer/DefenseBar"]
 custom_minimum_size = Vector2(16, 9)
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 size_flags_vertical = 8
 texture = ExtResource("2_e0rbg")
+expand_mode = 1
 stretch_mode = 1
 
 [node name="DefenseFullValue" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer/DefenseBar/DefenseEmptyValue"]
 modulate = Color(0.545098, 1, 0.996078, 1)
-custom_minimum_size = Vector2(16, 9)
+custom_minimum_size = Vector2(16, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 texture = ExtResource("3_cllx4")
+expand_mode = 1
 stretch_mode = 1
+
+[node name="DefenseLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(21, 22)
+layout_mode = 2
+theme = ExtResource("3_krfnt")
+theme_type_variation = &"HeadingLabel"
+theme_override_font_sizes/font_size = 18
+text = "0"
+horizontal_alignment = 1
 
 [node name="DefenseIcon" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 modulate = Color(0.545098, 1, 0.996078, 1)
@@ -134,29 +152,41 @@ layout_mode = 2
 
 [node name="HealthBar" type="PanelContainer" parent="VBoxContainer/HBoxContainer2"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 10
+size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxEmpty_hefqa")
 
 [node name="Empty" type="TextureRect" parent="VBoxContainer/HBoxContainer2/HealthBar"]
 custom_minimum_size = Vector2(9, 16)
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 4
 texture = ExtResource("7_kuqdb")
 expand_mode = 1
 stretch_mode = 1
 
 [node name="Full" type="TextureRect" parent="VBoxContainer/HBoxContainer2/HealthBar/Empty"]
 modulate = Color(0.996078, 0.388235, 0.886275, 1)
-custom_minimum_size = Vector2(9, 16)
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -9.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("8_krfnt")
 expand_mode = 1
 stretch_mode = 1
+
+[node name="HealthLabel" type="Label" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(21, 22)
+layout_mode = 2
+theme = ExtResource("3_krfnt")
+theme_type_variation = &"HeadingLabel"
+theme_override_font_sizes/font_size = 18
+text = "0"
+horizontal_alignment = 1
 
 [node name="HealthIcon" type="TextureRect" parent="VBoxContainer/HBoxContainer2"]
 modulate = Color(0.996078, 0.388235, 0.886275, 1)

@@ -63,10 +63,10 @@ func spawn_attack_effect(point : PathFollow2D) -> void:
 	add_child(slash)
 	slash.global_position = point.global_position
 	slash.emitting = true
-	AM.play_sfx("Game", "Attack")
+	AM.play_sfx("Game", "Attack",4)
 	card.hide()
 	await slash.finished
-	AM.play_sfx("Game", "Impact")
+	AM.play_sfx("Game", "Impact",3)
 	Enemy.take_damage(card.Value)
 	slash.queue_free()
 
@@ -104,12 +104,12 @@ func show_enemy_attack() -> void:
 	starStart.emitting = true
 	beam.position = EnemyMarker.position
 	beam.emitting = true
-	AM.play_sfx("Game", "Attack")
+	AM.play_sfx("Game", "Attack", 3)
 	await beam.finished
 	add_child(starEnd)
 	starEnd.position = AsiMarker.position
 	starEnd.emitting = true
-	AM.play_sfx("Game", "Impact")
+	AM.play_sfx("Game", "Impact", 2)
 	await starEnd.finished
 	Player.take_damage(Enemy.BaseAttack)
 	starStart.queue_free()

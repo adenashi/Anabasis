@@ -51,6 +51,7 @@ func _ready() -> void:
 	Validator.Deck = Deck
 	Validator.Combat = Combat
 	CurrentEnemy.Deck = Deck
+	await one_frame()
 	start_game()
 	await one_frame()
 	start_level()
@@ -87,7 +88,6 @@ func start_game() -> void:
 #region New Level
 
 func start_level() -> void:
-	AM.play_sfx("Transition", "NewStage")
 	Stage.go_to_next_stage()
 
 
@@ -108,6 +108,7 @@ func on_tutorial_ready() -> void:
 
 
 func on_ready_to_start_stage() -> void:
+	AM.play_sfx("Transition", "NewStage")
 	send_update("Starting Stage " + str(CurrentLevel))
 	if CurrentLevel == 1 and SaveData.TutorialOn:
 		Dispatch.FirstStageReached.emit()
