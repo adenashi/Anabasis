@@ -141,7 +141,7 @@ func on_player_discard() -> void:
 	
 	discardsSinceLastPlay += 1
 	if discardsSinceLastPlay >= Global.FreeDiscards:
-		CurrentEnemy.make_free_move()
+		CurrentEnemy.perform_action()
 		discardsSinceLastPlay = 0
 
 

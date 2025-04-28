@@ -13,6 +13,7 @@ func _ready() -> void:
 	Dispatch.PlaceEnemy.connect(on_new_enemy)
 	Dispatch.UpdateEnemyHealth.connect(update_health)
 	Dispatch.UpdateEnemyDefense.connect(update_defense)
+	Dispatch.UpdateEnemyAttack.connect(update_attack)
 
 #endregion
 

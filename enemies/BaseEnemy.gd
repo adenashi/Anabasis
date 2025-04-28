@@ -14,13 +14,15 @@ signal EnemyDied(enemy : BaseEnemy)
 var Name : String
 var Data : EnemyData
 
-var BaseAttack : int
+var Attacks : Array[int]
 
 var MaxHealth : int
 var CurrentHealth : int
 
 var MaxDefense : int
 var CurrentDefense : int
+
+var SpecialMove : Callable
 
 #endregion
 
@@ -37,23 +39,74 @@ var Deck : DeckManager
 func init_enemy(data : EnemyData) -> void:
 	Data = data
 	Name = Data.Name
-	BaseAttack = Data.Attack
+	Attacks = Data.Attacks
 	MaxDefense = Data.MaxDefense
 	MaxHealth = Data.MaxHealth
 	CurrentDefense = MaxDefense
 	CurrentHealth = MaxHealth
 	name = Name
+	set_special_move()
+
+
+func set_special_move() -> void:
+	match Data.SpecialMove:
+		"Thunderclap":
+			SpecialMove = thunderclap
+		"Barrage":
+			SpecialMove = barrage
+		"Shackle":
+			SpecialMove = shackle
+		"Betrayal":
+			SpecialMove = betrayal
+		"Transform":
+			SpecialMove = transform
+		"Scorch":
+			SpecialMove = scorch
+		"Eclipse":
+			SpecialMove = eclipse
+		"Whirlwind":
+			SpecialMove = whirlwind
+		"Slice":
+			SpecialMove = slice
+		"Seism":
+			SpecialMove = seism
+		"Dispel":
+			SpecialMove = dispel
+		"Fury":
+			SpecialMove = fury
+		"Burst":
+			SpecialMove = burst
+		"Sunder":
+			SpecialMove = sunder
+		"Salvo":
+			SpecialMove = salvo
+		"Bane":
+			SpecialMove = bane
+		"Blight":
+			SpecialMove = blight
+		"Blizzard":
+			SpecialMove = blizzard
+		"Purge":
+			SpecialMove = purge
+		"Bolt":
+			SpecialMove = bolt
 
 #endregion
 
 #region Gameplay Functions
 
-func make_free_move() -> void:
-	var chance : int = randi_range(1,20)
-	if chance % 2 == 0:
-		do_defense()
-	else:
+func current_attack() -> int:
+	return Attacks.pick_random()
+
+
+func perform_action() -> void:
+	var chance : int = randi_range(0,100)
+	if chance >= 90:
+		do_special_move()
+	elif chance >= 60:
 		do_attack()
+	else:
+		do_defense()
 
 
 func do_attack() -> void:
@@ -93,6 +146,11 @@ func do_defense() -> void:
 	Dispatch.EnemyDefends.emit(defense)
 
 
+func do_special_move() -> void:
+	send_update("Doing Special Move - " + Data.SpecialMove + " - for free move.")
+	SpecialMove.call()
+
+
 func take_damage(damage : int) -> void:
 	if CurrentDefense > 0:
 		if damage >= CurrentDefense:
@@ -129,7 +187,88 @@ func reset_hud() -> void:
 
 #endregion
 
-#region Aesthetics
+#region Special Moves
+
+func thunderclap() -> void:
+	pass
+
+
+func barrage() -> void:
+	pass
+
+
+func shackle() -> void:
+	pass
+
+
+func betrayal() -> void:
+	pass
+
+
+func transform() -> void:
+	pass
+
+
+func scorch() -> void:
+	pass
+
+
+func eclipse() -> void:
+	pass
+
+
+func whirlwind() -> void:
+	pass
+
+
+func slice() -> void:
+	pass
+
+
+func seism() -> void:
+	pass
+
+
+func dispel() -> void:
+	pass
+
+
+func fury() -> void:
+	pass
+
+
+func burst() -> void:
+	pass
+
+
+func sunder() -> void:
+	pass
+
+
+func salvo() -> void:
+	pass
+
+
+func bane() -> void:
+	pass
+
+
+func blight() -> void:
+	pass
+
+
+func blizzard() -> void:
+	pass
+
+
+func purge() -> void:
+	pass
+
+
+func bolt() -> void:
+	pass
+
+#endregion
 
 #region Debugging TODO: Delete Later!
 

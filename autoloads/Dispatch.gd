@@ -76,6 +76,10 @@ signal UpdateEnemyHealth(max : int, value : int)
 ## [br] Subscribers: [EnemyHUD]
 signal UpdateEnemyDefense(max : int, value : int)
 
+## [br] Emitters: [BaseEnemy], [CombatManager]
+## [br] Subscribers: [EnemyHUD]
+signal UpdateEnemyAttack(amount : int)
+
 ## [br] Emitters: [GM]
 ## [br] Subscribers: [HUDController]
 signal UpdateLevel(newLevel : int)

@@ -77,9 +77,10 @@ func spawn_new_enemy() -> void:
 	var data : EnemyData = EnemyData.new()
 	data.ID = id
 	data.Name = entry.Name
-	data.Attack = entry.Attack
+	data.Attacks = entry.Attacks
 	data.MaxDefense = entry.MaxDefense
 	data.MaxHealth = entry.MaxHealth
+	data.SpecialMove = entry.SpecialMove
 	data.PointValue = entry.PointValue
 	data.Stage = entry.Stage
 	data.Portrait = entry.Portrait

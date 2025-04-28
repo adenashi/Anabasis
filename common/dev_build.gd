@@ -37,6 +37,10 @@ func on_submit_report_button_pressed() -> void:
 	else:
 		OS.shell_open("https://discord.gg/7wWvNf59t3")
 
+
+func on_cancel_button_pressed() -> void:
+	BugReportPanel.hide()
+
 #endregion
 
 #region Debugging TODO: Delete Later!
