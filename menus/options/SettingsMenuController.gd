@@ -27,6 +27,7 @@ const RES_OPTIONS = [
 @export var GlobalVolSlider : HSlider
 @export var MusicVolSlider : HSlider
 @export var EffectsVolSlider : HSlider
+@export var AmbienceVolSlider : HSlider
 @export var ResolutionDropdown : OptionButton
 @export var FullscreenToggle : CheckButton
 @export var VSyncToggle : CheckButton
@@ -39,6 +40,7 @@ const RES_OPTIONS = [
 var globalVol : float
 var musicVol : float
 var effectsVol : float
+var ambienceVol : float
 var resolution : Vector2i
 var fullScreen : bool
 var vSync : bool
@@ -113,6 +115,12 @@ func on_effects_vol_changed(newValue : float) -> void:
 	effectsVol = newValue
 	AM.adjust_effect_volume(effectsVol)
 	SaveData.EffectsVolume = effectsVol
+
+
+func on_ambience_vol_changed(newValue : float) -> void:
+	ambienceVol = newValue
+	AM.adjust_ambience_volume(ambienceVol)
+	SaveData.AmbienceVolume = ambienceVol
 
 
 func on_resolution_changed(newChoice : int) -> void:

@@ -13,6 +13,7 @@ const PATH = "user://SaveData.cfg"
 static var GlobalVolume : float = 1.0
 static var MusicVolume : float = 1.0
 static var EffectsVolume : float = 1.0
+static var AmbienceVolume : float = 1.0
 static var Resolution : Vector2i = Vector2i(1920,1080)
 static var FullScreen : bool = true
 static var VSyncOn : bool = true
@@ -143,6 +144,7 @@ static func load_data() -> void:
 		GlobalVolume = config.get_value("Settings", "GlobalVolume")
 		MusicVolume = config.get_value("Settings", "MusicVolume")
 		EffectsVolume = config.get_value("Settings", "EffectsVolume")
+		AmbienceVolume = config.get_value("Settings", "AmbienceVolume")
 		Resolution = config.get_value("Settings", "Resolution")
 		FullScreen = config.get_value("Settings", "FullScreen")
 		VSyncOn = config.get_value("Settings", "VSyncOn")
@@ -191,6 +193,7 @@ static func save_data() -> void:
 	config.set_value("Settings", "GlobalVolume", GlobalVolume)
 	config.set_value("Settings", "MusicVolume", MusicVolume)
 	config.set_value("Settings", "EffectsVolume", EffectsVolume)
+	config.set_value("Settings", "AmbienceVolume", AmbienceVolume)
 	config.set_value("Settings", "Resolution", Resolution)
 	config.set_value("Settings", "FullScreen", FullScreen)
 	config.set_value("Settings", "VSyncOn", VSyncOn)

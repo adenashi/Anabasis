@@ -13,7 +13,7 @@ shader_parameter/amount = 0.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kf2ok"]
 
-[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("Tabs", "TabButtons", "GlobalVolSlider", "MusicVolSlider", "EffectsVolSlider", "ResolutionDropdown", "FullscreenToggle", "VSyncToggle", "TutorialToggle")]
+[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("Tabs", "TabButtons", "GlobalVolSlider", "MusicVolSlider", "EffectsVolSlider", "AmbienceVolSlider", "ResolutionDropdown", "FullscreenToggle", "VSyncToggle", "TutorialToggle")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,13 +24,14 @@ theme = ExtResource("1_wtyaf")
 script = ExtResource("1_0hxq5")
 Tabs = NodePath("InnerControl/TabContainer")
 TabButtons = NodePath("InnerControl/TabButtons")
-GlobalVolSlider = NodePath("InnerControl/TabContainer/AudioSettings/HBoxContainer/HBoxContainer/GlobalVolume")
-MusicVolSlider = NodePath("InnerControl/TabContainer/AudioSettings/HBoxContainer2/HBoxContainer/MusicVolume")
-EffectsVolSlider = NodePath("InnerControl/TabContainer/AudioSettings/HBoxContainer3/HBoxContainer2/EffectsVolume")
-ResolutionDropdown = NodePath("InnerControl/TabContainer/VideoSettings/HBoxContainer4/Resolution")
-FullscreenToggle = NodePath("InnerControl/TabContainer/VideoSettings/HBoxContainer5/Fullscreen")
-VSyncToggle = NodePath("InnerControl/TabContainer/VideoSettings/HBoxContainer6/VSync")
-TutorialToggle = NodePath("InnerControl/TabContainer/Graphics Settings/HBoxContainer6/Tutorial")
+GlobalVolSlider = NodePath("InnerControl/TabContainer/AudioSettings/Global/HBoxContainer/GlobalVolume")
+MusicVolSlider = NodePath("InnerControl/TabContainer/AudioSettings/Music/HBoxContainer/MusicVolume")
+EffectsVolSlider = NodePath("InnerControl/TabContainer/AudioSettings/Effects/HBoxContainer2/EffectsVolume")
+AmbienceVolSlider = NodePath("InnerControl/TabContainer/AudioSettings/Ambience/HBoxContainer2/AmbienceVolume")
+ResolutionDropdown = NodePath("InnerControl/TabContainer/VideoSettings/Resolution/Resolution")
+FullscreenToggle = NodePath("InnerControl/TabContainer/VideoSettings/Fullscreen/Fullscreen")
+VSyncToggle = NodePath("InnerControl/TabContainer/VideoSettings/VSync/VSync")
+TutorialToggle = NodePath("InnerControl/TabContainer/Graphics Settings/Tutorial/Tutorial")
 
 [node name="BackgroundPlaceholder" type="TextureRect" parent="."]
 layout_mode = 0
@@ -163,19 +164,19 @@ theme_override_constants/separation = 36
 alignment = 1
 metadata/_tab_index = 0
 
-[node name="HBoxContainer" type="VBoxContainer" parent="InnerControl/TabContainer/AudioSettings"]
+[node name="Global" type="VBoxContainer" parent="InnerControl/TabContainer/AudioSettings"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="InnerControl/TabContainer/AudioSettings/HBoxContainer"]
+[node name="Label" type="Label" parent="InnerControl/TabContainer/AudioSettings/Global"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Global Volume"
 uppercase = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="InnerControl/TabContainer/AudioSettings/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="InnerControl/TabContainer/AudioSettings/Global"]
 layout_mode = 2
 
-[node name="GlobalVolume" type="HSlider" parent="InnerControl/TabContainer/AudioSettings/HBoxContainer/HBoxContainer"]
+[node name="GlobalVolume" type="HSlider" parent="InnerControl/TabContainer/AudioSettings/Global/HBoxContainer"]
 custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -183,58 +184,83 @@ max_value = 1.0
 step = 0.0
 value = 0.78
 
-[node name="Label" type="Label" parent="InnerControl/TabContainer/AudioSettings/HBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="InnerControl/TabContainer/AudioSettings/Global/HBoxContainer"]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 text = "78"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="HBoxContainer2" type="VBoxContainer" parent="InnerControl/TabContainer/AudioSettings"]
+[node name="Music" type="VBoxContainer" parent="InnerControl/TabContainer/AudioSettings"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="InnerControl/TabContainer/AudioSettings/HBoxContainer2"]
+[node name="Label" type="Label" parent="InnerControl/TabContainer/AudioSettings/Music"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Music Volume"
 uppercase = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="InnerControl/TabContainer/AudioSettings/HBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="InnerControl/TabContainer/AudioSettings/Music"]
 layout_mode = 2
 
-[node name="MusicVolume" type="HSlider" parent="InnerControl/TabContainer/AudioSettings/HBoxContainer2/HBoxContainer"]
+[node name="MusicVolume" type="HSlider" parent="InnerControl/TabContainer/AudioSettings/Music/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
 step = 0.0
 value = 0.78
 
-[node name="Label" type="Label" parent="InnerControl/TabContainer/AudioSettings/HBoxContainer2/HBoxContainer"]
+[node name="Label" type="Label" parent="InnerControl/TabContainer/AudioSettings/Music/HBoxContainer"]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 text = "78"
 horizontal_alignment = 2
 
-[node name="HBoxContainer3" type="VBoxContainer" parent="InnerControl/TabContainer/AudioSettings"]
+[node name="Effects" type="VBoxContainer" parent="InnerControl/TabContainer/AudioSettings"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="InnerControl/TabContainer/AudioSettings/HBoxContainer3"]
+[node name="Label" type="Label" parent="InnerControl/TabContainer/AudioSettings/Effects"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Effects Volume"
 uppercase = true
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="InnerControl/TabContainer/AudioSettings/HBoxContainer3"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="InnerControl/TabContainer/AudioSettings/Effects"]
 layout_mode = 2
 
-[node name="EffectsVolume" type="HSlider" parent="InnerControl/TabContainer/AudioSettings/HBoxContainer3/HBoxContainer2"]
+[node name="EffectsVolume" type="HSlider" parent="InnerControl/TabContainer/AudioSettings/Effects/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
 step = 0.0
 value = 0.78
 
-[node name="Label" type="Label" parent="InnerControl/TabContainer/AudioSettings/HBoxContainer3/HBoxContainer2"]
+[node name="Label" type="Label" parent="InnerControl/TabContainer/AudioSettings/Effects/HBoxContainer2"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "78"
+horizontal_alignment = 2
+
+[node name="Ambience" type="VBoxContainer" parent="InnerControl/TabContainer/AudioSettings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="InnerControl/TabContainer/AudioSettings/Ambience"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Ambience Volume"
+uppercase = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="InnerControl/TabContainer/AudioSettings/Ambience"]
+layout_mode = 2
+
+[node name="AmbienceVolume" type="HSlider" parent="InnerControl/TabContainer/AudioSettings/Ambience/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.0
+value = 0.78
+
+[node name="Label" type="Label" parent="InnerControl/TabContainer/AudioSettings/Ambience/HBoxContainer2"]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 text = "78"
@@ -247,42 +273,42 @@ theme_override_constants/separation = 36
 alignment = 1
 metadata/_tab_index = 1
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="InnerControl/TabContainer/VideoSettings"]
+[node name="Resolution" type="HBoxContainer" parent="InnerControl/TabContainer/VideoSettings"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="InnerControl/TabContainer/VideoSettings/HBoxContainer4"]
+[node name="Label" type="Label" parent="InnerControl/TabContainer/VideoSettings/Resolution"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Resolution"
 uppercase = true
 
-[node name="Resolution" type="OptionButton" parent="InnerControl/TabContainer/VideoSettings/HBoxContainer4"]
+[node name="Resolution" type="OptionButton" parent="InnerControl/TabContainer/VideoSettings/Resolution"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="InnerControl/TabContainer/VideoSettings"]
+[node name="Fullscreen" type="HBoxContainer" parent="InnerControl/TabContainer/VideoSettings"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="InnerControl/TabContainer/VideoSettings/HBoxContainer5"]
+[node name="Label" type="Label" parent="InnerControl/TabContainer/VideoSettings/Fullscreen"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Fullscreen"
 uppercase = true
 
-[node name="Fullscreen" type="CheckButton" parent="InnerControl/TabContainer/VideoSettings/HBoxContainer5"]
+[node name="Fullscreen" type="CheckButton" parent="InnerControl/TabContainer/VideoSettings/Fullscreen"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer6" type="HBoxContainer" parent="InnerControl/TabContainer/VideoSettings"]
+[node name="VSync" type="HBoxContainer" parent="InnerControl/TabContainer/VideoSettings"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="InnerControl/TabContainer/VideoSettings/HBoxContainer6"]
+[node name="Label" type="Label" parent="InnerControl/TabContainer/VideoSettings/VSync"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "VSync"
 uppercase = true
 
-[node name="VSync" type="CheckButton" parent="InnerControl/TabContainer/VideoSettings/HBoxContainer6"]
+[node name="VSync" type="CheckButton" parent="InnerControl/TabContainer/VideoSettings/VSync"]
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -292,26 +318,27 @@ layout_mode = 2
 alignment = 1
 metadata/_tab_index = 2
 
-[node name="HBoxContainer6" type="HBoxContainer" parent="InnerControl/TabContainer/Graphics Settings"]
+[node name="Tutorial" type="HBoxContainer" parent="InnerControl/TabContainer/Graphics Settings"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="InnerControl/TabContainer/Graphics Settings/HBoxContainer6"]
+[node name="Label" type="Label" parent="InnerControl/TabContainer/Graphics Settings/Tutorial"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Show Tutorial"
 uppercase = true
 
-[node name="Tutorial" type="CheckButton" parent="InnerControl/TabContainer/Graphics Settings/HBoxContainer6"]
+[node name="Tutorial" type="CheckButton" parent="InnerControl/TabContainer/Graphics Settings/Tutorial"]
 layout_mode = 2
 size_flags_horizontal = 3
 button_pressed = true
 
 [connection signal="pressed" from="InnerControl/BackButton" to="." method="on_back_clicked"]
 [connection signal="pressed" from="InnerControl/ResetButton" to="." method="on_reset_clicked"]
-[connection signal="value_changed" from="InnerControl/TabContainer/AudioSettings/HBoxContainer/HBoxContainer/GlobalVolume" to="." method="on_global_vol_changed"]
-[connection signal="value_changed" from="InnerControl/TabContainer/AudioSettings/HBoxContainer2/HBoxContainer/MusicVolume" to="." method="on_music_vol_changed"]
-[connection signal="value_changed" from="InnerControl/TabContainer/AudioSettings/HBoxContainer3/HBoxContainer2/EffectsVolume" to="." method="on_effects_vol_changed"]
-[connection signal="item_selected" from="InnerControl/TabContainer/VideoSettings/HBoxContainer4/Resolution" to="." method="on_resolution_changed"]
-[connection signal="toggled" from="InnerControl/TabContainer/VideoSettings/HBoxContainer5/Fullscreen" to="." method="on_full_screen_toggled"]
-[connection signal="toggled" from="InnerControl/TabContainer/VideoSettings/HBoxContainer6/VSync" to="." method="on_vsync_toggled"]
-[connection signal="toggled" from="InnerControl/TabContainer/Graphics Settings/HBoxContainer6/Tutorial" to="." method="on_tutorial_toggled"]
+[connection signal="value_changed" from="InnerControl/TabContainer/AudioSettings/Global/HBoxContainer/GlobalVolume" to="." method="on_global_vol_changed"]
+[connection signal="value_changed" from="InnerControl/TabContainer/AudioSettings/Music/HBoxContainer/MusicVolume" to="." method="on_music_vol_changed"]
+[connection signal="value_changed" from="InnerControl/TabContainer/AudioSettings/Effects/HBoxContainer2/EffectsVolume" to="." method="on_effects_vol_changed"]
+[connection signal="value_changed" from="InnerControl/TabContainer/AudioSettings/Ambience/HBoxContainer2/AmbienceVolume" to="." method="on_ambience_vol_changed"]
+[connection signal="item_selected" from="InnerControl/TabContainer/VideoSettings/Resolution/Resolution" to="." method="on_resolution_changed"]
+[connection signal="toggled" from="InnerControl/TabContainer/VideoSettings/Fullscreen/Fullscreen" to="." method="on_full_screen_toggled"]
+[connection signal="toggled" from="InnerControl/TabContainer/VideoSettings/VSync/VSync" to="." method="on_vsync_toggled"]
+[connection signal="toggled" from="InnerControl/TabContainer/Graphics Settings/Tutorial/Tutorial" to="." method="on_tutorial_toggled"]

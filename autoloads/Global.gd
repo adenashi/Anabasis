@@ -39,6 +39,19 @@ func _ready() -> void:
 
 #region Housekeeping Methods
 
+func change_state(newState : GameState) -> void:
+	match CurrentState:
+		GameState.IDLE:
+			AM.cross_fade_ambience("Menus")
+		GameState.STARTING:
+			AM.cross_fade_ambience("Starting")
+		GameState.IN_GAME:
+			AM.cross_fade_ambience("DarkCave")
+		GameState.INTERSTAGE:
+			AM.cross_fade_ambience("Moving")
+		GameState.ENDING:
+			AM.cross_fade_ambience("Surface")
+
 func save_data() -> void:
 	send_update("Saving...")
 	SaveData.save_data()

@@ -78,7 +78,7 @@ func subscribe_to_signals() -> void:
 #region New Game
 
 func start_game() -> void:
-	Global.CurrentState = Global.GameState.STARTING
+	Global.change_state(Global.GameState.STARTING)
 	Deck.create_deck()
 	Player.set_stats(Global.StartingHealth, Global.StartingDefense)
 
@@ -112,7 +112,7 @@ func on_ready_to_start_stage() -> void:
 		while waitingForTutorial:
 			await one_frame()
 	
-	Global.CurrentState = Global.GameState.IN_GAME
+	Global.change_state(Global.GameState.IN_GAME)
 	Player.update_max_defense(Global.StartingDefense + (10*CurrentLevel))
 	Player.restore_to_full_health()
 	HUD.show()
@@ -141,7 +141,7 @@ func on_player_move() -> void:
 #region End of Level 
 
 func initiate_next_level() -> void:
-	Global.CurrentState = Global.GameState.INTERSTAGE
+	Global.change_state(Global.GameState.INTERSTAGE)
 	Dispatch.AddPoints.emit(CurrentEnemy.Data.PointValue)
 	await one_frame()
 	HUD.hide_all_buttons()
@@ -182,7 +182,7 @@ func update_culmulative_results() -> void:
 #region End of Game
 
 func on_player_died() -> void:
-	Global.CurrentState = Global.GameState.INTERSTAGE
+	Global.change_state(Global.GameState.INTERSTAGE)
 	GameTimer.stop()
 	HUD.hide_all_buttons()
 	await get_tree().create_timer(2.0).timeout
@@ -211,7 +211,7 @@ func reenter_combat_mode() -> void:
 		CurrentEnemy.reset_stats()
 		CurrentEnemy.reset_hud()
 		Player.set_stats(Global.StartingHealth, Global.StartingDefense)
-		Global.CurrentState = Global.GameState.IN_GAME
+		Global.change_state(Global.GameState.IN_GAME)
 		Deck.recycle_discard()
 
 		Deck.deal_card_to_hand(9)
@@ -220,12 +220,12 @@ func reenter_combat_mode() -> void:
 		start_game_timers()
 		Combat.start_combat()
 	else:
-		Global.CurrentState = Global.GameState.INTERSTAGE
+		Global.change_state(Global.GameState.INTERSTAGE)
 		Stage.go_to_next_stage()
 
 
 func on_player_won() -> void:
-	Global.CurrentState = Global.GameState.ENDING
+	Global.change_state(Global.GameState.ENDING)
 	update_final_results()
 	GUI.Transitioner.transition_to_victory()
 

@@ -1,10 +1,10 @@
 [gd_scene load_steps=17 format=3 uid="uid://btu7wqw3l2le1"]
 
 [ext_resource type="Theme" uid="uid://cdta86b2s4dni" path="res://assets/themes/global_theme.tres" id="1_lkur8"]
-[ext_resource type="Script" path="res://menus/main/MainMenuController.gd" id="1_wotb1"]
+[ext_resource type="Script" uid="uid://cyse6v2k44ejt" path="res://menus/main/MainMenuController.gd" id="1_wotb1"]
 [ext_resource type="Shader" uid="uid://dqf3tvysjbhu7" path="res://assets/shaders/blur.gdshader" id="2_qq57v"]
 [ext_resource type="Texture2D" uid="uid://deyqhxsmrfbmn" path="res://assets/ui/grid_background.png" id="3_o0cfa"]
-[ext_resource type="FontFile" uid="uid://76obvcak3ako" path="res://Assets/Fonts/Megrim-Regular.ttf" id="4_c3tdx"]
+[ext_resource type="FontFile" uid="uid://76obvcak3ako" path="res://assets/fonts/Megrim-Regular.ttf" id="4_c3tdx"]
 [ext_resource type="Texture2D" uid="uid://df5mokjeq6fff" path="res://asi/sitting/asi_dark_lineless.png" id="4_gsxsj"]
 [ext_resource type="PackedScene" uid="uid://bd0ts63cu65yf" path="res://common/ConfirmationPopup/confirmation_popup.tscn" id="4_y4ryc"]
 [ext_resource type="Texture2D" uid="uid://4rxct52du22v" path="res://asi/sitting/asi_holes_light.png" id="5_e5cb7"]
@@ -19,8 +19,8 @@ shader_parameter/amount = 2.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y4ryc"]
 shader = ExtResource("11_no1ml")
-shader_parameter/lod = 2.5
-shader_parameter/mix_percentage = 0.3
+shader_parameter/lod = 5.0
+shader_parameter/mix_percentage = 0.75
 
 [sub_resource type="Gradient" id="Gradient_gsxsj"]
 offsets = PackedFloat32Array(0, 0.284906, 0.598113)
@@ -1267,97 +1267,117 @@ grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Credits/PanelContainer"]
 layout_mode = 2
+theme_override_constants/separation = 32
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Credits/PanelContainer/VBoxContainer"]
+[node name="DesignCodeArt" type="VBoxContainer" parent="Credits/PanelContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 24
 
-[node name="Role" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Credits/PanelContainer/VBoxContainer/DesignCodeArt"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Role" type="Label" parent="Credits/PanelContainer/VBoxContainer/DesignCodeArt/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Game Design"
 
-[node name="Contributor" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Contributor" type="Label" parent="Credits/PanelContainer/VBoxContainer/DesignCodeArt"]
 layout_mode = 2
 size_flags_horizontal = 3
+text = "Adana K. Washington"
 horizontal_alignment = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Credits/PanelContainer/VBoxContainer"]
+[node name="DesignCodeArt2" type="VBoxContainer" parent="Credits/PanelContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 24
 
-[node name="Role" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Credits/PanelContainer/VBoxContainer/DesignCodeArt2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Role2" type="Label" parent="Credits/PanelContainer/VBoxContainer/DesignCodeArt2/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Programming"
 
-[node name="Contributor" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer2"]
+[node name="Contributor" type="Label" parent="Credits/PanelContainer/VBoxContainer/DesignCodeArt2"]
 layout_mode = 2
 size_flags_horizontal = 3
+text = "Adana K. Washington"
 horizontal_alignment = 2
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="Credits/PanelContainer/VBoxContainer"]
+[node name="DesignCodeArt3" type="VBoxContainer" parent="Credits/PanelContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 24
 
-[node name="Role" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer3"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Credits/PanelContainer/VBoxContainer/DesignCodeArt3"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Writing"
 
-[node name="Contributor" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer3"]
+[node name="Role4" type="Label" parent="Credits/PanelContainer/VBoxContainer/DesignCodeArt3/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+text = "Art + VFX"
+
+[node name="Contributor" type="Label" parent="Credits/PanelContainer/VBoxContainer/DesignCodeArt3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Adana K. Washington"
 horizontal_alignment = 2
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="Credits/PanelContainer/VBoxContainer"]
+[node name="Music" type="VBoxContainer" parent="Credits/PanelContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 24
 
-[node name="Role" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer4"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Art"
-
-[node name="Contributor" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer4"]
-layout_mode = 2
-size_flags_horizontal = 3
-horizontal_alignment = 2
-
-[node name="HBoxContainer6" type="HBoxContainer" parent="Credits/PanelContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Role" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer6"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Visual Effects"
-
-[node name="Contributor" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer6"]
-layout_mode = 2
-size_flags_horizontal = 3
-horizontal_alignment = 2
-
-[node name="HBoxContainer7" type="HBoxContainer" parent="Credits/PanelContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Role" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer7"]
+[node name="Role" type="Label" parent="Credits/PanelContainer/VBoxContainer/Music"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Music"
 
-[node name="Contributor" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer7"]
+[node name="Contributor" type="Label" parent="Credits/PanelContainer/VBoxContainer/Music"]
 layout_mode = 2
 size_flags_horizontal = 3
+text = "Makoto Hiramatsu"
 horizontal_alignment = 2
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="Credits/PanelContainer/VBoxContainer"]
+[node name="SoundEffects" type="VBoxContainer" parent="Credits/PanelContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 24
 
-[node name="Role" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer5"]
+[node name="Role" type="Label" parent="Credits/PanelContainer/VBoxContainer/SoundEffects"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 0
 text = "Sound Effects"
 
-[node name="Contributor" type="Label" parent="Credits/PanelContainer/VBoxContainer/HBoxContainer5"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Credits/PanelContainer/VBoxContainer/SoundEffects"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Contributor" type="Label" parent="Credits/PanelContainer/VBoxContainer/SoundEffects/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Atelier Magicae"
+horizontal_alignment = 2
+
+[node name="Contributor2" type="Label" parent="Credits/PanelContainer/VBoxContainer/SoundEffects/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Kenney"
+horizontal_alignment = 2
+
+[node name="Contributor3" type="Label" parent="Credits/PanelContainer/VBoxContainer/SoundEffects/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "NOX Sounds"
+horizontal_alignment = 2
+
+[node name="Contributor4" type="Label" parent="Credits/PanelContainer/VBoxContainer/SoundEffects/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Nathan Gibson"
 horizontal_alignment = 2
 
 [node name="BackFromCreditsButton" type="Button" parent="Credits"]

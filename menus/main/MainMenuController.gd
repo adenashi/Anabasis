@@ -46,6 +46,7 @@ var switchTween : Tween
 #region Initialization
 
 func _ready() -> void:
+	Global.change_state(Global.GameState.IDLE)
 	MainScreen.modulate.a = 0.0
 	CreditsScreen.modulate.a = 0.0
 	show_records()

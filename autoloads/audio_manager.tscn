@@ -1,14 +1,102 @@
-[gd_scene load_steps=2 format=3 uid="uid://dehrtgyleb8at"]
+[gd_scene load_steps=58 format=3 uid="uid://dehrtgyleb8at"]
 
-[ext_resource type="Script" path="res://autoloads/AudioManager.gd" id="1_ue73k"]
+[ext_resource type="Script" uid="uid://tpduortw4fy7" path="res://autoloads/AudioManager.gd" id="1_ue73k"]
+[ext_resource type="AudioStream" uid="uid://dst8txpwmh3hr" path="res://assets/audio/music/Alteration.wav" id="2_paf5t"]
+[ext_resource type="AudioStream" uid="uid://doy8401sh1hut" path="res://assets/audio/effects/transitions/Fantasy UI Vol (93).wav" id="2_tp26y"]
+[ext_resource type="AudioStream" uid="uid://d0irnv1xc428v" path="res://assets/audio/effects/game/cards/cardPlace2.ogg" id="2_vovef"]
+[ext_resource type="AudioStream" uid="uid://bbbw6w6cx2sly" path="res://assets/audio/effects/transitions/Fantasy UI Vol (94).wav" id="3_0hj8x"]
+[ext_resource type="AudioStream" uid="uid://bjn3ijwxg8bs2" path="res://assets/audio/effects/game/cards/cardSlide3.ogg" id="3_a4ose"]
+[ext_resource type="AudioStream" uid="uid://c06s82e2qqh48" path="res://assets/audio/music/Day After.wav" id="3_lkopi"]
+[ext_resource type="AudioStream" uid="uid://dymx5a2lbrlw4" path="res://assets/audio/effects/transitions/Fantasy UI Vol (92).wav" id="4_44o5v"]
+[ext_resource type="AudioStream" uid="uid://dfarf1atiq06i" path="res://assets/audio/music/Day Before.wav" id="4_aiso7"]
+[ext_resource type="AudioStream" uid="uid://dmwhq4qhpshdp" path="res://assets/audio/effects/ui/hover/Minimalist1.ogg" id="4_plitr"]
+[ext_resource type="AudioStream" uid="uid://bxakp354cva3i" path="res://assets/audio/effects/ui/click/Fantasy UI Vol (75).wav" id="5_0hj8x"]
+[ext_resource type="AudioStream" uid="uid://e5jtv4e16kjc" path="res://assets/audio/music/enter2.wav" id="5_iyxm4"]
+[ext_resource type="AudioStream" uid="uid://ck2sm6oui4n7c" path="res://assets/audio/effects/ui/hover/Minimalist2.ogg" id="5_jwsh5"]
+[ext_resource type="AudioStream" uid="uid://coi2fq15l2c7f" path="res://assets/audio/music/enter.wav" id="6_pil18"]
+[ext_resource type="AudioStream" uid="uid://gnrbky6d623b" path="res://assets/audio/effects/ui/confirm/Fantasy UI Vol (24).wav" id="6_thxvw"]
+[ext_resource type="AudioStream" uid="uid://d00cn4svwtrcw" path="res://assets/audio/music/exit.wav" id="7_7trak"]
+[ext_resource type="AudioStream" uid="uid://b2stm0vv3t4hj" path="res://assets/audio/ambience/Cave.wav" id="7_a4ose"]
+[ext_resource type="AudioStream" uid="uid://bfx8psyfus0jo" path="res://assets/audio/effects/game/defense/Fantasy UI Vol (52).wav" id="7_fug2n"]
+[ext_resource type="AudioStream" uid="uid://ik0cir4sj850" path="res://assets/audio/effects/ui/confirm/Fantasy UI Vol (44).wav" id="7_hscw7"]
+[ext_resource type="AudioStream" uid="uid://cmeh2ps3cuct1" path="res://assets/audio/effects/ui/confirm/Fantasy UI Vol (113).wav" id="8_8w84n"]
+[ext_resource type="AudioStream" uid="uid://b868ivcnt7c7h" path="res://assets/audio/ambience/Inside Night.wav" id="8_44o5v"]
+[ext_resource type="AudioStream" uid="uid://3qwlwhdsd65u" path="res://assets/audio/music/Haiku.wav" id="8_odldt"]
+[ext_resource type="AudioStream" uid="uid://b4ip0sm6f2pe6" path="res://assets/audio/effects/ui/error/Fantasy UI Vol (31).wav" id="9_3jomf"]
+[ext_resource type="AudioStream" uid="uid://dafqr8dcx7wgk" path="res://assets/audio/ambience/Atmosphere_SciFi_Interior_SpaceShip_Loop_Stereo.wav" id="9_f21h8"]
+[ext_resource type="AudioStream" uid="uid://rmn6t06eeyr4" path="res://assets/audio/music/illusion.wav" id="9_sl5vh"]
+[ext_resource type="AudioStream" uid="uid://cqut7176uy25a" path="res://assets/audio/effects/ui/error/Fantasy UI Vol (64).wav" id="10_d4kwn"]
+[ext_resource type="AudioStream" uid="uid://cvcrkhnbvrut7" path="res://assets/audio/effects/game/attack/Fireball 1.ogg" id="10_lmhjh"]
+[ext_resource type="AudioStream" uid="uid://1vrud16jgppt" path="res://assets/audio/ambience/Ambiance_Wind_Forest_Loop_Stereo.wav" id="10_thxvw"]
+[ext_resource type="AudioStream" uid="uid://mhi5qahlyv3c" path="res://assets/audio/music/Invasion.wav" id="10_ve1w3"]
+[ext_resource type="AudioStream" uid="uid://c5nblv07yiebf" path="res://assets/audio/music/Mechanization.wav" id="11_5kaej"]
+[ext_resource type="AudioStream" uid="uid://bhsnodv7x4upd" path="res://assets/audio/ambience/Ambiance_Cave_Deep_Loop_Stereo.wav" id="11_hscw7"]
+[ext_resource type="AudioStream" uid="uid://bs86j2hl6exv3" path="res://assets/audio/effects/ui/error/Fantasy UI Vol (67).wav" id="11_tw6on"]
+[ext_resource type="AudioStream" uid="uid://cddvlm8apxbaw" path="res://assets/audio/effects/game/attack/Fireball 2.ogg" id="11_xy6rp"]
+[ext_resource type="AudioStream" uid="uid://c58b3p2k2l5in" path="res://assets/audio/ambience/Ambiance_Cave_Dark_Loop_Stereo.wav" id="12_8w84n"]
+[ext_resource type="AudioStream" uid="uid://oln62veh5hq5" path="res://assets/audio/music/mind_game.wav" id="12_nlyc3"]
+[ext_resource type="AudioStream" uid="uid://b2v3gsldxyyrl" path="res://assets/audio/effects/game/attack/Fireball 3.ogg" id="12_y70lk"]
+[ext_resource type="AudioStream" uid="uid://dhq4q7jnnfoe7" path="res://assets/audio/effects/game/impact/lowFrequency_explosion_000.ogg" id="13_fug2n"]
+[ext_resource type="AudioStream" uid="uid://w2taev41fuht" path="res://assets/audio/music/other_level.wav" id="13_xyxbu"]
+[ext_resource type="AudioStream" uid="uid://nqptpc22w73f" path="res://assets/audio/music/outpost.wav" id="14_gggnk"]
+[ext_resource type="AudioStream" uid="uid://dfhdd1yw30lun" path="res://assets/audio/effects/game/impact/lowFrequency_explosion_001.ogg" id="14_pf041"]
+[ext_resource type="AudioStream" uid="uid://cvb3xs7no0gy6" path="res://assets/audio/effects/game/defense/forceField_000.ogg" id="15_hw6t6"]
+[ext_resource type="AudioStream" uid="uid://dwr1nubxu8suv" path="res://assets/audio/music/Pollution.wav" id="15_yxhsu"]
+[ext_resource type="AudioStream" uid="uid://h0jdv0rxb3er" path="res://assets/audio/music/portal.wav" id="16_mpej3"]
+[ext_resource type="AudioStream" uid="uid://bpeiavyjb2uvc" path="res://assets/audio/effects/ui/hover/snap0.mp3" id="16_xy6rp"]
+[ext_resource type="AudioStream" uid="uid://cwsavh21i11xl" path="res://assets/audio/music/ramparts.wav" id="17_tyrx3"]
+[ext_resource type="AudioStream" uid="uid://y105hau8m4dp" path="res://assets/audio/music/Reality.wav" id="18_2vhl8"]
+[ext_resource type="AudioStream" uid="uid://cpqicyvxtihr" path="res://assets/audio/music/Safe Time.wav" id="19_57fp0"]
+[ext_resource type="AudioStream" uid="uid://cxb0wgxfeiwkp" path="res://assets/audio/music/sequence1.wav" id="20_sxsmp"]
+[ext_resource type="AudioStream" uid="uid://cxjum4v7u6188" path="res://assets/audio/music/sequence2.wav" id="21_b8nu5"]
+[ext_resource type="AudioStream" uid="uid://cqb8cqhdxvgub" path="res://assets/audio/music/sleep(2).wav" id="22_jlbum"]
+[ext_resource type="AudioStream" uid="uid://b8bfri6d031b4" path="res://assets/audio/music/sleep.wav" id="23_s1v23"]
+[ext_resource type="AudioStream" uid="uid://bnx5wtq1ye6wq" path="res://assets/audio/music/Submerged.wav" id="24_hx08c"]
+[ext_resource type="AudioStream" uid="uid://bagdhi5c05j0g" path="res://assets/audio/music/synthesis.wav" id="25_3wjdk"]
+[ext_resource type="AudioStream" uid="uid://b541ai51nupcm" path="res://assets/audio/music/thoughtful.wav" id="26_jvxwa"]
+[ext_resource type="AudioStream" uid="uid://bsonhvsx48e5b" path="res://assets/audio/music/transmute.wav" id="27_efjr2"]
+[ext_resource type="AudioStream" uid="uid://cabc8wlbbs4jm" path="res://assets/audio/music/Underground City.wav" id="28_vwh8a"]
+[ext_resource type="AudioStream" uid="uid://clgscdtgd5eea" path="res://assets/audio/music/Watcher.wav" id="29_uah2h"]
 
-[node name="AudioManager" type="Node" node_paths=PackedStringArray("Music", "Effects")]
+[node name="AudioManager" type="Node" node_paths=PackedStringArray("Music", "Effects", "Ambience")]
 script = ExtResource("1_ue73k")
 Music = NodePath("Music")
 Effects = NodePath("Effects")
+Ambience = NodePath("Ambience")
+MusicTracks = Array[AudioStream]([ExtResource("2_paf5t"), ExtResource("3_lkopi"), ExtResource("4_aiso7"), ExtResource("5_iyxm4"), ExtResource("6_pil18"), ExtResource("7_7trak"), ExtResource("8_odldt"), ExtResource("9_sl5vh"), ExtResource("10_ve1w3"), ExtResource("11_5kaej"), ExtResource("12_nlyc3"), ExtResource("13_xyxbu"), ExtResource("14_gggnk"), ExtResource("15_yxhsu"), ExtResource("16_mpej3"), ExtResource("17_tyrx3"), ExtResource("18_2vhl8"), ExtResource("19_57fp0"), ExtResource("20_sxsmp"), ExtResource("21_b8nu5"), ExtResource("22_jlbum"), ExtResource("23_s1v23"), ExtResource("24_hx08c"), ExtResource("25_3wjdk"), ExtResource("26_jvxwa"), ExtResource("27_efjr2"), ExtResource("28_vwh8a"), ExtResource("29_uah2h")])
+EffectsTracks = {
+"Game": {
+"Attack": [ExtResource("10_lmhjh"), ExtResource("11_xy6rp"), ExtResource("12_y70lk")],
+"Cards": [ExtResource("2_vovef"), ExtResource("3_a4ose")],
+"Defense": [ExtResource("7_fug2n"), ExtResource("15_hw6t6")],
+"Impact": [ExtResource("13_fug2n"), ExtResource("14_pf041")]
+},
+"Transition": {
+"NewStage": [ExtResource("2_tp26y")],
+"PlayerLost": [ExtResource("3_0hj8x")],
+"PlayerWon": [ExtResource("4_44o5v")]
+},
+"UI": {
+"Click": [ExtResource("5_0hj8x")],
+"Confirm": [ExtResource("6_thxvw"), ExtResource("7_hscw7"), ExtResource("8_8w84n")],
+"Error": [ExtResource("9_3jomf"), ExtResource("10_d4kwn"), ExtResource("11_tw6on")],
+"Hover": [ExtResource("4_plitr"), ExtResource("5_jwsh5"), ExtResource("16_xy6rp")]
+}
+}
+AmbienceTracks = Dictionary[String, AudioStream]({
+"DarkCave": ExtResource("12_8w84n"),
+"DeepCave": ExtResource("11_hscw7"),
+"Menus": ExtResource("7_a4ose"),
+"Moving": ExtResource("9_f21h8"),
+"Starting": ExtResource("8_44o5v"),
+"Surface": ExtResource("10_thxvw")
+})
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 bus = &"Music"
 
 [node name="Effects" type="AudioStreamPlayer" parent="."]
 bus = &"Effects"
+
+[node name="Ambience" type="AudioStreamPlayer" parent="."]
+bus = &"Ambience"
