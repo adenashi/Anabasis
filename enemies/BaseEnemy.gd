@@ -102,12 +102,14 @@ func take_damage(damage : int) -> void:
 			Dispatch.UpdateEnemyDefense.emit(MaxDefense, CurrentDefense)
 			if damage > 0:
 				CurrentHealth -= damage
+				CurrentHealth = max(0, CurrentHealth)
 				Dispatch.UpdateEnemyHealth.emit(MaxHealth, CurrentHealth)
 		else:
 			CurrentDefense -= damage
 			Dispatch.UpdateEnemyDefense.emit(MaxDefense, CurrentDefense)
 	else:
 		CurrentHealth -= damage
+		CurrentHealth = max(0, CurrentHealth)
 		Dispatch.UpdateEnemyHealth.emit(MaxHealth, CurrentHealth)
 	
 	if CurrentHealth <= 0:

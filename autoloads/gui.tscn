@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cqhscwtkw8egs"]
+[gd_scene load_steps=8 format=3 uid="uid://cqhscwtkw8egs"]
 
 [ext_resource type="Script" uid="uid://bsydofop3u7c0" path="res://autoloads/GUI.gd" id="1_mm5ko"]
 [ext_resource type="PackedScene" uid="uid://hi338ppglm7m" path="res://menus/pause/pause_menu.tscn" id="2_bvxye"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://dntls2sgx2joi" path="res://common/SceneTransitioner/scene_transitioner.tscn" id="5_if8rd"]
 [ext_resource type="PackedScene" uid="uid://bvc4xkmypouiw" path="res://common/dev_build.tscn" id="6_bvxye"]
 [ext_resource type="PackedScene" uid="uid://dmfxaqejewmky" path="res://tutorial/tutorial.tscn" id="6_jjqar"]
-[ext_resource type="Theme" uid="uid://cdta86b2s4dni" path="res://assets/themes/global_theme.tres" id="7_uh6n7"]
 
 [node name="GUI" type="CanvasLayer" node_paths=PackedStringArray("PauseMenu", "SettingsMenu", "ConfirmWindow", "Transitioner", "DevUI")]
 process_mode = 3
@@ -35,6 +34,4 @@ visible = false
 visible = false
 
 [node name="DevBuild" parent="." instance=ExtResource("6_bvxye")]
-modulate = Color(1, 1, 1, 0.264)
 size_flags_horizontal = 4
-theme = ExtResource("7_uh6n7")

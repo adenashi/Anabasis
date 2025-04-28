@@ -16,7 +16,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hefqa"]
 
-[node name="EnemyHUD" type="Control" node_paths=PackedStringArray("CardImage", "EnemyAttack", "EnemyName", "HealthLabel", "HealthSegments", "HealthEmpty", "HealthFull", "DefenseLabel", "DefenseSegments", "DefenseEmpty", "DefenseFull")]
+[node name="EnemyHUD" type="Control" node_paths=PackedStringArray("EnemyName", "CardImage", "Attack", "HealthLabel", "HealthSegments", "HealthEmpty", "HealthFull", "DefenseLabel", "DefenseSegments", "DefenseEmpty", "DefenseFull")]
 custom_minimum_size = Vector2(177, 242)
 layout_mode = 3
 anchors_preset = 0
@@ -24,9 +24,9 @@ offset_right = 161.0
 offset_bottom = 211.0
 pivot_offset = Vector2(88, 121)
 script = ExtResource("1_pj5tm")
-CardImage = NodePath("VBoxContainer/HBoxContainer/EnemyCard/CardImage")
-EnemyAttack = NodePath("VBoxContainer/HBoxContainer3/EnemyAttack")
 EnemyName = NodePath("VBoxContainer/HBoxContainer3/EnemyName")
+CardImage = NodePath("VBoxContainer/HBoxContainer/EnemyCard/CardImage")
+Attack = NodePath("VBoxContainer/HBoxContainer3/EnemyAttack")
 HealthLabel = NodePath("VBoxContainer/HBoxContainer2/HealthLabel")
 HealthSegments = NodePath("VBoxContainer/HBoxContainer2/HealthBar")
 HealthEmpty = NodePath("VBoxContainer/HBoxContainer2/HealthBar/Empty")

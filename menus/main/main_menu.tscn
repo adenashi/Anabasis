@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://btu7wqw3l2le1"]
+[gd_scene load_steps=18 format=3 uid="uid://btu7wqw3l2le1"]
 
 [ext_resource type="Theme" uid="uid://cdta86b2s4dni" path="res://assets/themes/global_theme.tres" id="1_lkur8"]
 [ext_resource type="Script" uid="uid://cyse6v2k44ejt" path="res://menus/main/MainMenuController.gd" id="1_wotb1"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://4rxct52du22v" path="res://asi/sitting/asi_holes_light.png" id="5_e5cb7"]
 [ext_resource type="Texture2D" uid="uid://bcm215otfcmmq" path="res://asi/sitting/covers/stage_1.png" id="6_no1ml"]
 [ext_resource type="Texture2D" uid="uid://bmvychh586omi" path="res://asi/sitting/shadows.png" id="7_op8kx"]
+[ext_resource type="Texture2D" uid="uid://ce8optvsko5xv" path="res://assets/images/NeonNoodsLogoWhite.png" id="9_gtyj8"]
 [ext_resource type="PackedScene" uid="uid://bcxakmx7kigwa" path="res://menus/stage_select/game_starter.tscn" id="11_e5cb7"]
 [ext_resource type="Shader" uid="uid://b0n1i03vxwmb7" path="res://assets/shaders/darkenedblur.gdshader" id="11_no1ml"]
 
@@ -195,6 +196,29 @@ custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 theme_type_variation = &"TabButtonNormal"
 text = "QUIT"
+
+[node name="BottomCorner" type="VBoxContainer" parent="Main"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -199.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Logo" type="TextureRect" parent="Main/BottomCorner"]
+modulate = Color(1, 1, 1, 0.305882)
+layout_mode = 2
+texture = ExtResource("9_gtyj8")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="DiscordButton" type="Button" parent="Main/BottomCorner"]
+layout_mode = 2
+text = "DISCORD"
 
 [node name="Records" type="Control" parent="."]
 visible = false
@@ -1450,6 +1474,7 @@ layout_mode = 1
 [connection signal="pressed" from="Main/VBoxContainer/SettingsButton" to="." method="on_settings_button_pressed"]
 [connection signal="pressed" from="Main/VBoxContainer/CreditsButton" to="." method="on_credits_button_pressed"]
 [connection signal="pressed" from="Main/VBoxContainer/ExitButton" to="." method="on_exit_button_pressed"]
+[connection signal="pressed" from="Main/BottomCorner/DiscordButton" to="." method="on_discord_button_pressed"]
 [connection signal="pressed" from="Records/BackFromRecordsButton" to="." method="on_back_from_records_button_pressed"]
 [connection signal="pressed" from="Records/ClearRecordsButton" to="." method="on_delete_records_button_pressed"]
 [connection signal="pressed" from="Credits/BackFromCreditsButton" to="." method="on_back_from_credits_button_pressed"]

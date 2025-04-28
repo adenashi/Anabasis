@@ -50,8 +50,10 @@ func show_player_attack(cards : Array[BaseCard]) -> void:
 	var points = StartingPositions.keys()
 	for i in range(cards.size()):
 		usedPoints.append(points[i])
+		cards[i].scale = Vector2.ONE
 		await cards[i].move_to_position(points[i].global_position, 0.2)
 		cards[i].reparent(points[i])
+		await get_tree().create_timer(0.1).timeout
 	
 	for i in range(usedPoints.size() - 1, -1, -1):
 		await spawn_attack_effect(usedPoints[i])

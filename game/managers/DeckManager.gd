@@ -135,6 +135,7 @@ func discard_selected_cards(cards : Array[BaseCard]) -> void:
 func recycle_discard() -> void:
 	for card:BaseCard in Discard:
 		PlayerDeck.push_back(card)
+		card.show()
 		card.change_state(BaseCard.CardState.DECK)
 		card.reparent(Hand.DeckHolder)
 		Dispatch.UpdateDeckCount.emit(PlayerDeck.size())

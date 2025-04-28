@@ -12,7 +12,7 @@ const UPDATE_SPEED : float = 0.2
 
 @export_group("Controls")
 @export var CardImage : TextureRect
-@export var PlayerAttack : Label
+@export var Attack : Label
 
 @export_subgroup("Health Bar")
 @export var HealthLabel : Label
@@ -56,12 +56,15 @@ func _ready() -> void:
 func update_health(segments : int, value : int) -> void:
 	HealthEmpty.custom_minimum_size.x = SEGMENT_HEIGHT * roundi(segments / 10)
 	if value > health:
-		await add_health(value - health)
+		if value == segments:
+			HealthFull.size.x = SEGMENT_HEIGHT * roundi(segments / 10)
+		else:
+			add_health(value - health)
 	elif value < health:
 		if value == 0:
 			HealthFull.hide()
 		else:
-			await remove_health(segments - value)
+			remove_health(segments - value)
 	
 	health = value
 
@@ -69,18 +72,21 @@ func update_health(segments : int, value : int) -> void:
 func update_defense(segments : int, value : int) -> void:
 	DefenseEmpty.custom_minimum_size.y = SEGMENT_HEIGHT * roundi(segments / 10)
 	if value > defense:
-		await add_defense(value - defense)
+		if value == segments:
+			DefenseFull.size.y = SEGMENT_HEIGHT * roundi(segments / 10)
+		else:
+			add_defense(value - defense)
 	elif value < defense:
 		if value == 0:
 			DefenseFull.hide()
 		else:
-			await remove_defense(segments - value)
+			remove_defense(segments - value)
 	
 	defense = value
 
 
 func update_attack(amount : int) -> void:
-	PlayerAttack.text = str(amount)
+	Attack.text = str(amount)
 
 #endregion
 
@@ -88,13 +94,14 @@ func update_attack(amount : int) -> void:
 
 func remove_health(amount : int) -> void:
 	var segments : int = roundi(amount / 10)
+	var speed : float = (1.0 / segments) / 2
 	
 	if healthSegmentTween:
 		healthSegmentTween.kill()
 	for i in range(segments - 1, -1, -1):
-		healthSegmentTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_LINEAR)
-		healthSegmentTween.tween_property(HealthFull, "size:x", SEGMENT_HEIGHT * i, 0.2)
-		healthSegmentTween.tween_interval(0.2)
+		healthSegmentTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+		healthSegmentTween.tween_property(HealthFull, "size:x", HealthFull.size.x - SEGMENT_HEIGHT, speed)
+		healthSegmentTween.tween_interval(speed)
 		await healthSegmentTween.finished
 	
 	healthSegmentTween = null
@@ -105,13 +112,14 @@ func add_health(amount : int) -> void:
 		HealthFull.show()
 	
 	var segments : int = roundi(amount / 10)
+	var speed : float = (1.0 / segments) / 2
 	
 	if healthSegmentTween:
 		healthSegmentTween.kill()
 	for i in range(1, segments + 1):
-		healthSegmentTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_LINEAR)
-		healthSegmentTween.tween_property(HealthFull, "size:x", SEGMENT_HEIGHT * i, 0.2)
-		healthSegmentTween.tween_interval(0.2)
+		healthSegmentTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+		healthSegmentTween.tween_property(HealthFull, "size:x", HealthFull.size.x + SEGMENT_HEIGHT, speed)
+		healthSegmentTween.tween_interval(speed)
 		await healthSegmentTween.finished
 	
 	healthSegmentTween = null
@@ -119,13 +127,14 @@ func add_health(amount : int) -> void:
 
 func remove_defense(amount : int) -> void:
 	var segments : int = roundi(amount / 10)
+	var speed : float = (1.0 / segments) / 2
 	
 	if defenseSegmentTween:
 		defenseSegmentTween.kill()
 	for i in range(segments - 1, -1, -1):
-		defenseSegmentTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_LINEAR)
-		defenseSegmentTween.tween_property(DefenseFull, "size:y", SEGMENT_HEIGHT * i, 0.2)
-		defenseSegmentTween.tween_interval(0.2)
+		defenseSegmentTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+		defenseSegmentTween.tween_property(DefenseFull, "size:y", DefenseFull.size.y - SEGMENT_HEIGHT, speed)
+		defenseSegmentTween.tween_interval(speed)
 		await defenseSegmentTween.finished
 	
 	defenseSegmentTween = null
@@ -136,13 +145,14 @@ func add_defense(amount : int) -> void:
 		DefenseFull.show()
 	
 	var segments : int = roundi(amount / 10)
+	var speed : float = (1.0 / segments) / 2
 	
 	if defenseSegmentTween:
 		defenseSegmentTween.kill()
 	for i in range(1, segments + 1):
-		defenseSegmentTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_LINEAR)
-		defenseSegmentTween.tween_property(DefenseFull, "size:y", SEGMENT_HEIGHT * i, 0.2)
-		defenseSegmentTween.tween_interval(0.2)
+		defenseSegmentTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+		defenseSegmentTween.tween_property(DefenseFull, "size:y", DefenseFull.size.y + SEGMENT_HEIGHT, speed)
+		defenseSegmentTween.tween_interval(speed)
 		await defenseSegmentTween.finished
 	
 	defenseSegmentTween = null

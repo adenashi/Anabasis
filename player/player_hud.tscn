@@ -16,7 +16,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cjc2p"]
 
-[node name="PlayerHUD" type="Control" node_paths=PackedStringArray("CardImage", "PlayerAttack", "HealthLabel", "HealthSegments", "HealthEmpty", "HealthFull", "DefenseLabel", "DefenseSegments", "DefenseEmpty", "DefenseFull")]
+[node name="PlayerHUD" type="Control" node_paths=PackedStringArray("CardImage", "Attack", "HealthLabel", "HealthSegments", "HealthEmpty", "HealthFull", "DefenseLabel", "DefenseSegments", "DefenseEmpty", "DefenseFull")]
 custom_minimum_size = Vector2(177, 242)
 layout_mode = 3
 anchors_preset = 0
@@ -25,7 +25,7 @@ offset_bottom = 210.0
 pivot_offset = Vector2(88, 121)
 script = ExtResource("1_0phdd")
 CardImage = NodePath("VBoxContainer/HBoxContainer/PlayerCard/CardImage")
-PlayerAttack = NodePath("VBoxContainer/HBoxContainer3/PlayerAttack")
+Attack = NodePath("VBoxContainer/HBoxContainer3/PlayerAttack")
 HealthLabel = NodePath("VBoxContainer/HBoxContainer2/HealthLabel")
 HealthSegments = NodePath("VBoxContainer/HBoxContainer2/HealthBar")
 HealthEmpty = NodePath("VBoxContainer/HBoxContainer2/HealthBar/Empty")

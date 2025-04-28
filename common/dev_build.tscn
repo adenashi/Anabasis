@@ -1,6 +1,15 @@
-[gd_scene format=3 uid="uid://bvc4xkmypouiw"]
+[gd_scene load_steps=5 format=3 uid="uid://bvc4xkmypouiw"]
 
-[node name="DevBuild" type="Control"]
+[ext_resource type="Theme" uid="uid://cdta86b2s4dni" path="res://assets/themes/global_theme.tres" id="1_kcrwy"]
+[ext_resource type="Script" uid="uid://dlnxn14lxaseo" path="res://common/dev_build.gd" id="2_wlvsl"]
+[ext_resource type="FontFile" uid="uid://dc44yikjkj2vr" path="res://assets/fonts/BarlowCondensed-Light.ttf" id="3_b5p2y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kcrwy"]
+
+[node name="DevBuild" type="Control" node_paths=PackedStringArray("BugReportPanel", "ScreenPhaseLabel")]
+process_mode = 3
+z_index = 4096
+z_as_relative = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -8,9 +17,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = ExtResource("1_kcrwy")
+script = ExtResource("2_wlvsl")
+BugReportPanel = NodePath("BugReportPanel")
+ScreenPhaseLabel = NodePath("BugReportPanel/VBoxContainer/VBoxContainer/ScreenPhaseLabel")
 
 [node name="Label" type="Label" parent="."]
-modulate = Color(1, 1, 1, 0.5)
+modulate = Color(1, 1, 1, 0.137255)
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -25,3 +38,82 @@ grow_vertical = 0
 text = "Dev Build 0.4"
 horizontal_alignment = 1
 uppercase = true
+
+[node name="ReportBugButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -87.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("3_b5p2y")
+theme_override_font_sizes/font_size = 18
+text = "REPORT BUG"
+
+[node name="BugReportPanel" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -281.0
+offset_top = -265.5
+offset_right = 281.0
+offset_bottom = 265.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BugReportPanel"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 24
+
+[node name="Label" type="Label" parent="BugReportPanel/VBoxContainer"]
+layout_mode = 2
+text = "Report Bug"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Note" type="Label" parent="BugReportPanel/VBoxContainer"]
+layout_mode = 2
+text = "The following Location has been added to your clipboard:"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BugReportPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="BugReportPanel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ScreenPhaseLabel" type="Label" parent="BugReportPanel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="BugReportPanel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="BugReportPanel/VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+text = "Head on over to the Bug Report channel of the Neon Noods Discord by clicking the button below, press Ctrl/Cmd + V to paste the bug location, and send a brief description what led to the bug.
+
+Thanks in advance!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="BugReportPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+theme_override_styles/separator = SubResource("StyleBoxEmpty_kcrwy")
+
+[node name="GoToDiscordButton" type="Button" parent="BugReportPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "GO TO DISCORD"
+
+[connection signal="pressed" from="ReportBugButton" to="." method="on_report_bug_button_pressed"]
+[connection signal="pressed" from="BugReportPanel/VBoxContainer/GoToDiscordButton" to="." method="on_submit_report_button_pressed"]

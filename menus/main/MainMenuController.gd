@@ -119,6 +119,15 @@ func on_cancel_exit_button_pressed() -> void:
 func on_confirm_exit_button_pressed() -> void:
 	Global.quit_game()
 
+
+func on_discord_button_pressed() -> void:
+	if OS.has_feature('JavaScript'):
+		JavaScriptBridge.eval("""
+			window.open('https://discord.gg/7wWvNf59t3', '_blank').focus();
+		""")
+	else:
+		OS.shell_open("https://discord.gg/7wWvNf59t3")
+
 #endregion
 
 #region Aesthetics

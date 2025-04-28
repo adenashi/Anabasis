@@ -119,6 +119,7 @@ func on_ready_to_start_stage() -> void:
 	Global.change_state(Global.GameState.IN_GAME)
 	Player.update_max_defense(Global.StartingDefense + (10*CurrentLevel))
 	Player.restore_to_full_health()
+	discardsSinceLastPlay = 0
 	HUD.show()
 	Deck.deal_card_to_hand(9)
 	await Deck.CardsDealt
@@ -131,6 +132,9 @@ func on_ready_to_start_stage() -> void:
 #region During Game
 
 func on_player_discard() -> void:
+	if Global.CurrentState != Global.GameState.IN_GAME:
+		return
+	
 	discardsSinceLastPlay += 1
 	if discardsSinceLastPlay >= Global.FreeDiscards:
 		CurrentEnemy.make_free_move()
@@ -152,6 +156,7 @@ func initiate_next_level() -> void:
 	GameTimer.stop()
 	Dispatch.DiscardSelectedCards.emit()
 	Deck.discard_hand()
+	await get_tree().create_timer(1.0).timeout
 	HUD.hide()
 	playerWon = true
 	await one_frame()
@@ -190,9 +195,9 @@ func on_player_died() -> void:
 	Global.change_state(Global.GameState.INTERSTAGE)
 	GameTimer.stop()
 	HUD.hide_all_buttons()
-	await get_tree().create_timer(2.0).timeout
 	Dispatch.DiscardSelectedCards.emit()
 	Deck.discard_hand()
+	await get_tree().create_timer(1.0).timeout
 	HUD.hide()
 	
 	var results : Dictionary = {
