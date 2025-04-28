@@ -15,6 +15,13 @@ var CurrentPoints : int
 
 #region Initialization
 
+func _ready() -> void:
+	MaxHealth = Global.StartingHealth
+	CurrentHealth = MaxHealth
+	MaxDefense = Global.StartingDefense - 10
+	CurrentDefense = MaxDefense
+
+
 func set_stats(startingHealth : int, startingDefense : int) -> void:
 	CurrentHealth = startingHealth
 	set_max_health(CurrentHealth)

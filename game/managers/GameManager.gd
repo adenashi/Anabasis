@@ -81,7 +81,6 @@ func subscribe_to_signals() -> void:
 func start_game() -> void:
 	Global.change_state(Global.GameState.STARTING)
 	Deck.create_deck()
-	Player.set_stats(Global.StartingHealth, Global.StartingDefense)
 
 #endregion
 
