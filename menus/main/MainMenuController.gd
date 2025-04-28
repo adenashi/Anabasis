@@ -88,6 +88,7 @@ func on_back_from_credits_button_pressed() -> void:
 
 ## Calls [method switch_screens] to switch from the Main Menu screen to the Records screen.
 func on_records_button_pressed() -> void:
+	show_records()
 	switch_screens(MainScreen, RecordsScreen)
 
 
@@ -196,14 +197,14 @@ func show_records() -> void:
 			bestScore = record.HighScore
 		HighScoreLabels[i].text = str(record.HighScore) if record.HighScore > 0 else "--"
 	
-	BestTimeLabels[bestTimeIndex].add_theme_font_size_override("font_size", 21)
-	BestTimeLabels[bestTimeIndex].get_parent_control().get_child(0).add_theme_font_size_override("font_size", 21)
-	
-	ReshuffleLabels[bestReshufIndex].add_theme_font_size_override("font_size", 21)
-	ReshuffleLabels[bestReshufIndex].get_parent_control().get_child(0).add_theme_font_size_override("font_size", 21)
-	
-	HighScoreLabels[bestScoreIndex].add_theme_font_size_override("font_size", 21)
-	HighScoreLabels[bestScoreIndex].get_parent_control().get_child(0).add_theme_font_size_override("font_size", 21)
+	#BestTimeLabels[bestTimeIndex].add_theme_font_size_override("font_size", 21)
+	#BestTimeLabels[bestTimeIndex].get_parent_control().get_child(0).add_theme_font_size_override("font_size", 21)
+	#
+	#ReshuffleLabels[bestReshufIndex].add_theme_font_size_override("font_size", 21)
+	#ReshuffleLabels[bestReshufIndex].get_parent_control().get_child(0).add_theme_font_size_override("font_size", 21)
+	#
+	#HighScoreLabels[bestScoreIndex].add_theme_font_size_override("font_size", 21)
+	#HighScoreLabels[bestScoreIndex].get_parent_control().get_child(0).add_theme_font_size_override("font_size", 21)
 
 #endregion
 

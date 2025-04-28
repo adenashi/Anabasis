@@ -57,6 +57,7 @@ func update_health(segments : int, value : int) -> void:
 	HealthEmpty.custom_minimum_size.x = SEGMENT_HEIGHT * roundi(segments / 10)
 	if value > health:
 		if value == segments:
+			HealthFull.show()
 			HealthFull.size.x = SEGMENT_HEIGHT * roundi(segments / 10)
 		else:
 			add_health(value - health)
@@ -73,6 +74,7 @@ func update_defense(segments : int, value : int) -> void:
 	DefenseEmpty.custom_minimum_size.y = SEGMENT_HEIGHT * roundi(segments / 10)
 	if value > defense:
 		if value == segments:
+			DefenseFull.show()
 			DefenseFull.size.y = SEGMENT_HEIGHT * roundi(segments / 10)
 		else:
 			add_defense(value - defense)

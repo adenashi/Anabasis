@@ -117,7 +117,11 @@ func on_ready_to_start_stage() -> void:
 		waitingForTutorial = false
 	
 	Global.change_state(Global.GameState.IN_GAME)
-	Player.update_max_defense(Global.StartingDefense + (10*CurrentLevel))
+	GameTime = 0
+	GameReshuffles = 0
+	GameScore = 0
+	Player.set_stats(Global.StartingHealth, Global.StartingDefense + (10 * CurrentLevel))
+	Player.restore_full_defense()
 	Player.restore_to_full_health()
 	discardsSinceLastPlay = 0
 	HUD.show()
@@ -170,8 +174,8 @@ func initiate_next_level() -> void:
 			"Enemy": CurrentEnemy,
 			"Result": "Victory"
 		}
-		AM.play_sfx("Transition", "PlayerWon")
 		Stage.show_stage_results(results)
+		AM.play_sfx("Transition", "PlayerWon")
 		update_culmulative_results()
 	else:
 		update_culmulative_results()
@@ -182,10 +186,6 @@ func update_culmulative_results() -> void:
 	TotalGameTime += GameTime
 	TotalReshuffles += GameReshuffles
 	TotalScore += GameScore
-	
-	GameTime = 0
-	GameReshuffles = 0
-	GameScore = 0
 
 #endregion
 
@@ -218,11 +218,16 @@ func on_retry_level() -> void:
 
 
 func reenter_combat_mode() -> void:
+	GameTime = 0
+	GameReshuffles = 0
+	GameScore = 0
 	HUD.show()
 	if !playerWon:
 		CurrentEnemy.reset_stats()
 		CurrentEnemy.reset_hud()
-		Player.set_stats(Global.StartingHealth, Global.StartingDefense)
+		Player.set_stats(Global.StartingHealth, Global.StartingDefense + (10 * CurrentLevel))
+		Player.restore_full_defense()
+		Player.restore_to_full_health()
 		Global.change_state(Global.GameState.IN_GAME)
 		Deck.recycle_discard()
 

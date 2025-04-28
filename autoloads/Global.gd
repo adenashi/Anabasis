@@ -17,7 +17,7 @@ enum GameState {
 
 var CurrentState : GameState
 var StartingHealth : int = 100
-var StartingDefense : int = 50
+var StartingDefense : int = 40
 var StagesToClear : int = 1
 
 var FreeDiscards : int = 3

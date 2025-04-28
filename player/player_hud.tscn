@@ -28,12 +28,12 @@ CardImage = NodePath("VBoxContainer/HBoxContainer/PlayerCard/CardImage")
 Attack = NodePath("VBoxContainer/HBoxContainer3/PlayerAttack")
 HealthLabel = NodePath("VBoxContainer/HBoxContainer2/HealthLabel")
 HealthSegments = NodePath("VBoxContainer/HBoxContainer2/HealthBar")
-HealthEmpty = NodePath("VBoxContainer/HBoxContainer2/HealthBar/Empty")
-HealthFull = NodePath("VBoxContainer/HBoxContainer2/HealthBar/Empty/Full")
+HealthEmpty = NodePath("VBoxContainer/HBoxContainer2/HealthBar/HealthEmpty")
+HealthFull = NodePath("VBoxContainer/HBoxContainer2/HealthBar/HealthEmpty/HealthFull")
 DefenseLabel = NodePath("VBoxContainer/HBoxContainer/DefenseBar/VBoxContainer/DefenseLabel")
 DefenseSegments = NodePath("VBoxContainer/HBoxContainer/DefenseBar/VBoxContainer/DefenseBar")
-DefenseEmpty = NodePath("VBoxContainer/HBoxContainer/DefenseBar/VBoxContainer/DefenseBar/Empty")
-DefenseFull = NodePath("VBoxContainer/HBoxContainer/DefenseBar/VBoxContainer/DefenseBar/Empty/Full")
+DefenseEmpty = NodePath("VBoxContainer/HBoxContainer/DefenseBar/VBoxContainer/DefenseBar/DefenseEmpty")
+DefenseFull = NodePath("VBoxContainer/HBoxContainer/DefenseBar/VBoxContainer/DefenseBar/DefenseEmpty/DefenseFull")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -100,7 +100,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_styles/panel = SubResource("StyleBoxEmpty_17rot")
 
-[node name="Empty" type="TextureRect" parent="VBoxContainer/HBoxContainer/DefenseBar/VBoxContainer/DefenseBar"]
+[node name="DefenseEmpty" type="TextureRect" parent="VBoxContainer/HBoxContainer/DefenseBar/VBoxContainer/DefenseBar"]
 custom_minimum_size = Vector2(16, 9)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -109,7 +109,7 @@ texture = ExtResource("3_74gtv")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="Full" type="TextureRect" parent="VBoxContainer/HBoxContainer/DefenseBar/VBoxContainer/DefenseBar/Empty"]
+[node name="DefenseFull" type="TextureRect" parent="VBoxContainer/HBoxContainer/DefenseBar/VBoxContainer/DefenseBar/DefenseEmpty"]
 modulate = Color(0.545098, 1, 0.996078, 1)
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 1
@@ -171,7 +171,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxEmpty_cjc2p")
 
-[node name="Empty" type="TextureRect" parent="VBoxContainer/HBoxContainer2/HealthBar"]
+[node name="HealthEmpty" type="TextureRect" parent="VBoxContainer/HBoxContainer2/HealthBar"]
 custom_minimum_size = Vector2(9, 16)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -180,7 +180,7 @@ texture = ExtResource("7_mkbi4")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="Full" type="TextureRect" parent="VBoxContainer/HBoxContainer2/HealthBar/Empty"]
+[node name="HealthFull" type="TextureRect" parent="VBoxContainer/HBoxContainer2/HealthBar/HealthEmpty"]
 modulate = Color(0.996078, 0.388235, 0.886275, 1)
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 1

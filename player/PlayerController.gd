@@ -18,14 +18,17 @@ var CurrentPoints : int
 func _ready() -> void:
 	MaxHealth = Global.StartingHealth
 	CurrentHealth = MaxHealth
-	MaxDefense = Global.StartingDefense - 10
+	MaxDefense = Global.StartingDefense
 	CurrentDefense = MaxDefense
 
 
 func set_stats(startingHealth : int, startingDefense : int) -> void:
 	CurrentHealth = startingHealth
-	set_max_health(CurrentHealth)
-	update_max_defense(startingDefense)
+	MaxHealth = startingHealth
+	Dispatch.UpdatePlayerHealth.emit(MaxHealth, CurrentHealth)
+	CurrentDefense = startingDefense
+	MaxDefense = startingDefense
+	Dispatch.UpdatePlayerDefense.emit(MaxDefense, CurrentDefense)
 
 #endregion
 
@@ -34,6 +37,11 @@ func set_stats(startingHealth : int, startingDefense : int) -> void:
 func restore_to_full_health() -> void:
 	CurrentHealth = MaxHealth
 	Dispatch.UpdatePlayerHealth.emit(MaxHealth, CurrentHealth)
+
+
+func restore_full_defense() -> void:
+	CurrentDefense = MaxDefense
+	Dispatch.UpdatePlayerDefense.emit(MaxDefense, CurrentDefense)
 
 
 func update_max_defense(maxDefense : int) -> void:
