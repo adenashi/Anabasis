@@ -248,6 +248,10 @@ signal PlayerAttackEffect(amount : int)
 ## [br] Subscribers: [FieldManager]
 signal EnemyAttackEffect(amount : int)
 
+## [br] Emitters: 
+## [br] Subscribers: 
+signal DoEnemySpecialAttack(attack : Dictionary)
+
 #endregion
 
 #endregion

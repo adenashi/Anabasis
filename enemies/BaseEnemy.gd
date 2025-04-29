@@ -113,27 +113,32 @@ func current_attack() -> int:
 
 func perform_action(doMove : bool = true) -> Action:
 	var chance : int = randi_range(0,100)
+	var message : String
 	var action : Action
 	if chance >= 90:
+		message = "Performing Special Attack"
+		action = Action.SPECIAL
 		if doMove:
 			do_special_move()
-			send_update("Performing Special Attack on Free Move.")
-		action = Action.SPECIAL
 	elif chance >= 60:
+		message = "Attacking"
+		action = Action.ATTACK
 		if doMove:
 			do_attack()
-			send_update("Attacking on Free Move.")
-		action = Action.ATTACK
 	else:
+		message = "Defending"
+		action = Action.DEFEND
 		if doMove:
 			do_defense()
-			send_update("Defending on Free Move.")
-		action = Action.DEFEND
+	if doMove:
+		message += " on Free Move."
+	else:
+		message += "."
+	send_update(message)
 	return action
 
 
 func do_attack() -> void:
-	send_update("Attacking.")
 	Dispatch.EnemyAttacks.emit()
 
 
@@ -165,12 +170,10 @@ func do_defense() -> void:
 		var possibles : Array[int] = [5,10,15]
 		defense = possibles.pick_random()
 	
-	send_update("Defending.")
 	Dispatch.EnemyDefends.emit(defense)
 
 
 func do_special_move() -> void:
-	send_update("Doing Special Move - " + Data.SpecialMove + ".")
 	SpecialMove.call()
 
 
@@ -218,83 +221,303 @@ func reset_hud() -> void:
 #region Special Moves
 
 func thunderclap() -> void:
+	var cards : Array[BaseCard]
+	
+	# Select affected cards here
+	
+	var attack : Dictionary = {
+		"Cards": cards,
+		"Effect": BaseCard.StatusEffect.ROLLING,
+		"moves": 0
+	}
+	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
+	Dispatch.DoEnemySpecialAttack.emit(attack)
 
 
 func barrage() -> void:
+	var cards : Array[BaseCard]
+	
+	# Select affected cards here
+	
+	var attack : Dictionary = {
+		"Cards": cards,
+		"Effect": BaseCard.StatusEffect.ROLLING,
+		"moves": 0
+	}
+	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
+	Dispatch.DoEnemySpecialAttack.emit(attack)
 
 
 func shackle() -> void:
+	var cards : Array[BaseCard]
+	
+	# Select affected cards here
+	
+	var attack : Dictionary = {
+		"Cards": cards,
+		"Effect": BaseCard.StatusEffect.ROLLING,
+		"moves": 0
+	}
+	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
+	Dispatch.DoEnemySpecialAttack.emit(attack)
 
 
 func betrayal() -> void:
+	var cards : Array[BaseCard]
+	
+	# Select affected cards here
+	
+	var attack : Dictionary = {
+		"Cards": cards,
+		"Effect": BaseCard.StatusEffect.ROLLING,
+		"moves": 0
+	}
+	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
+	Dispatch.DoEnemySpecialAttack.emit(attack)
 
 
 func transform() -> void:
+	var cards : Array[BaseCard]
+	
+	# Select affected cards here
+	
+	var attack : Dictionary = {
+		"Cards": cards,
+		"Effect": BaseCard.StatusEffect.ROLLING,
+		"moves": 0
+	}
+	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
+	Dispatch.DoEnemySpecialAttack.emit(attack)
 
 
 func scorch() -> void:
+	var cards : Array[BaseCard]
+	
+	# Select affected cards here
+	
+	var attack : Dictionary = {
+		"Cards": cards,
+		"Effect": BaseCard.StatusEffect.ROLLING,
+		"moves": 0
+	}
+	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
+	Dispatch.DoEnemySpecialAttack.emit(attack)
 
 
 func eclipse() -> void:
+	var cards : Array[BaseCard]
+	
+	# Select affected cards here
+	
+	var attack : Dictionary = {
+		"Cards": cards,
+		"Effect": BaseCard.StatusEffect.ROLLING,
+		"moves": 0
+	}
+	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
+	Dispatch.DoEnemySpecialAttack.emit(attack)
 
 
 func whirlwind() -> void:
+	var cards : Array[BaseCard]
+	
+	# Select affected cards here
+	
+	var attack : Dictionary = {
+		"Cards": cards,
+		"Effect": BaseCard.StatusEffect.ROLLING,
+		"moves": 0
+	}
+	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
+	Dispatch.DoEnemySpecialAttack.emit(attack)
 
 
 func slice() -> void:
+	var cards : Array[BaseCard]
+	
+	# Select affected cards here
+	
+	var attack : Dictionary = {
+		"Cards": cards,
+		"Effect": BaseCard.StatusEffect.ROLLING,
+		"moves": 0
+	}
+	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
+	Dispatch.DoEnemySpecialAttack.emit(attack)
 
 
 func seism() -> void:
+	var cards : Array[BaseCard]
+	
+	# Select affected cards here
+	
+	var attack : Dictionary = {
+		"Cards": cards,
+		"Effect": BaseCard.StatusEffect.ROLLING,
+		"moves": 0
+	}
+	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
+	Dispatch.DoEnemySpecialAttack.emit(attack)
 
 
 func dispel() -> void:
+	var cards : Array[BaseCard]
+	
+	# Select affected cards here
+	
+	var attack : Dictionary = {
+		"Cards": cards,
+		"Effect": BaseCard.StatusEffect.ROLLING,
+		"moves": 0
+	}
+	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
+	Dispatch.DoEnemySpecialAttack.emit(attack)
 
 
 func fury() -> void:
+	var cards : Array[BaseCard]
+	
+	# Select affected cards here
+	
+	var attack : Dictionary = {
+		"Cards": cards,
+		"Effect": BaseCard.StatusEffect.ROLLING,
+		"moves": 0
+	}
+	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
+	Dispatch.DoEnemySpecialAttack.emit(attack)
 
 
 func burst() -> void:
+	var cards : Array[BaseCard]
+	
+	# Select affected cards here
+	
+	var attack : Dictionary = {
+		"Cards": cards,
+		"Effect": BaseCard.StatusEffect.ROLLING,
+		"moves": 0
+	}
+	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
+	Dispatch.DoEnemySpecialAttack.emit(attack)
 
 
 func sunder() -> void:
+	var cards : Array[BaseCard]
+	
+	# Select affected cards here
+	
+	var attack : Dictionary = {
+		"Cards": cards,
+		"Effect": BaseCard.StatusEffect.ROLLING,
+		"moves": 0
+	}
+	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
+	Dispatch.DoEnemySpecialAttack.emit(attack)
 
 
 func salvo() -> void:
+	var cards : Array[BaseCard]
+	
+	# Select affected cards here
+	
+	var attack : Dictionary = {
+		"Cards": cards,
+		"Effect": BaseCard.StatusEffect.ROLLING,
+		"moves": 0
+	}
+	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
+	Dispatch.DoEnemySpecialAttack.emit(attack)
 
 
 func bane() -> void:
+	var cards : Array[BaseCard]
+	
+	# Select affected cards here
+	
+	var attack : Dictionary = {
+		"Cards": cards,
+		"Effect": BaseCard.StatusEffect.ROLLING,
+		"moves": 0
+	}
+	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
+	Dispatch.DoEnemySpecialAttack.emit(attack)
 
 
 func blight() -> void:
+	var cards : Array[BaseCard]
+	
+	# Select affected cards here
+	
+	var attack : Dictionary = {
+		"Cards": cards,
+		"Effect": BaseCard.StatusEffect.ROLLING,
+		"moves": 0
+	}
+	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
+	Dispatch.DoEnemySpecialAttack.emit(attack)
 
 
 func blizzard() -> void:
+	var cards : Array[BaseCard]
+	
+	# Select affected cards here
+	
+	var attack : Dictionary = {
+		"Cards": cards,
+		"Effect": BaseCard.StatusEffect.ROLLING,
+		"moves": 0
+	}
+	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
+	Dispatch.DoEnemySpecialAttack.emit(attack)
 
 
 func purge() -> void:
+	var cards : Array[BaseCard]
+	
+	# Select affected cards here
+	
+	var attack : Dictionary = {
+		"Cards": cards,
+		"Effect": BaseCard.StatusEffect.ROLLING,
+		"moves": 0
+	}
+	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
+	Dispatch.DoEnemySpecialAttack.emit(attack)
 
 
 func bolt() -> void:
+	var cards : Array[BaseCard]
+	
+	# Select affected cards here
+	
+	var attack : Dictionary = {
+		"Cards": cards,
+		"Effect": BaseCard.StatusEffect.ROLLING,
+		"moves": 0
+	}
+	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
+	Dispatch.DoEnemySpecialAttack.emit(attack)
 
 #endregion
 

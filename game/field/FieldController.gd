@@ -27,6 +27,7 @@ func _ready() -> void:
 	Dispatch.EnemyDefends.connect(show_enemy_defense)
 	Dispatch.PlayerAttackEffect.connect(set_player_attack_debuff)
 	Dispatch.EnemyAttackEffect.connect(set_enemy_attack_debuff)
+	Dispatch.DoEnemySpecialAttack.connect(show_enemy_special_move)
 
 
 func set_starting_positions() -> void:
@@ -150,7 +151,10 @@ func show_enemy_defense(amount : int) -> void:
 		circle.queue_free()
 
 
-func show_enemy_special_move(cards : Array[BaseCard], effect: BaseCard.StatusEffect, moves : int = 0) -> void:
+func show_enemy_special_move(attack : Dictionary) -> void:
+	var cards : Array[BaseCard] = attack.Cards
+	var effect : BaseCard.StatusEffect = attack.Effect
+	var moves : int = attack.Moves
 	for card:BaseCard in cards:
 		var spawn : Vector2 = card.global_position
 		spawn.x += card.CardImage.size.x / 2
