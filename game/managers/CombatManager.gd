@@ -236,7 +236,8 @@ func perform_enemy_turn() -> void:
 			var poss : Array[int] = [5,10,15]
 			await Field.show_enemy_defense(poss.pick_random())
 		BaseEnemy.Action.SPECIAL:
-			await get_tree().create_timer(1.0).timeout
+			CurrentEnemy.do_special_move()
+			await get_tree().create_timer(2.0).timeout
 	
 	await one_frame()
 	if Player.CurrentHealth < 0:

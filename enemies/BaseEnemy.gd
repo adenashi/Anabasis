@@ -115,12 +115,12 @@ func perform_action(doMove : bool = true) -> Action:
 	var chance : int = randi_range(0,100)
 	var message : String
 	var action : Action
-	if chance >= 90:
+	if chance >= 70:
 		message = "Performing Special Attack"
 		action = Action.SPECIAL
 		if doMove:
 			do_special_move()
-	elif chance >= 60:
+	elif chance >= 30:
 		message = "Attacking"
 		action = Action.ATTACK
 		if doMove:
@@ -174,6 +174,7 @@ func do_defense() -> void:
 
 
 func do_special_move() -> void:
+	Deck.CurrentHand.sort_custom(Util.sort_by_suit)
 	SpecialMove.call()
 
 
@@ -221,9 +222,7 @@ func reset_hud() -> void:
 #region Special Moves
 
 func thunderclap() -> void:
-	var cards : Array[BaseCard]
-	
-	# Select affected cards here
+	var cards : Array[BaseCard] = select_random_card(BaseCard.CardSuit.SPADES)
 	
 	var attack : Dictionary = {
 		"Cards": cards,
@@ -236,14 +235,12 @@ func thunderclap() -> void:
 
 
 func barrage() -> void:
-	var cards : Array[BaseCard]
-	
-	# Select affected cards here
+	var cards : Array[BaseCard] = select_random_card(BaseCard.CardSuit.HEARTS, 3)
 	
 	var attack : Dictionary = {
 		"Cards": cards,
-		"Effect": BaseCard.StatusEffect.ROLLING,
-		"moves": 0
+		"Effect": BaseCard.StatusEffect.LOCKED,
+		"moves": 1
 	}
 	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
@@ -251,14 +248,12 @@ func barrage() -> void:
 
 
 func shackle() -> void:
-	var cards : Array[BaseCard]
-	
-	# Select affected cards here
+	var cards : Array[BaseCard] = select_highest(BaseCard.CardSuit.HEARTS)
 	
 	var attack : Dictionary = {
 		"Cards": cards,
-		"Effect": BaseCard.StatusEffect.ROLLING,
-		"moves": 0
+		"Effect": BaseCard.StatusEffect.LOCKED,
+		"moves": 3
 	}
 	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
@@ -266,9 +261,7 @@ func shackle() -> void:
 
 
 func betrayal() -> void:
-	var cards : Array[BaseCard]
-	
-	# Select affected cards here
+	var cards : Array[BaseCard] = select_random(1)
 	
 	var attack : Dictionary = {
 		"Cards": cards,
@@ -281,9 +274,7 @@ func betrayal() -> void:
 
 
 func transform() -> void:
-	var cards : Array[BaseCard]
-	
-	# Select affected cards here
+	var cards : Array[BaseCard] = select_highest(BaseCard.CardSuit.CLUBS)
 	
 	var attack : Dictionary = {
 		"Cards": cards,
@@ -296,14 +287,12 @@ func transform() -> void:
 
 
 func scorch() -> void:
-	var cards : Array[BaseCard]
-	
-	# Select affected cards here
+	var cards : Array[BaseCard] = select_random_card(BaseCard.CardSuit.CLUBS, 2)
 	
 	var attack : Dictionary = {
 		"Cards": cards,
-		"Effect": BaseCard.StatusEffect.ROLLING,
-		"moves": 0
+		"Effect": BaseCard.StatusEffect.LOCKED,
+		"moves": 1
 	}
 	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
@@ -311,9 +300,7 @@ func scorch() -> void:
 
 
 func eclipse() -> void:
-	var cards : Array[BaseCard]
-	
-	# Select affected cards here
+	var cards : Array[BaseCard] = select_lowest(BaseCard.CardSuit.DIAMONDS)
 	
 	var attack : Dictionary = {
 		"Cards": cards,
@@ -326,9 +313,7 @@ func eclipse() -> void:
 
 
 func whirlwind() -> void:
-	var cards : Array[BaseCard]
-	
-	# Select affected cards here
+	var cards : Array[BaseCard] = select_random_card(BaseCard.CardSuit.DIAMONDS, 4)
 	
 	var attack : Dictionary = {
 		"Cards": cards,
@@ -341,14 +326,12 @@ func whirlwind() -> void:
 
 
 func slice() -> void:
-	var cards : Array[BaseCard]
-	
-	# Select affected cards here
+	var cards : Array[BaseCard] = select_highest(BaseCard.CardSuit.SPADES)
 	
 	var attack : Dictionary = {
 		"Cards": cards,
-		"Effect": BaseCard.StatusEffect.ROLLING,
-		"moves": 0
+		"Effect": BaseCard.StatusEffect.LOCKED,
+		"moves": 3
 	}
 	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
@@ -356,9 +339,7 @@ func slice() -> void:
 
 
 func seism() -> void:
-	var cards : Array[BaseCard]
-	
-	# Select affected cards here
+	var cards : Array[BaseCard] = select_random(0, 3)
 	
 	var attack : Dictionary = {
 		"Cards": cards,
@@ -371,9 +352,7 @@ func seism() -> void:
 
 
 func dispel() -> void:
-	var cards : Array[BaseCard]
-	
-	# Select affected cards here
+	var cards : Array[BaseCard] = select_lowest(BaseCard.CardSuit.HEARTS, 2)
 	
 	var attack : Dictionary = {
 		"Cards": cards,
@@ -386,14 +365,12 @@ func dispel() -> void:
 
 
 func fury() -> void:
-	var cards : Array[BaseCard]
-	
-	# Select affected cards here
+	var cards : Array[BaseCard] = select_random_card(BaseCard.CardSuit.CLUBS, -1)
 	
 	var attack : Dictionary = {
 		"Cards": cards,
-		"Effect": BaseCard.StatusEffect.ROLLING,
-		"moves": 0
+		"Effect": BaseCard.StatusEffect.LOCKED,
+		"moves": 3
 	}
 	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
@@ -401,9 +378,7 @@ func fury() -> void:
 
 
 func burst() -> void:
-	var cards : Array[BaseCard]
-	
-	# Select affected cards here
+	var cards : Array[BaseCard] = select_highest(BaseCard.CardSuit.DIAMONDS, 3)
 	
 	var attack : Dictionary = {
 		"Cards": cards,
@@ -416,14 +391,12 @@ func burst() -> void:
 
 
 func sunder() -> void:
-	var cards : Array[BaseCard]
-	
-	# Select affected cards here
+	var cards : Array[BaseCard] = select_random(-1, 3)
 	
 	var attack : Dictionary = {
 		"Cards": cards,
-		"Effect": BaseCard.StatusEffect.ROLLING,
-		"moves": 0
+		"Effect": BaseCard.StatusEffect.LOCKED,
+		"moves": 3
 	}
 	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
@@ -431,9 +404,7 @@ func sunder() -> void:
 
 
 func salvo() -> void:
-	var cards : Array[BaseCard]
-	
-	# Select affected cards here
+	var cards : Array[BaseCard] = select_random(-1, 3)
 	
 	var attack : Dictionary = {
 		"Cards": cards,
@@ -446,9 +417,7 @@ func salvo() -> void:
 
 
 func bane() -> void:
-	var cards : Array[BaseCard]
-	
-	# Select affected cards here
+	var cards : Array[BaseCard] = select_random_card(BaseCard.CardSuit.HEARTS, -1)
 	
 	var attack : Dictionary = {
 		"Cards": cards,
@@ -461,9 +430,7 @@ func bane() -> void:
 
 
 func blight() -> void:
-	var cards : Array[BaseCard]
-	
-	# Select affected cards here
+	var cards : Array[BaseCard] = select_random_card(BaseCard.CardSuit.CLUBS, -1)
 	
 	var attack : Dictionary = {
 		"Cards": cards,
@@ -476,14 +443,12 @@ func blight() -> void:
 
 
 func blizzard() -> void:
-	var cards : Array[BaseCard]
-	
-	# Select affected cards here
+	var cards : Array[BaseCard] = select_random_card(BaseCard.CardSuit.DIAMONDS, -1)
 	
 	var attack : Dictionary = {
 		"Cards": cards,
-		"Effect": BaseCard.StatusEffect.ROLLING,
-		"moves": 0
+		"Effect": BaseCard.StatusEffect.LOCKED,
+		"moves": 2
 	}
 	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
@@ -491,9 +456,7 @@ func blizzard() -> void:
 
 
 func purge() -> void:
-	var cards : Array[BaseCard]
-	
-	# Select affected cards here
+	var cards : Array[BaseCard] = Deck.CurrentHand
 	
 	var attack : Dictionary = {
 		"Cards": cards,
@@ -506,9 +469,7 @@ func purge() -> void:
 
 
 func bolt() -> void:
-	var cards : Array[BaseCard]
-	
-	# Select affected cards here
+	var cards : Array[BaseCard] = select_random_card(BaseCard.CardSuit.SPADES, -1)
 	
 	var attack : Dictionary = {
 		"Cards": cards,
@@ -518,6 +479,86 @@ func bolt() -> void:
 	
 	send_update(Name + " performing " + Data.SpecialMove + ".")
 	Dispatch.DoEnemySpecialAttack.emit(attack)
+
+
+func select_random_card(suit : BaseCard.CardSuit, quantity : int = 1) -> Array[BaseCard]:
+	var cards : Array[BaseCard] = []
+	
+	var c : Array[BaseCard] = []
+	for card:BaseCard in Deck.CurrentHand:
+		if card.Suit == suit:
+			c.append(card)
+	
+	if quantity == -1:
+		return c
+	
+	for i in range(quantity):
+		var x : BaseCard = c.pick_random()
+		cards.append(x)
+		c.erase(x)
+		if c.is_empty():
+			break
+	
+	return cards
+
+func select_highest(suit : BaseCard.CardSuit, quantity : int = 1) -> Array[BaseCard]:
+	var cards : Array[BaseCard] = []
+	
+	var c : Array[BaseCard] = []
+	for card:BaseCard in Deck.CurrentHand:
+		if card.Suit == suit:
+			c.append(card)
+	
+	for i in range(quantity):
+		var x : BaseCard = c.back()
+		cards.append(x)
+		c.erase(x)
+		if c.is_empty():
+			break
+	
+	return cards
+
+
+func select_lowest(suit : BaseCard.CardSuit, quantity : int = 1) -> Array[BaseCard]:
+	var cards : Array[BaseCard] = []
+	
+	var c : Array[BaseCard] = []
+	Deck.CurrentHand.sort_custom(Util.sort_by_rank)
+	for card:BaseCard in Deck.CurrentHand:
+		if card.Suit == suit:
+			c.append(card)
+	
+	for i in range(quantity):
+		var x : BaseCard = c.front()
+		cards.append(x)
+		c.erase(x)
+		if c.is_empty():
+			break
+	
+	return cards
+
+
+func select_random(pos : int, quantity : int = 1) -> Array[BaseCard]:
+	var cards : Array[BaseCard] = []
+	
+	var c : Array[BaseCard] = Deck.CurrentHand.duplicate()
+	c.sort_custom(Util.sort_by_rank)
+	
+	for i in range(quantity):
+		var x : BaseCard
+		match pos:
+			-1:
+				x = c.front()
+			0:
+				x = c.pick_random()
+			1:
+				x = c.back()
+		cards.append(x)
+		c.erase(x)
+		if c.is_empty():
+			break
+	
+	return cards
 
 #endregion
 

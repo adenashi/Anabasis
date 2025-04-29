@@ -154,10 +154,10 @@ func show_enemy_defense(amount : int) -> void:
 func show_enemy_special_move(attack : Dictionary) -> void:
 	var cards : Array[BaseCard] = attack.Cards
 	var effect : BaseCard.StatusEffect = attack.Effect
-	var moves : int = attack.Moves
+	var moves : int = attack.moves
 	for card:BaseCard in cards:
 		var spawn : Vector2 = card.global_position
-		spawn.x += card.CardImage.size.x / 2
+		spawn.x += card.get_child(0).size.x / 2
 		var star : CPUParticles2D = VFX.Impacts.Star.instantiate()
 		add_child(star)
 		star.global_position = spawn
@@ -166,6 +166,7 @@ func show_enemy_special_move(attack : Dictionary) -> void:
 		await star.finished
 		card.apply_status_effect(effect, moves)
 		await get_tree().create_timer(0.2).timeout
+		star.queue_free()
 
 
 func reset_points() -> void:
