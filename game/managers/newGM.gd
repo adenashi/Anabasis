@@ -179,6 +179,7 @@ func update_current_stage() -> void:
 	reset_game_stats()
 	CurrentStage += 1
 	Dispatch.UpdateLevel.emit(CurrentStage)
+	Global.NextStage += 1
 
 
 func on_game_timer_timeout() -> void:

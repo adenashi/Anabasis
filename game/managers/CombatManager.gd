@@ -81,6 +81,7 @@ func spawn_new_enemy() -> void:
 	data.MaxDefense = entry.MaxDefense
 	data.MaxHealth = entry.MaxHealth
 	data.SpecialMove = entry.SpecialMove
+	data.SpecialMoveDesc = entry.SpecialMoveDesc
 	data.PointValue = entry.PointValue
 	data.Stage = entry.Stage
 	data.Portrait = entry.Portrait

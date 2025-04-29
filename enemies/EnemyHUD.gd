@@ -26,6 +26,8 @@ func on_new_enemy(enemy : EnemyData) -> void:
 	Attack.text = str(0)
 	update_health(enemy.MaxHealth, enemy.MaxHealth)
 	update_defense(enemy.MaxDefense, enemy.MaxDefense)
+	var tooltip : String = "[p align=center][b]" + enemy.SpecialMove + "[/b][/p]" + enemy.SpecialMoveDesc
+	CardImage.tooltip_text = tooltip
 
 #endregion
 

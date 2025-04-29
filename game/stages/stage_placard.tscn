@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://cdta86b2s4dni" path="res://assets/themes/global_theme.tres" id="1_bpiyq"]
 [ext_resource type="Script" uid="uid://b0hdhqnjxlgw2" path="res://game/stages/StagePlacard.gd" id="2_dkj1f"]
 
-[node name="StagePlacard" type="Control" node_paths=PackedStringArray("StartPanel", "StartHeading", "EnemyName", "EnemyAttack", "EnemyDefense", "EnemyHealth", "ResultsPanel", "ResultsHeading", "ResultsStageName", "ResultsEnemyName", "ResultsTimeLabel", "ResultsReshufflesLabel", "ResultsScoreLabel", "StageStartButton", "StageRetryButton", "StageNextButton", "StageMainMenuButton")]
+[node name="StagePlacard" type="Control" node_paths=PackedStringArray("StartPanel", "StartStageName", "StartHeading", "EnemyName", "EnemySpecialMoveName", "EnemySpecialMoveDesc", "EnemyAttack", "EnemyDefense", "EnemyHealth", "ResultsPanel", "ResultsHeading", "ResultsStageName", "ResultsEnemyName", "ResultsTimeLabel", "ResultsReshufflesLabel", "ResultsScoreLabel", "StageStartButton", "StageRetryButton", "StageNextButton", "StageMainMenuButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,11 +13,14 @@ grow_vertical = 2
 theme = ExtResource("1_bpiyq")
 script = ExtResource("2_dkj1f")
 StartPanel = NodePath("StartPanel")
-StartHeading = NodePath("StartPanel/VBoxContainer/StartHeading")
-EnemyName = NodePath("StartPanel/VBoxContainer/VBoxContainer2/HBoxContainer/EnemyName")
-EnemyAttack = NodePath("StartPanel/VBoxContainer/VBoxContainer2/HBoxContainer2/EnemyAttack")
-EnemyDefense = NodePath("StartPanel/VBoxContainer/VBoxContainer2/HBoxContainer3/EnemyArmor")
-EnemyHealth = NodePath("StartPanel/VBoxContainer/VBoxContainer2/HBoxContainer4/EnemyHealth")
+StartStageName = NodePath("StartPanel/VBoxContainer/HBoxContainer/StageLabel")
+StartHeading = NodePath("StartPanel/VBoxContainer/HBoxContainer/StartHeading")
+EnemyName = NodePath("StartPanel/VBoxContainer/VBoxContainer2/VBoxContainer/Enemy/EnemyName")
+EnemySpecialMoveName = NodePath("StartPanel/VBoxContainer/VBoxContainer2/VBoxContainer/VBoxContainer/SpecialMoveName")
+EnemySpecialMoveDesc = NodePath("StartPanel/VBoxContainer/VBoxContainer2/VBoxContainer/VBoxContainer/SpecialMoveDescription")
+EnemyAttack = NodePath("StartPanel/VBoxContainer/VBoxContainer2/Attack/EnemyAttack")
+EnemyDefense = NodePath("StartPanel/VBoxContainer/VBoxContainer2/Armor/EnemyArmor")
+EnemyHealth = NodePath("StartPanel/VBoxContainer/VBoxContainer2/Health/EnemyHealth")
 ResultsPanel = NodePath("ResultsPanel")
 ResultsHeading = NodePath("ResultsPanel/VBoxContainer/ResultsHeading")
 ResultsStageName = NodePath("ResultsPanel/VBoxContainer/VBoxContainer/Stage/StageName")
@@ -37,10 +40,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -395.0
-offset_top = -216.0
-offset_right = 395.0
-offset_bottom = 216.0
+offset_left = -272.0
+offset_top = -265.0
+offset_right = 272.0
+offset_bottom = 274.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -48,10 +51,23 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="StartHeading" type="Label" parent="StartPanel/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="StartPanel/VBoxContainer"]
 layout_mode = 2
+
+[node name="StageLabel" type="Label" parent="StartPanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_type_variation = &"HeadingLabel"
-horizontal_alignment = 1
+horizontal_alignment = 2
+
+[node name="VSeparator" type="VSeparator" parent="StartPanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="StartHeading" type="Label" parent="StartPanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"HeadingLabel"
 uppercase = true
 
 [node name="HSeparator2" type="HSeparator" parent="StartPanel/VBoxContainer"]
@@ -59,63 +75,88 @@ layout_mode = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="StartPanel/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 24
+theme_override_constants/separation = 12
 
-[node name="HBoxContainer" type="HBoxContainer" parent="StartPanel/VBoxContainer/VBoxContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="StartPanel/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="StartPanel/VBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="Enemy" type="HBoxContainer" parent="StartPanel/VBoxContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="StartPanel/VBoxContainer/VBoxContainer2/VBoxContainer/Enemy"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Denizen"
 uppercase = true
 
-[node name="EnemyName" type="Label" parent="StartPanel/VBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="EnemyName" type="Label" parent="StartPanel/VBoxContainer/VBoxContainer2/VBoxContainer/Enemy"]
 layout_mode = 2
 size_flags_horizontal = 3
 horizontal_alignment = 2
 uppercase = true
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="StartPanel/VBoxContainer/VBoxContainer2"]
+[node name="HSeparator" type="HSeparator" parent="StartPanel/VBoxContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StartPanel/VBoxContainer/VBoxContainer2/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="StartPanel/VBoxContainer/VBoxContainer2/HBoxContainer2"]
+[node name="SpecialMoveName" type="Label" parent="StartPanel/VBoxContainer/VBoxContainer2/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="SpecialMoveDescription" type="RichTextLabel" parent="StartPanel/VBoxContainer/VBoxContainer2/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator2" type="HSeparator" parent="StartPanel/VBoxContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Attack" type="HBoxContainer" parent="StartPanel/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="StartPanel/VBoxContainer/VBoxContainer2/Attack"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Attack"
 uppercase = true
 
-[node name="EnemyAttack" type="Label" parent="StartPanel/VBoxContainer/VBoxContainer2/HBoxContainer2"]
+[node name="EnemyAttack" type="Label" parent="StartPanel/VBoxContainer/VBoxContainer2/Attack"]
 layout_mode = 2
 size_flags_horizontal = 3
 horizontal_alignment = 2
 uppercase = true
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="StartPanel/VBoxContainer/VBoxContainer2"]
+[node name="Armor" type="HBoxContainer" parent="StartPanel/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="StartPanel/VBoxContainer/VBoxContainer2/HBoxContainer3"]
+[node name="Label" type="Label" parent="StartPanel/VBoxContainer/VBoxContainer2/Armor"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Armor"
 uppercase = true
 
-[node name="EnemyArmor" type="Label" parent="StartPanel/VBoxContainer/VBoxContainer2/HBoxContainer3"]
+[node name="EnemyArmor" type="Label" parent="StartPanel/VBoxContainer/VBoxContainer2/Armor"]
 layout_mode = 2
 size_flags_horizontal = 3
 horizontal_alignment = 2
 uppercase = true
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="StartPanel/VBoxContainer/VBoxContainer2"]
+[node name="Health" type="HBoxContainer" parent="StartPanel/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="StartPanel/VBoxContainer/VBoxContainer2/HBoxContainer4"]
+[node name="Label" type="Label" parent="StartPanel/VBoxContainer/VBoxContainer2/Health"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Health"
 uppercase = true
 
-[node name="EnemyHealth" type="Label" parent="StartPanel/VBoxContainer/VBoxContainer2/HBoxContainer4"]
+[node name="EnemyHealth" type="Label" parent="StartPanel/VBoxContainer/VBoxContainer2/Health"]
 layout_mode = 2
 size_flags_horizontal = 3
 horizontal_alignment = 2
@@ -129,6 +170,10 @@ theme_override_constants/separation = 24
 layout_mode = 2
 alignment = 1
 
+[node name="Control" type="Control" parent="StartPanel/VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+
 [node name="StartStageButton" type="Button" parent="StartPanel/VBoxContainer/Buttons"]
 layout_mode = 2
 text = "START"
@@ -141,10 +186,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -395.0
-offset_top = -214.5
-offset_right = 395.0
-offset_bottom = 214.5
+offset_left = -273.0
+offset_top = -265.0
+offset_right = 275.0
+offset_bottom = 182.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -171,13 +216,16 @@ layout_mode = 2
 [node name="StageName" type="Label" parent="ResultsPanel/VBoxContainer/VBoxContainer/Stage"]
 layout_mode = 2
 size_flags_horizontal = 3
-horizontal_alignment = 1
+horizontal_alignment = 2
 uppercase = true
+
+[node name="VSeparator" type="VSeparator" parent="ResultsPanel/VBoxContainer/VBoxContainer/Stage"]
+layout_mode = 2
+theme_override_constants/separation = 24
 
 [node name="StageEnemy" type="Label" parent="ResultsPanel/VBoxContainer/VBoxContainer/Stage"]
 layout_mode = 2
 size_flags_horizontal = 3
-horizontal_alignment = 1
 uppercase = true
 
 [node name="HSeparator2" type="HSeparator" parent="ResultsPanel/VBoxContainer/VBoxContainer"]
@@ -254,6 +302,10 @@ text = "RETRY"
 [node name="NextStageButton" type="Button" parent="ResultsPanel/VBoxContainer/Buttons"]
 layout_mode = 2
 text = "FORWARD"
+
+[node name="Control" type="Control" parent="ResultsPanel/VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
 
 [connection signal="pressed" from="StartPanel/VBoxContainer/Buttons/StartStageButton" to="." method="on_continue_button_pressed"]
 [connection signal="pressed" from="ResultsPanel/VBoxContainer/Buttons/MainMenuButton" to="." method="on_main_menu_button_pressed"]

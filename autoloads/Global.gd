@@ -16,6 +16,7 @@ enum GameState {
 #region Public Variables
 
 var CurrentState : GameState
+var NextStage : int = 1
 var StartingHealth : int = 100
 var StartingDefense : int = 40
 var StagesToClear : int = 1

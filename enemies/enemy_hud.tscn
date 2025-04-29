@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b0fvrt4jjt2xe"]
+[gd_scene load_steps=15 format=3 uid="uid://b0fvrt4jjt2xe"]
 
 [ext_resource type="Script" uid="uid://da284r44a7yqx" path="res://enemies/EnemyHUD.gd" id="1_pj5tm"]
 [ext_resource type="Texture2D" uid="uid://dn00wae1rpmih" path="res://cards/assets/card_blank.png" id="2_1cr2r"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bfsd0cekcrefe" path="res://assets/ui/shield.png" id="5_xoao5"]
 [ext_resource type="Texture2D" uid="uid://ih76gffcaf08" path="res://assets/ui/segment_empty_vertical.png" id="7_kuqdb"]
 [ext_resource type="Texture2D" uid="uid://dgpgst7wjcb1p" path="res://assets/ui/segment_full_vertical.png" id="8_krfnt"]
+[ext_resource type="Script" uid="uid://bhslf2bf1lm6s" path="res://enemies/CardImage.gd" id="9_krfnt"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e0rbg"]
 
@@ -147,6 +148,7 @@ grow_vertical = 2
 texture = ExtResource("3_py827")
 expand_mode = 5
 stretch_mode = 5
+script = ExtResource("9_krfnt")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2

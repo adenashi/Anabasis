@@ -3,7 +3,7 @@ class_name StagePlacard extends Control
 
 #region Constants
 
-const VISIBLE : float = 325.0
+const VISIBLE : float = 275.0
 const HIDDEN : float = 1100.0
 
 #endregion
@@ -20,9 +20,12 @@ signal GoToNextStage
 
 @export_group("Stage Start", "Start")
 @export var StartPanel : PanelContainer
+@export var StartStageName : Label
 @export var StartHeading : Label
 @export_subgroup("Enemy Labels", "Enemy")
 @export var EnemyName : Label
+@export var EnemySpecialMoveName : Label
+@export var EnemySpecialMoveDesc : RichTextLabel
 @export var EnemyAttack : Label
 @export var EnemyDefense : Label
 @export var EnemyHealth : Label
@@ -103,9 +106,12 @@ func prepare_start_placard() -> void:
 	ResultsPanel.hide()
 	StartPanel.show()
 	EnemyName.text = ""
+	EnemySpecialMoveName.text = ""
+	EnemySpecialMoveDesc.text = ""
 	EnemyAttack.text = "0"
 	EnemyDefense.text = "0"
 	EnemyHealth.text = "0"
+	StartStageName.text = "Stage " + str(Global.NextStage)
 	StartHeading.text = currentEnemy.Stage
 	StageMainMenuButton.hide()
 	StageStartButton.hide()
@@ -113,8 +119,11 @@ func prepare_start_placard() -> void:
 
 
 func show_stage_start() -> void:
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.3).timeout
 	await set_enemy_name(currentEnemy.Name)
+	EnemySpecialMoveName.text = currentEnemy.SpecialMove
+	EnemySpecialMoveDesc.text = currentEnemy.SpecialMoveDesc
+	await get_tree().create_timer(0.2).timeout
 	await set_enemy_attack(currentEnemy.Attacks[2])
 	await set_enemy_armor(currentEnemy.MaxDefense)
 	await set_enemy_health(currentEnemy.MaxHealth)
