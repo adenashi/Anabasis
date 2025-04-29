@@ -45,7 +45,7 @@ var AvailableEnemies : Array[int] = []
 #region Initialization
 
 func _ready() -> void:
-	Dispatch.EndPlayerTurn.connect(start_enemy_turn)
+	#Dispatch.EndPlayerTurn.connect(start_enemy_turn)
 	Dispatch.StartEnemyTurn.connect(start_enemy_turn)
 	Dispatch.SpawnNewEnemy.connect(spawn_new_enemy)
 	Dispatch.AddDefense.connect(add_to_defense)
@@ -133,13 +133,12 @@ func perform_attack(cards : Array[BaseCard]) -> void:
 	Dispatch.AddPoints.emit(points)
 	await Deck.discard_selected_cards(cards)
 	await one_frame()
-	if currentTurn == Turn.NONE:
-		
-		return
-	
 	send_update("Player turn completed.")
-	Dispatch.EndPlayerTurn.emit()
 	Dispatch.UpdatePlayerAttack.emit(0)
+	Dispatch.EndPlayerTurn.emit()
+	
+	if currentTurn != Turn.NONE:
+		start_enemy_turn()
 
 #endregion
 
@@ -163,13 +162,11 @@ func add_to_defense(cards : Array[BaseCard]) -> void:
 	Dispatch.AddPoints.emit(points)
 	await Deck.discard_selected_cards(cards)
 	await one_frame()
-	if currentTurn == Turn.NONE:
-		return
-	
-	await one_frame()
-	
 	send_update("Player turn completed.")
 	Dispatch.EndPlayerTurn.emit()
+	
+	if currentTurn != Turn.NONE:
+		start_enemy_turn()
 
 #endregion
 
@@ -199,13 +196,12 @@ func add_defense_and_perform_attack(cards : Array[BaseCard]) -> void:
 	Dispatch.AddPoints.emit(points)
 	await Deck.discard_selected_cards(cards)
 	await one_frame()
-	if currentTurn == Turn.NONE:
-		
-		return
-	
 	send_update("Player turn completed.")
-	Dispatch.EndPlayerTurn.emit()
 	Dispatch.UpdatePlayerAttack.emit(0)
+	Dispatch.EndPlayerTurn.emit()
+	
+	if currentTurn != Turn.NONE:
+		start_enemy_turn()
 
 #endregion
 
@@ -253,6 +249,7 @@ func perform_enemy_turn() -> void:
 #region Enemy Death
 
 func on_enemy_died(enemy : BaseEnemy) -> void:
+	Deck.CanDeal = false
 	send_update(enemy.Name + " has been defeated!")
 	change_turn(Turn.NONE)
 	await get_tree().create_timer(1.5).timeout

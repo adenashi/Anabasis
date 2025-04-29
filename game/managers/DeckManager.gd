@@ -27,6 +27,7 @@ var PlayerDeck : Array[BaseCard] = []
 var CurrentHand : Array[BaseCard] = []
 var Discard : Array[BaseCard] = []
 
+var CanDeal : bool = true
 #endregion
 
 #region Initialization
@@ -55,6 +56,10 @@ func create_deck() -> void:
 #region Dealing Cards
 
 func deal_card_to_hand(number_of_cards : int) -> void:
+	if !CanDeal:
+		send_update("Outside of Game - not dealing cards.")
+		return
+	
 	if Global.CurrentState != Global.GameState.STARTING and Global.CurrentState != Global.GameState.IN_GAME:
 		send_update("Outside of Game - not dealing cards.")
 		return
@@ -73,7 +78,7 @@ func deal_card_to_hand(number_of_cards : int) -> void:
 			Dispatch.UpdateDeckCount.emit(PlayerDeck.size())
 			await get_tree().create_timer(0.01).timeout
 	
-	send_update("{x} cards dealt.".format({"x": cardsDealt}))
+	send_update("{x} cards dealt. {y} cards remaining in deck.".format({"x": cardsDealt, "y": PlayerDeck.size()}))
 	CardsDealt.emit()
 
 #endregion
@@ -134,6 +139,11 @@ func discard_selected_cards(cards : Array[BaseCard]) -> void:
 #region Recycling Discard
 
 func recycle_discard() -> void:
+	for card:BaseCard in PlayerDeck:
+		Discard.append(card)
+	
+	PlayerDeck.clear()
+	
 	for card:BaseCard in Discard:
 		PlayerDeck.push_back(card)
 		card.show()

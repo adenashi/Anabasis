@@ -1,0 +1,259 @@
+[gd_scene load_steps=4 format=3 uid="uid://blnlpfm41x74o"]
+
+[ext_resource type="Script" uid="uid://dysi3gfsadawb" path="res://dev/debug.gd" id="1_mdk68"]
+[ext_resource type="Theme" uid="uid://cdta86b2s4dni" path="res://assets/themes/global_theme.tres" id="1_monv1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xuhr7"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.145098, 0.14902, 0.266667, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.545098, 1, 0.996078, 1)
+
+[node name="DebugPanel" type="CanvasLayer" node_paths=PackedStringArray("DebugPanel", "StagesToClear", "Enemy", "Victor")]
+layer = 128
+script = ExtResource("1_mdk68")
+DebugPanel = NodePath("DebugPanel")
+StagesToClear = NodePath("DebugPanel/PanelContainer/VBoxContainer/StartGameButtons/VBoxContainer/StagesToClear")
+Enemy = NodePath("DebugPanel/PanelContainer/VBoxContainer/EnemyButtons/VBoxContainer/Enemies")
+Victor = NodePath("DebugPanel/PanelContainer/VBoxContainer/EndGameButtons/VBoxContainer/Victor")
+
+[node name="DebugPanel" type="Control" parent="."]
+z_index = 4096
+z_as_relative = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="DebugPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -217.0
+offset_top = -468.5
+offset_right = -24.0
+offset_bottom = 468.5
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("1_monv1")
+theme_override_styles/panel = SubResource("StyleBoxFlat_xuhr7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DebugPanel/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="DebugPanel/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeadingLabel"
+text = "Debug"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="StartGameButtons" type="VBoxContainer" parent="DebugPanel/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="DebugPanel/PanelContainer/VBoxContainer/StartGameButtons"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="DebugPanel/PanelContainer/VBoxContainer/StartGameButtons/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="DebugPanel/PanelContainer/VBoxContainer/StartGameButtons/Header"]
+layout_mode = 2
+text = "Game"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="HSeparator2" type="HSeparator" parent="DebugPanel/PanelContainer/VBoxContainer/StartGameButtons/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DebugPanel/PanelContainer/VBoxContainer/StartGameButtons"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DebugPanel/PanelContainer/VBoxContainer/StartGameButtons/VBoxContainer"]
+layout_mode = 2
+text = "Stages To Clear"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="StagesToClear" type="SpinBox" parent="DebugPanel/PanelContainer/VBoxContainer/StartGameButtons/VBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+value = 1.0
+update_on_text_changed = true
+
+[node name="RestartGame" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/StartGameButtons/VBoxContainer"]
+layout_mode = 2
+text = "RESTART GAME"
+
+[node name="PlayerButtons" type="VBoxContainer" parent="DebugPanel/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="DebugPanel/PanelContainer/VBoxContainer/PlayerButtons"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="DebugPanel/PanelContainer/VBoxContainer/PlayerButtons/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="DebugPanel/PanelContainer/VBoxContainer/PlayerButtons/Header"]
+layout_mode = 2
+text = "Player"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="HSeparator2" type="HSeparator" parent="DebugPanel/PanelContainer/VBoxContainer/PlayerButtons/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LaunchPlayerAttackButton" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/PlayerButtons"]
+layout_mode = 2
+text = "ATTACK"
+
+[node name="LaunchPlayerDefenseButton" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/PlayerButtons"]
+layout_mode = 2
+text = "DEFEND"
+
+[node name="LaunchPlayerComboButton" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/PlayerButtons"]
+layout_mode = 2
+text = "COMBO"
+
+[node name="RestorePlayerHealthButton" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/PlayerButtons"]
+layout_mode = 2
+text = "RESTORE HEALTH"
+
+[node name="EnemyButtons" type="VBoxContainer" parent="DebugPanel/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="DebugPanel/PanelContainer/VBoxContainer/EnemyButtons"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="DebugPanel/PanelContainer/VBoxContainer/EnemyButtons/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="DebugPanel/PanelContainer/VBoxContainer/EnemyButtons/Header"]
+layout_mode = 2
+text = "Enemy"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="HSeparator2" type="HSeparator" parent="DebugPanel/PanelContainer/VBoxContainer/EnemyButtons/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DebugPanel/PanelContainer/VBoxContainer/EnemyButtons"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DebugPanel/PanelContainer/VBoxContainer/EnemyButtons/VBoxContainer"]
+layout_mode = 2
+text = "Enemy To Set"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Enemies" type="OptionButton" parent="DebugPanel/PanelContainer/VBoxContainer/EnemyButtons/VBoxContainer"]
+layout_mode = 2
+
+[node name="SetEnemyButton" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/EnemyButtons/VBoxContainer"]
+layout_mode = 2
+text = "SET ENEMY"
+
+[node name="LaunchEnemyAttackButton" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/EnemyButtons"]
+layout_mode = 2
+text = "ATTACK"
+
+[node name="LaunchEnemyDefenseButton" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/EnemyButtons"]
+layout_mode = 2
+text = "DEFEND"
+
+[node name="LaunchEnemySpecialButton" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/EnemyButtons"]
+layout_mode = 2
+text = "SPECIAL ATTACK"
+
+[node name="DefeatEnemyButton" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/EnemyButtons"]
+layout_mode = 2
+text = "DEFEAT"
+
+[node name="StageButtons" type="VBoxContainer" parent="DebugPanel/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="DebugPanel/PanelContainer/VBoxContainer/StageButtons"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="DebugPanel/PanelContainer/VBoxContainer/StageButtons/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="DebugPanel/PanelContainer/VBoxContainer/StageButtons/Header"]
+layout_mode = 2
+text = "Stage"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="HSeparator2" type="HSeparator" parent="DebugPanel/PanelContainer/VBoxContainer/StageButtons/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ListCardsInHandButton" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/StageButtons"]
+layout_mode = 2
+text = "LIST CARDS IN HAND"
+
+[node name="FindMissingCardsButton" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/StageButtons"]
+layout_mode = 2
+text = "FIND MISSING CARDS"
+
+[node name="EndGameButtons" type="VBoxContainer" parent="DebugPanel/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DebugPanel/PanelContainer/VBoxContainer/EndGameButtons"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DebugPanel/PanelContainer/VBoxContainer/EndGameButtons/VBoxContainer"]
+layout_mode = 2
+
+[node name="Victor" type="OptionButton" parent="DebugPanel/PanelContainer/VBoxContainer/EndGameButtons/VBoxContainer"]
+layout_mode = 2
+selected = 1
+item_count = 2
+popup/item_0/text = "Enemy"
+popup/item_0/id = 0
+popup/item_1/text = "Player"
+popup/item_1/id = 1
+
+[node name="EndStageButton" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/EndGameButtons/VBoxContainer"]
+layout_mode = 2
+text = "END STAGE"
+
+[node name="EndGameButton" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/EndGameButtons"]
+layout_mode = 2
+text = "END GAME"
+
+[connection signal="pressed" from="DebugPanel/PanelContainer/VBoxContainer/StartGameButtons/VBoxContainer/RestartGame" to="." method="on_restart_game_button_pressed"]
+[connection signal="pressed" from="DebugPanel/PanelContainer/VBoxContainer/PlayerButtons/LaunchPlayerAttackButton" to="." method="on_launch_player_attack_button_pressed"]
+[connection signal="pressed" from="DebugPanel/PanelContainer/VBoxContainer/PlayerButtons/LaunchPlayerDefenseButton" to="." method="on_launch_player_defense_button_pressed"]
+[connection signal="pressed" from="DebugPanel/PanelContainer/VBoxContainer/PlayerButtons/LaunchPlayerComboButton" to="." method="on_launch_player_combo_button_pressed"]
+[connection signal="pressed" from="DebugPanel/PanelContainer/VBoxContainer/PlayerButtons/RestorePlayerHealthButton" to="." method="on_restore_player_health_button_pressed"]
+[connection signal="pressed" from="DebugPanel/PanelContainer/VBoxContainer/EnemyButtons/VBoxContainer/SetEnemyButton" to="." method="on_set_enemy_button_pressed"]
+[connection signal="pressed" from="DebugPanel/PanelContainer/VBoxContainer/EnemyButtons/LaunchEnemyAttackButton" to="." method="on_launch_enemy_attack_button_pressed"]
+[connection signal="pressed" from="DebugPanel/PanelContainer/VBoxContainer/EnemyButtons/LaunchEnemyDefenseButton" to="." method="on_launch_enemy_defense_button_pressed"]
+[connection signal="pressed" from="DebugPanel/PanelContainer/VBoxContainer/EnemyButtons/LaunchEnemySpecialButton" to="." method="on_launch_enemy_special_attack_button_pressed"]
+[connection signal="pressed" from="DebugPanel/PanelContainer/VBoxContainer/EnemyButtons/DefeatEnemyButton" to="." method="on_defeat_enemy_button_pressed"]
+[connection signal="pressed" from="DebugPanel/PanelContainer/VBoxContainer/StageButtons/ListCardsInHandButton" to="." method="on_list_cards_in_hand_button_pressed"]
+[connection signal="pressed" from="DebugPanel/PanelContainer/VBoxContainer/StageButtons/FindMissingCardsButton" to="." method="on_find_missing_cards_button_pressed"]
+[connection signal="pressed" from="DebugPanel/PanelContainer/VBoxContainer/EndGameButtons/VBoxContainer/EndStageButton" to="." method="on_end_stage_button_pressed"]
+[connection signal="pressed" from="DebugPanel/PanelContainer/VBoxContainer/EndGameButtons/EndGameButton" to="." method="on_end_game_button_pressed"]

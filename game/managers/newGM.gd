@@ -1,4 +1,4 @@
-extends Node
+class_name AGM extends Node
 
 
 #region Enums
@@ -37,6 +37,7 @@ var GameScore : int = 0
 var waitingForTutorial : bool
 
 var currentMaxDefense : int
+var currentEnemyDefenseAward : int
 var discardsSinceLastPlay : int = 0
 var stageResult : StageResult
 
@@ -53,6 +54,9 @@ func _ready() -> void:
 	subscribe_to_stage_signals()
 	set_references()
 	start_new_game()
+	
+	if OS.has_feature("editor"):
+		Debug.GameManager = self
 
 
 func subscribe_to_dispatch_signals() -> void:
@@ -113,6 +117,7 @@ func start_new_game() -> void:
 func on_ready_to_start_stage() -> void:
 	initialize_player_stats()
 	show_hud()
+	Deck.CanDeal = true
 	await deal_hand()
 	start_player_turn()
 
@@ -136,8 +141,8 @@ func on_tutorial_first_step_completed() -> void:
 
 
 func start_new_stage() -> void:
-	update_player_stats()
 	update_current_stage()
+	update_player_stats()
 	send_update("Starting Stage " + str(CurrentStage))
 	change_global_state(Global.GameState.IN_GAME)
 	start_game_timer()
@@ -153,6 +158,7 @@ func restart_current_stage() -> void:
 	reset_current_enemy_stats()
 	reset_player_stats()
 	change_global_state(Global.GameState.IN_GAME)
+	Deck.CanDeal = true
 	await deal_hand()
 	start_game_timer()
 
@@ -239,8 +245,8 @@ func on_player_cleared_stage() -> void:
 	send_update("Stage " + str(CurrentStage) + " cleared.")
 	await one_frame()
 	
-	hide_hud()
-	reset_all_cards()
+	await reset_all_cards()
+	await hide_hud()
 	await one_frame()
 	
 	if CurrentStage < Global.StagesToClear:
@@ -256,8 +262,8 @@ func on_player_lost_stage() -> void:
 	send_update("Stage " + str(CurrentStage) + " failed.")
 	await one_frame()
 	
-	hide_hud()
-	reset_all_cards()
+	await reset_all_cards()
+	await hide_hud()
 	await one_frame()
 	
 	show_stage_results()
@@ -332,7 +338,9 @@ func show_stage_results() -> void:
 #region Current Enemy Commands
 
 func set_new_enemy_data(data : EnemyData) -> void:
+	send_update("Setting new enemy.")
 	CurrentEnemy.init_enemy(data)
+	CurrentEnemy.IsDead = false
 
 
 func reset_current_enemy_stats() -> void:
@@ -351,9 +359,11 @@ func initialize_player_stats() -> void:
 
 
 func update_player_stats() -> void:
-	currentMaxDefense += 10
+	send_update("Updating Player Defense")
+	currentMaxDefense += currentEnemyDefenseAward
 	Player.MaxDefense = currentMaxDefense
 	reset_player_stats()
+	currentEnemyDefenseAward = CurrentEnemy.Data.PointValue / 100
 
 
 func reset_player_stats() -> void:

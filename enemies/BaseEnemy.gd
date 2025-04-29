@@ -24,6 +24,8 @@ var CurrentDefense : int
 
 var SpecialMove : Callable
 
+var IsDead : bool
+
 #endregion
 
 #region References
@@ -170,8 +172,12 @@ func take_damage(damage : int) -> void:
 		CurrentHealth = max(0, CurrentHealth)
 		Dispatch.UpdateEnemyHealth.emit(MaxHealth, CurrentHealth)
 	
+	if IsDead:
+		return
+	
 	if CurrentHealth <= 0:
 		EnemyDied.emit(self)
+		IsDead = true
 
 
 func reset_stats() -> void:
@@ -179,6 +185,7 @@ func reset_stats() -> void:
 	MaxHealth = Data.MaxHealth
 	CurrentDefense = MaxDefense
 	CurrentHealth = MaxHealth
+	IsDead = false
 
 
 func reset_hud() -> void:
@@ -190,83 +197,83 @@ func reset_hud() -> void:
 #region Special Moves
 
 func thunderclap() -> void:
-	pass
+	send_update(Name + " performing " + Data.SpecialMove + ".")
 
 
 func barrage() -> void:
-	pass
+	send_update(Name + " performing " + Data.SpecialMove + ".")
 
 
 func shackle() -> void:
-	pass
+	send_update(Name + " performing " + Data.SpecialMove + ".")
 
 
 func betrayal() -> void:
-	pass
+	send_update(Name + " performing " + Data.SpecialMove + ".")
 
 
 func transform() -> void:
-	pass
+	send_update(Name + " performing " + Data.SpecialMove + ".")
 
 
 func scorch() -> void:
-	pass
+	send_update(Name + " performing " + Data.SpecialMove + ".")
 
 
 func eclipse() -> void:
-	pass
+	send_update(Name + " performing " + Data.SpecialMove + ".")
 
 
 func whirlwind() -> void:
-	pass
+	send_update(Name + " performing " + Data.SpecialMove + ".")
 
 
 func slice() -> void:
-	pass
+	send_update(Name + " performing " + Data.SpecialMove + ".")
 
 
 func seism() -> void:
-	pass
+	send_update(Name + " performing " + Data.SpecialMove + ".")
 
 
 func dispel() -> void:
-	pass
+	send_update(Name + " performing " + Data.SpecialMove + ".")
 
 
 func fury() -> void:
-	pass
+	send_update(Name + " performing " + Data.SpecialMove + ".")
 
 
 func burst() -> void:
-	pass
+	send_update(Name + " performing " + Data.SpecialMove + ".")
 
 
 func sunder() -> void:
-	pass
+	send_update(Name + " performing " + Data.SpecialMove + ".")
 
 
 func salvo() -> void:
-	pass
+	send_update(Name + " performing " + Data.SpecialMove + ".")
 
 
 func bane() -> void:
-	pass
+	send_update(Name + " performing " + Data.SpecialMove + ".")
 
 
 func blight() -> void:
-	pass
+	send_update(Name + " performing " + Data.SpecialMove + ".")
 
 
 func blizzard() -> void:
-	pass
+	send_update(Name + " performing " + Data.SpecialMove + ".")
 
 
 func purge() -> void:
-	pass
+	send_update(Name + " performing " + Data.SpecialMove + ".")
 
 
 func bolt() -> void:
-	pass
+	send_update(Name + " performing " + Data.SpecialMove + ".")
 
 #endregion
 
