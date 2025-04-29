@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3337govdjm1h"]
+
+[ext_resource type="Script" uid="uid://laaf2io2tuy0" path="res://autoloads/EffectsManager.gd" id="1_nigdu"]
+
+[node name="EffectsManager" type="Node"]
+script = ExtResource("1_nigdu")

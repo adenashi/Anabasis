@@ -26,6 +26,7 @@ buses/default_bus_layout="uid://b8gff2mpf8uta"
 Dispatch="*res://autoloads/Dispatch.gd"
 Global="*res://autoloads/Global.gd"
 AM="*res://autoloads/audio_manager.tscn"
+VFX="*res://autoloads/effects_manager.tscn"
 GUI="*res://autoloads/gui.tscn"
 Debug="*res://dev/debug_panel.tscn"
 

@@ -5,7 +5,8 @@ class_name PlayValidator extends Node
 enum ActionType {
 	NONE,
 	DEFENSE,
-	ATTACK
+	ATTACK,
+	COMBO
 }
 
 #endregion
@@ -89,7 +90,7 @@ func on_card_deselected(card : BaseCard) -> void:
 		elif valid_full_sequence():
 			var att : int = 0
 			for c in selectedCards:
-				c.show_action(ActionType.ATTACK)
+				c.show_action(ActionType.COMBO)
 				att += c.Value
 			Dispatch.UpdatePlayerAttack.emit(att)
 		elif valid_partial_sequence():

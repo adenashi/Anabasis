@@ -61,7 +61,7 @@ func show_player_attack(cards : Array[BaseCard]) -> void:
 
 func spawn_attack_effect(point : PathFollow2D) -> void:
 	var card : BaseCard = point.get_child(0)
-	var slash : CPUParticles2D = EFFECTS.Slash.instantiate()
+	var slash : CPUParticles2D = VFX.Attacks.Slash.instantiate()
 	add_child(slash)
 	slash.global_position = point.global_position
 	slash.emitting = true
@@ -80,11 +80,11 @@ func show_player_defense(cards : Array[BaseCard]) -> void:
 
 func spawn_defense_effect(amount : int, defense : int) -> void:
 	for i in range(amount):
-		var circle : CPUParticles2D = EFFECTS.Circle.instantiate()
+		var circle : CPUParticles2D = VFX.Defense.Circle.instantiate()
 		add_child(circle)
 		circle.position = AsiMarker.position
 		circle.emitting = true
-		AM.play_sfx("Game", "Defense")
+		AM.play_sfx("Game", "Defense",0)
 		await circle.finished
 		Player.add_defense(defense)
 		circle.queue_free()
@@ -101,9 +101,9 @@ func show_enemy_attack() -> void:
 	send_update(str(attack) + " Damage to Player")
 	Dispatch.UpdateEnemyAttack.emit(attack)
 	
-	var starStart : CPUParticles2D = EFFECTS.Star.instantiate()
-	var starEnd : CPUParticles2D = EFFECTS.Star.instantiate()
-	var beam : CPUParticles2D = EFFECTS.Beam.instantiate()
+	var starStart : CPUParticles2D = VFX.Impacts.Star.instantiate()
+	var starEnd : CPUParticles2D = VFX.Impacts.Star.instantiate()
+	var beam : CPUParticles2D = VFX.Attacks.Beam.instantiate()
 	add_child(starStart)
 	add_child(beam)
 	starStart.position = EnemyMarker.position
@@ -129,11 +129,11 @@ func show_enemy_attack() -> void:
 
 func show_enemy_defense(amount : int) -> void:
 	for i in range(3):
-		var circle : CPUParticles2D = EFFECTS.Circle.instantiate()
+		var circle : CPUParticles2D = VFX.Defense.Circle.instantiate()
 		add_child(circle)
 		circle.position = EnemyMarker.position
 		circle.emitting = true
-		AM.play_sfx("Game", "Defense")
+		AM.play_sfx("Game", "Defense",1)
 		await circle.finished
 		Enemy.CurrentDefense += amount
 		if Enemy.CurrentDefense > Enemy.MaxDefense:

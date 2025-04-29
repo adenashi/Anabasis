@@ -18,6 +18,19 @@ enum CardState {
 	DISCARDED
 }
 
+enum StatusEffect {
+	NONE,
+	ATTACK,
+	DEFENSE,
+	COMBO,
+	ACTIVE,
+	ROLLING,
+	BUFFING,
+	HEALING,
+	COOLDOWN,
+	LOCKED
+}
+
 #endregion
 
 #region Constants
@@ -29,6 +42,7 @@ const MOVE_SPEED : float = 0.05
 
 const ATTACK_COLOR : Color = Color(0.996, 0.388, 0.886)
 const DEFENSE_COLOR : Color = Color(0.545, 1.0, 0.996)
+const COMBO_COLOR : Color = Color(0.992, 0.635, 0.533)
 const NORMAL_COLOR : Color = Color(1.0, 1.0, 1.0)
 
 #endregion
@@ -41,6 +55,10 @@ const NORMAL_COLOR : Color = Color(1.0, 1.0, 1.0)
 @export var SuitIconUpright : TextureRect
 @export var RankLabelReversed : Label
 @export var SuitIconReversed : TextureRect
+@export_group("Status", "Status")
+@export var StatusIconLarge : TextureRect
+@export var StatusIconSmall : TextureRect
+@export var StatusLabel : Label
 
 #endregion
 
@@ -59,6 +77,9 @@ var PointValue : int
 
 var CurrentState : CardState
 var ShowingFace : bool
+var CurrentStatus : StatusEffect
+var MoveLimit : int
+var MoveCounter : int
 
 #endregion
 
@@ -75,6 +96,7 @@ var handRotation : float
 
 var hoverTween : Tween
 var moveTween : Tween
+var statusTween : Tween
 
 #endregion
 
@@ -243,12 +265,11 @@ func reset_hover_tween() -> void:
 
 func start_selected_effect() -> void:
 	position.y -= 50
-	rotation_degrees = 0
 
 
 func end_selected_effect() -> void:
 	position.y += 50
-	rotation_degrees = handRotation
+	show_action(PlayValidator.ActionType.NONE)
 
 #endregion
 
@@ -266,11 +287,130 @@ func show_action(action : PlayValidator.ActionType) -> void:
 			SuitIconUpright.modulate = ATTACK_COLOR
 			RankLabelReversed.modulate = ATTACK_COLOR
 			SuitIconReversed.modulate = ATTACK_COLOR
+		PlayValidator.ActionType.COMBO:
+			RankLabelUpright.modulate = COMBO_COLOR
+			SuitIconUpright.modulate = COMBO_COLOR
+			RankLabelReversed.modulate = COMBO_COLOR
+			SuitIconReversed.modulate = COMBO_COLOR
 		PlayValidator.ActionType.NONE:
 			RankLabelUpright.modulate = NORMAL_COLOR
 			SuitIconUpright.modulate = NORMAL_COLOR
 			RankLabelReversed.modulate = NORMAL_COLOR
 			SuitIconReversed.modulate = NORMAL_COLOR
+
+#endregion
+
+#region Status Effects
+
+func apply_status_effect(effect : StatusEffect) -> void:
+	match effect:
+		StatusEffect.NONE:
+			reset_status_effect()
+		StatusEffect.ATTACK:
+			show_attack_status_effect()
+		StatusEffect.DEFENSE:
+			show_defense_status_effect()
+		StatusEffect.COMBO:
+			show_combo_status_effect()
+		StatusEffect.ACTIVE:
+			apply_active_status_effect()
+		StatusEffect.ROLLING:
+			apply_rolling_status_effect()
+		StatusEffect.BUFFING:
+			apply_buffing_status_effect()
+		StatusEffect.HEALING:
+			initiate_healing_effect()
+		StatusEffect.COOLDOWN:
+			initiate_cooldown_effect()
+		StatusEffect.LOCKED:
+			initiate_locked_effect()
+
+
+func reset_status_effect() -> void:
+	StatusIconLarge.texture = null
+	StatusIconSmall.texture = null
+	StatusLabel.text = ""
+
+
+func show_attack_status_effect() -> void:
+	pass
+
+
+func show_defense_status_effect() -> void:
+	pass
+
+
+func show_combo_status_effect() -> void:
+	pass
+
+
+func apply_active_status_effect() -> void:
+	pass
+
+
+func apply_rolling_status_effect() -> void:
+	pass
+
+
+func apply_buffing_status_effect() -> void:
+	pass
+
+
+func initiate_healing_effect() -> void:
+	pass
+
+
+func initiate_cooldown_effect() -> void:
+	pass
+
+
+func initiate_locked_effect() -> void:
+	pass
+
+
+func start_move_counter(moves : int) -> void:
+	pass
+
+
+func increment_move_counter() -> void:
+	MoveCounter += 1
+	check_status_effect()
+
+
+func check_status_effect() -> void:
+	match CurrentStatus:
+		StatusEffect.HEALING:
+			if MoveLimit > 0 and MoveCounter >= MoveLimit:
+				reset_status_effect()
+			else:
+				increment_healing_status_effect()
+		StatusEffect.COOLDOWN:
+			if MoveLimit > 0 and MoveCounter >= MoveLimit:
+				reset_status_effect()
+			else:
+				increment_cooldown_status_effect()
+		StatusEffect.LOCKED:
+			if MoveLimit > 0 and MoveCounter >= MoveLimit:
+				end_locked_status_effect()
+
+
+func increment_healing_status_effect() -> void:
+	pass
+
+
+func increment_cooldown_status_effect() -> void:
+	pass
+
+
+func end_locked_status_effect() -> void:
+	pass
+
+
+func reset_status_tween() -> void:
+	if statusTween:
+		statusTween.kill()
+	
+	statusTween = create_tween().set_ease(Tween.EASE_IN_OUT)
 
 #endregion
 

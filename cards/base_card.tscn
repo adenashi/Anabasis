@@ -1,20 +1,24 @@
-[gd_scene load_steps=8 format=3 uid="uid://ddi8j3e2qifws"]
+[gd_scene load_steps=9 format=3 uid="uid://ddi8j3e2qifws"]
 
 [ext_resource type="Script" uid="uid://bafk1i78217fx" path="res://cards/BaseCard.gd" id="1_5crtc"]
 [ext_resource type="Texture2D" uid="uid://dn00wae1rpmih" path="res://cards/assets/card_blank.png" id="2_fbsta"]
 [ext_resource type="Texture2D" uid="uid://d1ir4pp7lbd0j" path="res://cards/assets/card_background_alt.png" id="3_cr6ah"]
 [ext_resource type="Theme" uid="uid://cdta86b2s4dni" path="res://assets/themes/global_theme.tres" id="4_7tv7l"]
+[ext_resource type="FontFile" uid="uid://dykq5v23q0j50" path="res://assets/fonts/BarlowCondensed-Medium.ttf" id="5_cr6ah"]
 [ext_resource type="Texture2D" uid="uid://dqas1fsdtb3ra" path="res://cards/assets/suits/Clubs64.png" id="5_kfaqa"]
 [ext_resource type="Texture2D" uid="uid://8eeotvfnl8er" path="res://cards/assets/card_border.png" id="6_q8opy"]
 [ext_resource type="Texture2D" uid="uid://cu2af88jsh05r" path="res://cards/assets/card_back.png" id="7_1s4ic"]
 
-[node name="BaseCard" type="Node2D" node_paths=PackedStringArray("CardBack", "RankLabelUpright", "SuitIconUpright", "RankLabelReversed", "SuitIconReversed")]
+[node name="BaseCard" type="Node2D" node_paths=PackedStringArray("CardBack", "RankLabelUpright", "SuitIconUpright", "RankLabelReversed", "SuitIconReversed", "StatusIconLarge", "StatusIconSmall", "StatusLabel")]
 script = ExtResource("1_5crtc")
 CardBack = NodePath("CardBack")
 RankLabelUpright = NodePath("Control/Upright/RankLabelUpright")
 SuitIconUpright = NodePath("Control/Upright/SuitIconUpright")
 RankLabelReversed = NodePath("Control/Reversed/RankLabelReversed")
 SuitIconReversed = NodePath("Control/Reversed/SuitIconReversed")
+StatusIconLarge = NodePath("Control/Status/LargeIcon")
+StatusIconSmall = NodePath("Control/Status/SmallIcon")
+StatusLabel = NodePath("Control/Status/StatusLabel")
 
 [node name="Card" type="TextureRect" parent="."]
 modulate = Color(0.145098, 0.14902, 0.266667, 1)
@@ -45,6 +49,57 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("4_7tv7l")
+
+[node name="Status" type="Control" parent="Control"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 1
+anchor_left = 0.157143
+anchor_top = 0.247368
+anchor_right = 0.842857
+anchor_bottom = 0.752632
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="LargeIcon" type="TextureRect" parent="Control/Status"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 3
+stretch_mode = 5
+
+[node name="SmallIcon" type="TextureRect" parent="Control/Status"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="StatusLabel" type="Label" parent="Control/Status"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.0745098, 0.0901961, 0.137255, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = ExtResource("5_cr6ah")
+theme_override_font_sizes/font_size = 64
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Upright" type="Control" parent="Control"]
 layout_mode = 1
