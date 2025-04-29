@@ -136,6 +136,7 @@ func on_tutorial_first_step_completed() -> void:
 
 
 func start_new_stage() -> void:
+	update_player_stats()
 	update_current_stage()
 	send_update("Starting Stage " + str(CurrentStage))
 	change_global_state(Global.GameState.IN_GAME)
@@ -161,7 +162,7 @@ func restart_current_stage() -> void:
 
 func continue_to_next_stage() -> void:
 	send_update("Moving to next stage.")
-	change_global_state(Global.GameState.INTERSTAGE)
+	change_global_state(Global.GameState.STARTING)
 	show_next_stage()
 
 #endregion
@@ -218,10 +219,13 @@ func current_stage_results() -> Dictionary:
 
 
 func reset_game_stats() -> void:
-	send_update("Reseting game stats.")
+	send_update("Resetting game stats.")
 	GameTime = 0
+	Dispatch.UpdateGameTime.emit(GameTime)
 	GameReshuffles = 0
+	Dispatch.UpdateMoves.emit(GameReshuffles)
 	GameScore = 0
+	Dispatch.UpdateScore.emit(GameScore)
 
 #endregion
 
@@ -303,7 +307,7 @@ func deal_hand() -> void:
 
 
 func reset_all_cards() -> void:
-	Validator.on_discard_selected_cards()
+	await Validator.on_discard_selected_cards()
 	Deck.discard_hand()
 	Deck.recycle_discard()
 	send_update("All cards returned to deck.")
@@ -340,8 +344,9 @@ func reset_current_enemy_stats() -> void:
 #region Player Commands
 
 func initialize_player_stats() -> void:
+	currentMaxDefense = Global.StartingDefense
 	Player.MaxHealth = Global.StartingHealth
-	Player.MaxDefense = Global.StartingDefense
+	Player.MaxDefense = currentMaxDefense
 	reset_player_stats()
 
 

@@ -255,7 +255,7 @@ func perform_enemy_turn() -> void:
 func on_enemy_died(enemy : BaseEnemy) -> void:
 	send_update(enemy.Name + " has been defeated!")
 	change_turn(Turn.NONE)
-	await get_tree().create_timer(3.0).timeout
+	await get_tree().create_timer(1.5).timeout
 	Dispatch.EnemyDied.emit()
 
 #endregion
