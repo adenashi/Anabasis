@@ -20,6 +20,8 @@ func _ready() -> void:
 	CurrentHealth = MaxHealth
 	MaxDefense = Global.StartingDefense
 	CurrentDefense = MaxDefense
+	Dispatch.PlayerDefenseEffect.connect(apply_card_defense_effect)
+	Dispatch.PlayerHealthEffect.connect(apply_card_health_effect)
 
 
 func set_stats(startingHealth : int, startingDefense : int) -> void:
@@ -33,6 +35,17 @@ func set_stats(startingHealth : int, startingDefense : int) -> void:
 #endregion
 
 #region Health and Defense Methods
+
+func apply_card_health_effect(amount : int) -> void:
+	if amount > 0:
+		add_health(amount)
+	else:
+		take_damage(amount)
+
+
+func apply_card_defense_effect(amount : int) -> void:
+	add_defense(amount)
+
 
 func restore_to_full_health() -> void:
 	CurrentHealth = MaxHealth

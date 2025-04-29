@@ -1,6 +1,16 @@
 class_name BaseEnemy extends Node
 
 
+#region Enums
+
+enum Action {
+	DEFEND,
+	ATTACK,
+	SPECIAL
+}
+
+#endregion
+
 #region Signals
 
 signal EnemyDied(enemy : BaseEnemy)
@@ -101,18 +111,29 @@ func current_attack() -> int:
 	return Attacks.pick_random()
 
 
-func perform_action() -> void:
+func perform_action(doMove : bool = true) -> Action:
 	var chance : int = randi_range(0,100)
+	var action : Action
 	if chance >= 90:
-		do_special_move()
+		if doMove:
+			do_special_move()
+			send_update("Performing Special Attack on Free Move.")
+		action = Action.SPECIAL
 	elif chance >= 60:
-		do_attack()
+		if doMove:
+			do_attack()
+			send_update("Attacking on Free Move.")
+		action = Action.ATTACK
 	else:
-		do_defense()
+		if doMove:
+			do_defense()
+			send_update("Defending on Free Move.")
+		action = Action.DEFEND
+	return action
 
 
 func do_attack() -> void:
-	send_update("Attacking for free move.")
+	send_update("Attacking.")
 	Dispatch.EnemyAttacks.emit()
 
 
@@ -144,12 +165,12 @@ func do_defense() -> void:
 		var possibles : Array[int] = [5,10,15]
 		defense = possibles.pick_random()
 	
-	send_update("Defending for free move.")
+	send_update("Defending.")
 	Dispatch.EnemyDefends.emit(defense)
 
 
 func do_special_move() -> void:
-	send_update("Doing Special Move - " + Data.SpecialMove + " - for free move.")
+	send_update("Doing Special Move - " + Data.SpecialMove + ".")
 	SpecialMove.call()
 
 

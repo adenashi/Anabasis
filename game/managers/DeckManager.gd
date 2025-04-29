@@ -121,6 +121,11 @@ func discard_selected_cards(cards : Array[BaseCard]) -> void:
 	
 	var cardsDiscarded : int = 0
 	for card:BaseCard in cards:
+		match card.CurrentStatus:
+			BaseCard.StatusEffect.ROLLING, BaseCard.StatusEffect.COOLDOWN, BaseCard.StatusEffect.LOCKED:
+				send_update("Cannot discard this card.")
+				continue
+		
 		card.change_state(BaseCard.CardState.DISCARDED)
 		if CurrentHand.has(card):
 			CurrentHand.erase(card)
@@ -146,6 +151,7 @@ func recycle_discard() -> void:
 	
 	for card:BaseCard in Discard:
 		PlayerDeck.push_back(card)
+		card.reset_status_effect()
 		card.show()
 		card.change_state(BaseCard.CardState.DECK)
 		card.reparent(Hand.DeckHolder)
@@ -166,12 +172,6 @@ func discard_hand() -> void:
 		Hand.discard_card(card)
 		Dispatch.UpdateDiscardCount.emit(Discard.size())
 	CurrentHand.clear()
-
-#endregion
-
-#region Aesthetics
-
-
 
 #endregion
 

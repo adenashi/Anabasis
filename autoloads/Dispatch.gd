@@ -230,6 +230,26 @@ signal AllStagesCleared
 
 #endregion
 
+#region Card Status Effects
+
+## [br] Emitters: [BaseCard]
+## [br] Subscribers: [PlayerController]
+signal PlayerHealthEffect(amount : int)
+
+## [br] Emitters: [BaseCard]
+## [br] Subscribers: [PlayerController]
+signal PlayerDefenseEffect(amount : int)
+
+## [br] Emitters: [BaseCard]
+## [br] Subscribers: [FieldManager]
+signal PlayerAttackEffect(amount : int)
+
+## [br] Emitters: [BaseCard]
+## [br] Subscribers: [FieldManager]
+signal EnemyAttackEffect(amount : int)
+
+#endregion
+
 #endregion
 
 

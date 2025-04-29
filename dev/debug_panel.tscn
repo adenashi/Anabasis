@@ -15,12 +15,13 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.545098, 1, 0.996078, 1)
 
-[node name="DebugPanel" type="CanvasLayer" node_paths=PackedStringArray("DebugPanel", "StagesToClear", "Enemy", "Victor")]
+[node name="DebugPanel" type="CanvasLayer" node_paths=PackedStringArray("DebugPanel", "StagesToClear", "Enemy", "StatusEffect", "Victor")]
 layer = 128
 script = ExtResource("1_mdk68")
 DebugPanel = NodePath("DebugPanel")
 StagesToClear = NodePath("DebugPanel/PanelContainer/VBoxContainer/StartGameButtons/VBoxContainer/StagesToClear")
 Enemy = NodePath("DebugPanel/PanelContainer/VBoxContainer/EnemyButtons/VBoxContainer/Enemies")
+StatusEffect = NodePath("DebugPanel/PanelContainer/VBoxContainer/StageButtons/VBoxContainer/StatusEffects")
 Victor = NodePath("DebugPanel/PanelContainer/VBoxContainer/EndGameButtons/VBoxContainer/Victor")
 
 [node name="DebugPanel" type="Control" parent="."]
@@ -73,7 +74,8 @@ size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="DebugPanel/PanelContainer/VBoxContainer/StartGameButtons/Header"]
 layout_mode = 2
-text = "Game"
+theme_override_font_sizes/font_size = 24
+text = "Start"
 horizontal_alignment = 1
 uppercase = true
 
@@ -86,6 +88,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="DebugPanel/PanelContainer/VBoxContainer/StartGameButtons/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 21
 text = "Stages To Clear"
 horizontal_alignment = 1
 uppercase = true
@@ -99,6 +102,7 @@ update_on_text_changed = true
 
 [node name="RestartGame" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/StartGameButtons/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "RESTART GAME"
 
 [node name="PlayerButtons" type="VBoxContainer" parent="DebugPanel/PanelContainer/VBoxContainer"]
@@ -113,6 +117,7 @@ size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="DebugPanel/PanelContainer/VBoxContainer/PlayerButtons/Header"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Player"
 horizontal_alignment = 1
 uppercase = true
@@ -123,18 +128,22 @@ size_flags_horizontal = 3
 
 [node name="LaunchPlayerAttackButton" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/PlayerButtons"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "ATTACK"
 
 [node name="LaunchPlayerDefenseButton" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/PlayerButtons"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "DEFEND"
 
 [node name="LaunchPlayerComboButton" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/PlayerButtons"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "COMBO"
 
 [node name="RestorePlayerHealthButton" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/PlayerButtons"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "RESTORE HEALTH"
 
 [node name="EnemyButtons" type="VBoxContainer" parent="DebugPanel/PanelContainer/VBoxContainer"]
@@ -149,6 +158,7 @@ size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="DebugPanel/PanelContainer/VBoxContainer/EnemyButtons/Header"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Enemy"
 horizontal_alignment = 1
 uppercase = true
@@ -162,31 +172,38 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="DebugPanel/PanelContainer/VBoxContainer/EnemyButtons/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 21
 text = "Enemy To Set"
 horizontal_alignment = 1
 uppercase = true
 
 [node name="Enemies" type="OptionButton" parent="DebugPanel/PanelContainer/VBoxContainer/EnemyButtons/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 
 [node name="SetEnemyButton" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/EnemyButtons/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "SET ENEMY"
 
 [node name="LaunchEnemyAttackButton" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/EnemyButtons"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "ATTACK"
 
 [node name="LaunchEnemyDefenseButton" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/EnemyButtons"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "DEFEND"
 
 [node name="LaunchEnemySpecialButton" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/EnemyButtons"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "SPECIAL ATTACK"
 
 [node name="DefeatEnemyButton" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/EnemyButtons"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "DEFEAT"
 
 [node name="StageButtons" type="VBoxContainer" parent="DebugPanel/PanelContainer/VBoxContainer"]
@@ -201,6 +218,7 @@ size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="DebugPanel/PanelContainer/VBoxContainer/StageButtons/Header"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Stage"
 horizontal_alignment = 1
 uppercase = true
@@ -211,14 +229,53 @@ size_flags_horizontal = 3
 
 [node name="ListCardsInHandButton" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/StageButtons"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "LIST CARDS IN HAND"
 
 [node name="FindMissingCardsButton" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/StageButtons"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "FIND MISSING CARDS"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DebugPanel/PanelContainer/VBoxContainer/StageButtons"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DebugPanel/PanelContainer/VBoxContainer/StageButtons/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Status Effect"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="StatusEffects" type="OptionButton" parent="DebugPanel/PanelContainer/VBoxContainer/StageButtons/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+
+[node name="ApplyStatusEffectButton" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/StageButtons/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "APPLY STATUS EFFECT"
 
 [node name="EndGameButtons" type="VBoxContainer" parent="DebugPanel/PanelContainer/VBoxContainer"]
 layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="DebugPanel/PanelContainer/VBoxContainer/EndGameButtons"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="DebugPanel/PanelContainer/VBoxContainer/EndGameButtons/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="DebugPanel/PanelContainer/VBoxContainer/EndGameButtons/Header"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "End"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="HSeparator2" type="HSeparator" parent="DebugPanel/PanelContainer/VBoxContainer/EndGameButtons/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="DebugPanel/PanelContainer/VBoxContainer/EndGameButtons"]
 layout_mode = 2
@@ -228,6 +285,7 @@ layout_mode = 2
 
 [node name="Victor" type="OptionButton" parent="DebugPanel/PanelContainer/VBoxContainer/EndGameButtons/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 selected = 1
 item_count = 2
 popup/item_0/text = "Enemy"
@@ -237,10 +295,12 @@ popup/item_1/id = 1
 
 [node name="EndStageButton" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/EndGameButtons/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "END STAGE"
 
 [node name="EndGameButton" type="Button" parent="DebugPanel/PanelContainer/VBoxContainer/EndGameButtons"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "END GAME"
 
 [connection signal="pressed" from="DebugPanel/PanelContainer/VBoxContainer/StartGameButtons/VBoxContainer/RestartGame" to="." method="on_restart_game_button_pressed"]
@@ -255,5 +315,6 @@ text = "END GAME"
 [connection signal="pressed" from="DebugPanel/PanelContainer/VBoxContainer/EnemyButtons/DefeatEnemyButton" to="." method="on_defeat_enemy_button_pressed"]
 [connection signal="pressed" from="DebugPanel/PanelContainer/VBoxContainer/StageButtons/ListCardsInHandButton" to="." method="on_list_cards_in_hand_button_pressed"]
 [connection signal="pressed" from="DebugPanel/PanelContainer/VBoxContainer/StageButtons/FindMissingCardsButton" to="." method="on_find_missing_cards_button_pressed"]
+[connection signal="pressed" from="DebugPanel/PanelContainer/VBoxContainer/StageButtons/VBoxContainer/ApplyStatusEffectButton" to="." method="on_apply_status_effect_button_pressed"]
 [connection signal="pressed" from="DebugPanel/PanelContainer/VBoxContainer/EndGameButtons/VBoxContainer/EndStageButton" to="." method="on_end_stage_button_pressed"]
 [connection signal="pressed" from="DebugPanel/PanelContainer/VBoxContainer/EndGameButtons/EndGameButton" to="." method="on_end_game_button_pressed"]

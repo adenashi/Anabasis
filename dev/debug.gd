@@ -6,6 +6,7 @@ extends CanvasLayer
 @export var DebugPanel : Control
 @export var StagesToClear : SpinBox
 @export var Enemy : OptionButton
+@export var StatusEffect : OptionButton
 @export var Victor : OptionButton
 
 #endregion
@@ -21,12 +22,19 @@ var GameManager : AGM
 func _ready() -> void:
 	self.visible = false
 	set_enemies()
+	set_status_effects()
 
 
 func set_enemies() -> void:
 	var keys = CombatManager.ENEMIES.DB.keys()
 	for key in keys:
 		Enemy.add_item(CombatManager.ENEMIES.DB[key].Name, key)
+
+
+func set_status_effects() -> void:
+	var keys = BaseCard.StatusEffect.keys()
+	for i in range(keys.size()):
+		StatusEffect.add_item(keys[i].capitalize(), i)
 
 #endregion
 
@@ -157,6 +165,15 @@ func on_find_missing_cards_button_pressed() -> void:
 	
 	send_update("Details on Missing Card(s):")
 	print(cardDetails)
+
+
+func on_apply_status_effect_button_pressed() -> void:
+	var card : BaseCard = GameManager.Deck.CurrentHand.pick_random()
+	var statusEffect : BaseCard.StatusEffect = StatusEffect.selected as BaseCard.StatusEffect
+	var moves : int = 0
+	if statusEffect == BaseCard.StatusEffect.LOCKED:
+		moves = randi_range(1,5)
+	card.apply_status_effect(statusEffect, moves)
 
 
 func on_end_stage_button_pressed() -> void:

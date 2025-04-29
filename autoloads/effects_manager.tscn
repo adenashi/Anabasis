@@ -1,6 +1,37 @@
-[gd_scene load_steps=2 format=3 uid="uid://b3337govdjm1h"]
+[gd_scene load_steps=23 format=3 uid="uid://b3337govdjm1h"]
 
 [ext_resource type="Script" uid="uid://laaf2io2tuy0" path="res://autoloads/EffectsManager.gd" id="1_nigdu"]
+[ext_resource type="Texture2D" uid="uid://crn8jy365djyx" path="res://cards/assets/icons/sword.png" id="2_6a445"]
+[ext_resource type="Texture2D" uid="uid://dxhkjsc5a6dog" path="res://cards/assets/icons/shield.png" id="3_sjwgl"]
+[ext_resource type="Texture2D" uid="uid://coyl2jjuqw5t5" path="res://cards/assets/icons/skull.png" id="4_d8mgc"]
+[ext_resource type="Texture2D" uid="uid://d3dni5c347q0d" path="res://cards/assets/icons/dice_shield.png" id="5_sccwb"]
+[ext_resource type="Texture2D" uid="uid://hdcrbssekemt" path="res://cards/assets/icons/dice_sword.png" id="6_o84kw"]
+[ext_resource type="Texture2D" uid="uid://dfpuvchdy616p" path="res://cards/assets/icons/dice_skull.png" id="7_r2hq7"]
+[ext_resource type="Texture2D" uid="uid://cs2x7rhrkr23i" path="res://cards/assets/icons/dice_heart.png" id="7_sjwgl"]
+[ext_resource type="Texture2D" uid="uid://cat2c58kvg73y" path="res://cards/assets/icons/dice_1.png" id="8_ljhup"]
+[ext_resource type="Texture2D" uid="uid://64r2tsbwamj0" path="res://cards/assets/icons/dice_2.png" id="9_pc20o"]
+[ext_resource type="Texture2D" uid="uid://d4clwb0w7b1wh" path="res://cards/assets/icons/dice_3.png" id="10_h4r6y"]
+[ext_resource type="Texture2D" uid="uid://chhl4b2hk2ut0" path="res://cards/assets/icons/dice_4.png" id="11_ryn7d"]
+[ext_resource type="Texture2D" uid="uid://blfrq55hewxer" path="res://cards/assets/icons/dice_5.png" id="12_xx026"]
+[ext_resource type="Texture2D" uid="uid://bm5im6yq2pb87" path="res://cards/assets/icons/dice_6.png" id="13_ks3je"]
+[ext_resource type="Texture2D" uid="uid://j71ttas7fxt" path="res://cards/assets/icons/flask_full.png" id="14_lwkdk"]
+[ext_resource type="Texture2D" uid="uid://bd8fmlvh4avpt" path="res://cards/assets/icons/flask_half.png" id="15_86al0"]
+[ext_resource type="Texture2D" uid="uid://bd04l0qwd1bno" path="res://cards/assets/icons/flask_empty.png" id="16_ft8xh"]
+[ext_resource type="Texture2D" uid="uid://d0muehsup78lv" path="res://cards/assets/icons/hourglass_top.png" id="17_itu2k"]
+[ext_resource type="Texture2D" uid="uid://cywpvx2dov7ks" path="res://cards/assets/icons/hourglass.png" id="18_q41n7"]
+[ext_resource type="Texture2D" uid="uid://bc4t7lvi342ah" path="res://cards/assets/icons/hourglass_bottom.png" id="19_lsdrb"]
+[ext_resource type="Texture2D" uid="uid://bjoriortbmijd" path="res://cards/assets/icons/lock_closed.png" id="20_vkacf"]
+[ext_resource type="Texture2D" uid="uid://dlceqkmabtsol" path="res://cards/assets/icons/lock_open.png" id="21_otwns"]
 
 [node name="EffectsManager" type="Node"]
 script = ExtResource("1_nigdu")
+StatusIcons = {
+1: [ExtResource("2_6a445")],
+2: [ExtResource("3_sjwgl")],
+3: [ExtResource("4_d8mgc")],
+4: [ExtResource("5_sccwb"), ExtResource("6_o84kw"), ExtResource("7_sjwgl"), ExtResource("7_r2hq7")],
+5: [ExtResource("8_ljhup"), ExtResource("9_pc20o"), ExtResource("10_h4r6y"), ExtResource("11_ryn7d"), ExtResource("12_xx026"), ExtResource("13_ks3je")],
+6: [ExtResource("14_lwkdk"), ExtResource("15_86al0"), ExtResource("16_ft8xh")],
+7: [ExtResource("17_itu2k"), ExtResource("18_q41n7"), ExtResource("19_lsdrb")],
+8: [ExtResource("20_vkacf"), ExtResource("21_otwns")]
+}

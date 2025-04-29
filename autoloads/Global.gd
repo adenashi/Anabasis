@@ -11,12 +11,19 @@ enum GameState {
 	ENDING
 }
 
+enum Turn {
+	NONE,
+	PLAYER,
+	ENEMY
+}
+
 #endregion
 
 #region Public Variables
 
 var CurrentState : GameState
 var NextStage : int = 1
+var CurrentTurn : Turn
 var StartingHealth : int = 100
 var StartingDefense : int = 40
 var StagesToClear : int = 1

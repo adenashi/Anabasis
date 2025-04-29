@@ -25,7 +25,6 @@ enum StatusEffect {
 	COMBO,
 	ACTIVE,
 	ROLLING,
-	BUFFING,
 	HEALING,
 	COOLDOWN,
 	LOCKED
@@ -78,6 +77,7 @@ var PointValue : int
 var CurrentState : CardState
 var ShowingFace : bool
 var CurrentStatus : StatusEffect
+var AffectedAttack : Global.Turn
 var MoveLimit : int
 var MoveCounter : int
 
@@ -133,6 +133,7 @@ func init_card(value : int, suit : int) -> void:
 	var img = load(file)
 	SuitIconUpright.texture = img
 	SuitIconReversed.texture = img
+	Dispatch.PlayerMove.connect(increment_move_counter)
 
 #endregion
 
@@ -149,6 +150,13 @@ func on_mouse_exited() -> void:
 
 
 func on_mouse_clicked(event : InputEvent) -> void:
+	if Global.CurrentTurn != Global.Turn.PLAYER:
+		return
+	
+	match CurrentStatus:
+		StatusEffect.ROLLING, StatusEffect.COOLDOWN, StatusEffect.LOCKED:
+			return
+	
 	if event.is_action_pressed("left_click"):
 		match CurrentState:
 			CardState.HAND:
@@ -282,27 +290,31 @@ func show_action(action : PlayValidator.ActionType) -> void:
 			SuitIconUpright.modulate = DEFENSE_COLOR
 			RankLabelReversed.modulate = DEFENSE_COLOR
 			SuitIconReversed.modulate = DEFENSE_COLOR
+			apply_status_effect(StatusEffect.DEFENSE)
 		PlayValidator.ActionType.ATTACK:
 			RankLabelUpright.modulate = ATTACK_COLOR
 			SuitIconUpright.modulate = ATTACK_COLOR
 			RankLabelReversed.modulate = ATTACK_COLOR
 			SuitIconReversed.modulate = ATTACK_COLOR
+			apply_status_effect(StatusEffect.ATTACK)
 		PlayValidator.ActionType.COMBO:
 			RankLabelUpright.modulate = COMBO_COLOR
 			SuitIconUpright.modulate = COMBO_COLOR
 			RankLabelReversed.modulate = COMBO_COLOR
 			SuitIconReversed.modulate = COMBO_COLOR
+			apply_status_effect(StatusEffect.COMBO)
 		PlayValidator.ActionType.NONE:
 			RankLabelUpright.modulate = NORMAL_COLOR
 			SuitIconUpright.modulate = NORMAL_COLOR
 			RankLabelReversed.modulate = NORMAL_COLOR
 			SuitIconReversed.modulate = NORMAL_COLOR
+			apply_status_effect(StatusEffect.NONE)
 
 #endregion
 
 #region Status Effects
 
-func apply_status_effect(effect : StatusEffect) -> void:
+func apply_status_effect(effect : StatusEffect, moves : int = 0) -> void:
 	match effect:
 		StatusEffect.NONE:
 			reset_status_effect()
@@ -312,67 +324,152 @@ func apply_status_effect(effect : StatusEffect) -> void:
 			show_defense_status_effect()
 		StatusEffect.COMBO:
 			show_combo_status_effect()
-		StatusEffect.ACTIVE:
-			apply_active_status_effect()
 		StatusEffect.ROLLING:
 			apply_rolling_status_effect()
-		StatusEffect.BUFFING:
-			apply_buffing_status_effect()
 		StatusEffect.HEALING:
 			initiate_healing_effect()
 		StatusEffect.COOLDOWN:
 			initiate_cooldown_effect()
 		StatusEffect.LOCKED:
-			initiate_locked_effect()
+			initiate_locked_effect(moves)
 
 
 func reset_status_effect() -> void:
+	CurrentStatus = StatusEffect.NONE
 	StatusIconLarge.texture = null
 	StatusIconSmall.texture = null
 	StatusLabel.text = ""
+	StatusLabel.modulate = Color.WHITE
+	MoveCounter = -1
+	MoveLimit = -1
 
 
 func show_attack_status_effect() -> void:
-	pass
+	CurrentStatus = StatusEffect.ATTACK
+	set_small_status_icon(ATTACK_COLOR)
+	StatusLabel.text = str(Value)
 
 
 func show_defense_status_effect() -> void:
-	pass
+	CurrentStatus = StatusEffect.DEFENSE
+	set_small_status_icon(DEFENSE_COLOR)
+	StatusLabel.text = str(PointValue / 10)
 
 
 func show_combo_status_effect() -> void:
-	pass
+	CurrentStatus = StatusEffect.COMBO
+	set_small_status_icon(COMBO_COLOR)
+	StatusLabel.text = str(PointValue / 10)
 
 
-func apply_active_status_effect() -> void:
-	pass
+func set_small_status_icon(mod_color : Color) -> void:
+	var key = CurrentStatus
+	StatusIconLarge.texture = null
+	StatusIconSmall.texture = VFX.StatusIcons[key][0]
+	StatusLabel.modulate = mod_color
 
 
 func apply_rolling_status_effect() -> void:
-	pass
+	CurrentStatus = StatusEffect.ROLLING
+	var results : Array[int] = await perform_roll_tween()
+	var amount : int = -(PointValue / 10) * (results[1] + 1)
+	match results[0]:
+		0: # Defense
+			Dispatch.PlayerDefenseEffect.emit(amount)
+			AffectedAttack = Global.Turn.NONE
+			await get_tree().create_timer(2.0).timeout
+			reset_status_effect()
+		1: # Attack
+			Dispatch.PlayerAttackEffect.emit(amount)
+			AffectedAttack = Global.Turn.PLAYER
+			await get_tree().create_timer(2.0).timeout
+			initiate_cooldown_effect()
+		2: # Health
+			AffectedAttack = Global.Turn.NONE
+			await get_tree().create_timer(2.0).timeout
+			initiate_healing_effect()
+		3: # Enemy
+			Dispatch.EnemyAttackEffect.emit(amount)
+			AffectedAttack = Global.Turn.ENEMY
+			await get_tree().create_timer(2.0).timeout
+			initiate_cooldown_effect()
 
 
-func apply_buffing_status_effect() -> void:
-	pass
+func perform_roll_tween() -> Array[int]:
+	var results : Array[int] = [0,0]
+	
+	results[0] = await roll_die(StatusEffect.ACTIVE)
+	StatusIconSmall.texture = VFX.StatusIcons[StatusEffect.ACTIVE][results[0]]
+	StatusIconSmall.hide()
+	
+	results[1] = await roll_die(StatusEffect.ROLLING)
+	await get_tree().create_timer(0.2).timeout
+	StatusIconLarge.texture = null
+	StatusIconSmall.show()
+	StatusLabel.text = str(-(PointValue / 10) * (results[1] + 1))
+	
+	return results
+
+
+func roll_die(dice : StatusEffect) -> int:
+	var die : Array = VFX.StatusIcons[dice].duplicate()
+	die.shuffle()
+	var index : int = -1
+	for i in 10:
+		index = randi_range(0, die.size() - 1)
+		var tex : Texture = die[index]
+		statusTween = create_tween()
+		statusTween.tween_callback(tween_large_icon.bind(tex))
+		statusTween.tween_interval(0.05)
+		await statusTween.finished
+	
+	statusTween = null
+	return index
+
+
+func tween_large_icon(tex : Texture) -> void:
+	StatusIconLarge.texture = tex
 
 
 func initiate_healing_effect() -> void:
-	pass
+	CurrentStatus = StatusEffect.HEALING
+	var healAmount : int = PointValue / 10
+	var moves : int = healAmount / 5
+	start_move_counter(moves)
+	set_large_status_icon()
+	StatusLabel.text = "+" + str(PointValue / 10)
+	Dispatch.PlayerHealthEffect.emit(healAmount)
 
 
 func initiate_cooldown_effect() -> void:
-	pass
+	CurrentStatus = StatusEffect.COOLDOWN
+	start_move_counter(3)
+	set_large_status_icon()
 
 
-func initiate_locked_effect() -> void:
-	pass
+func initiate_locked_effect(moves : int) -> void:
+	CurrentStatus = StatusEffect.LOCKED
+	start_move_counter(moves)
+	set_large_status_icon()
+
+
+func set_large_status_icon() -> void:
+	var key = CurrentStatus
+	StatusIconLarge.texture = VFX.StatusIcons[key][MoveCounter]
+	StatusIconSmall.texture = null
+	StatusLabel.text = ""
+	StatusLabel.modulate = Color.WHITE
 
 
 func start_move_counter(moves : int) -> void:
-	pass
+	MoveLimit = moves
+	MoveCounter = 0
 
 
 func increment_move_counter() -> void:
+	if MoveLimit == -1:
+		return
+	
 	MoveCounter += 1
 	check_status_effect()
 
@@ -386,24 +483,42 @@ func check_status_effect() -> void:
 				increment_healing_status_effect()
 		StatusEffect.COOLDOWN:
 			if MoveLimit > 0 and MoveCounter >= MoveLimit:
-				reset_status_effect()
+				end_attack_status_effect()
 			else:
 				increment_cooldown_status_effect()
 		StatusEffect.LOCKED:
-			if MoveLimit > 0 and MoveCounter >= MoveLimit:
+			if MoveLimit > 0 and MoveCounter == MoveLimit - 1:
 				end_locked_status_effect()
+			elif MoveLimit > 0 and MoveCounter >= MoveLimit:
+				reset_status_effect()
 
 
 func increment_healing_status_effect() -> void:
-	pass
+	var key = CurrentStatus
+	StatusIconLarge.texture = VFX.StatusIcons[key][MoveCounter]
+	var healAmount : int = (PointValue / 10) - (5 * MoveCounter)
+	StatusLabel.text = "+" + str(healAmount)
+	Dispatch.PlayerHealthEffect.emit(healAmount)
 
 
 func increment_cooldown_status_effect() -> void:
-	pass
+	var key = CurrentStatus
+	StatusIconLarge.texture = VFX.StatusIcons[key][MoveCounter]
+
+
+func end_attack_status_effect() -> void:
+	match AffectedAttack:
+		Global.Turn.PLAYER:
+			Dispatch.PlayerAttackEffect.emit(0)
+		Global.Turn.ENEMY:
+			Dispatch.EnemyAttackEffect.emit(0)
+	AffectedAttack = Global.Turn.NONE
+	reset_status_effect()
 
 
 func end_locked_status_effect() -> void:
-	pass
+	var key = CurrentStatus
+	StatusIconLarge.texture = VFX.StatusIcons[key][1]
 
 
 func reset_status_tween() -> void:

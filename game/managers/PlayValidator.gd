@@ -27,7 +27,7 @@ var Combat : CombatManager
 #region Private Variables
 
 var selectedCards : Array[BaseCard] = []
-var sigilTween : Tween
+var playerAttackDebuff : int = 0
 
 #endregion
 
@@ -39,14 +39,22 @@ func _ready() -> void:
 	Dispatch.PlaySelectedCards.connect(on_play_selected_cards)
 	Dispatch.DiscardSelectedCards.connect(on_discard_selected_cards)
 	Dispatch.EndPlayerTurn.connect(clear_selected_cards)
+	Dispatch.PlayerAttackEffect.connect(update_player_attack_debuff)
 
 #endregion
 
 #region Selecting and Deselecting Cards
 
 func on_card_selected(card : BaseCard) -> void:
+	if Global.CurrentTurn != Global.Turn.PLAYER:
+		return
+	
 	if selectedCards.has(card):
 		return
+	
+	match card.CurrentStatus:
+		BaseCard.StatusEffect.ROLLING, BaseCard.StatusEffect.COOLDOWN, BaseCard.StatusEffect.LOCKED:
+			return
 	
 	selectedCards.append(card)
 	if selectedCards.size() >= 3:
@@ -58,8 +66,8 @@ func on_card_selected(card : BaseCard) -> void:
 		elif valid_full_sequence():
 			var att : int = 0
 			for c in selectedCards:
-				c.show_action(ActionType.ATTACK)
-				att += c.Value
+				c.show_action(ActionType.COMBO)
+				att += max(0, c.Value - playerAttackDebuff)
 			Dispatch.UpdatePlayerAttack.emit(att)
 			if SaveData.TutorialOn:
 				Dispatch.SequenceSelected.emit()
@@ -67,7 +75,7 @@ func on_card_selected(card : BaseCard) -> void:
 			var att : int = 0
 			for c in selectedCards:
 				c.show_action(ActionType.ATTACK)
-				att += c.Value
+				att += max(0, c.Value - playerAttackDebuff)
 			Dispatch.UpdatePlayerAttack.emit(att)
 			if SaveData.TutorialOn:
 				Dispatch.SequenceSelected.emit()
@@ -79,6 +87,9 @@ func on_card_selected(card : BaseCard) -> void:
 
 
 func on_card_deselected(card : BaseCard) -> void:
+	if Global.CurrentTurn != Global.Turn.PLAYER:
+		return
+	
 	selectedCards.erase(card)
 	if selectedCards.size() < 3:
 		for c in selectedCards:
@@ -91,13 +102,13 @@ func on_card_deselected(card : BaseCard) -> void:
 			var att : int = 0
 			for c in selectedCards:
 				c.show_action(ActionType.COMBO)
-				att += c.Value
+				att += max(0, c.Value - playerAttackDebuff)
 			Dispatch.UpdatePlayerAttack.emit(att)
 		elif valid_partial_sequence():
 			var att : int = 0
 			for c in selectedCards:
 				c.show_action(ActionType.ATTACK)
-				att += c.Value
+				att += max(0, c.Value - playerAttackDebuff)
 			Dispatch.UpdatePlayerAttack.emit(att)
 		else:
 			if SaveData.TutorialOn:
@@ -114,6 +125,9 @@ func on_discard_selected_cards() -> void:
 
 
 func on_play_selected_cards() -> void:
+	if Global.CurrentTurn != Global.Turn.PLAYER:
+		return
+	
 	if selectedCards.size() < 3:
 		return
 	
@@ -131,6 +145,9 @@ func clear_selected_cards() -> void:
 #endregion
 
 #region Checking for Runs and Sequences
+
+func update_player_attack_debuff(amount : int) -> void:
+	playerAttackDebuff = abs(amount)
 
 func check_selected_cards() -> void:
 	selectedCards.sort_custom(Util.sort_by_suit)
@@ -171,6 +188,9 @@ func check_selected_cards() -> void:
 func valid_run() -> bool: # Valid runs are added to Defense
 	var value : int = selectedCards.front().Value
 	for card:BaseCard in selectedCards:
+		match card.CurrentStatus:
+			BaseCard.StatusEffect.ROLLING, BaseCard.StatusEffect.COOLDOWN, BaseCard.StatusEffect.LOCKED:
+				return false
 		if card.Value != value:
 			return false
 	
@@ -181,6 +201,9 @@ func valid_run() -> bool: # Valid runs are added to Defense
 func valid_full_sequence() -> bool: # Valid sequences are Attacks
 	var suit : BaseCard.CardSuit = selectedCards.front().Suit
 	for card:BaseCard in selectedCards:
+		match card.CurrentStatus:
+			BaseCard.StatusEffect.ROLLING, BaseCard.StatusEffect.COOLDOWN, BaseCard.StatusEffect.LOCKED:
+				return false
 		if card.Suit != suit:
 			return false
 	
@@ -192,6 +215,9 @@ func valid_partial_sequence() -> bool:
 	var start : int = selectedCards.front().Value
 	for i in range(1, selectedCards.size()):
 		start += 1
+		match selectedCards[i].CurrentStatus:
+			BaseCard.StatusEffect.ROLLING, BaseCard.StatusEffect.COOLDOWN, BaseCard.StatusEffect.LOCKED:
+				return false
 		if selectedCards[i].Value != start:
 			return false
 	

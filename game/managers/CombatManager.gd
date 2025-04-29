@@ -1,16 +1,6 @@
 class_name CombatManager extends Node
 
 
-#region Enums
-
-enum Turn {
-	NONE,
-	PLAYER,
-	ENEMY
-}
-
-#endregion
-
 #region Constants
 
 const ENEMIES = preload("uid://bt8m2els0rd13")
@@ -33,7 +23,7 @@ var CurrentEnemy : BaseEnemy
 
 #region Private Variables
 
-var currentTurn : Turn
+var currentTurn : Global.Turn
 
 var currentEnemyAttack : int
 var currentEnemyDebuff : int
@@ -93,16 +83,18 @@ func spawn_new_enemy() -> void:
 #region Turn Management
 
 func start_combat() -> void:
-	change_turn(Turn.PLAYER)
+	change_turn(Global.Turn.PLAYER)
 
 
 func start_enemy_turn() -> void:
-	change_turn(Turn.ENEMY)
+	change_turn(Global.Turn.ENEMY)
 
 
-func change_turn(nextTurn : Turn) -> void:
+func change_turn(nextTurn : Global.Turn) -> void:
 	currentTurn = nextTurn
-	if currentTurn == Turn.ENEMY:
+	Global.CurrentTurn = nextTurn
+	
+	if currentTurn == Global.Turn.ENEMY:
 		perform_enemy_turn()
 	else:
 		currentEnemyDebuff = 0
@@ -114,14 +106,14 @@ func change_turn(nextTurn : Turn) -> void:
 #region Attack Methods
 
 func perform_attack(cards : Array[BaseCard]) -> void:
-	if currentTurn != Turn.PLAYER:
+	if currentTurn != Global.Turn.PLAYER:
 		return
 	
 	var points : int = 0
 	
 	for card:BaseCard in cards:
 		var values : Array[int] = get_values(card)
-		send_update(CurrentEnemy.Name + " takes " + str(values[0]) + " damage.")
+		send_update(CurrentEnemy.Name + " takes " + str(values[0] - Field.PlayerAttackDebuff) + " damage.")
 		points += values[1]
 	
 	if cards.size() > 3:
@@ -135,10 +127,10 @@ func perform_attack(cards : Array[BaseCard]) -> void:
 	await Deck.discard_selected_cards(cards)
 	await one_frame()
 	send_update("Player turn completed.")
-	Dispatch.UpdatePlayerAttack.emit(0)
+	Dispatch.UpdatePlayerAttack.emit(0 - Field.PlayerAttackDebuff)
 	Dispatch.EndPlayerTurn.emit()
 	
-	if currentTurn != Turn.NONE:
+	if currentTurn != Global.Turn.NONE:
 		start_enemy_turn()
 
 #endregion
@@ -146,7 +138,7 @@ func perform_attack(cards : Array[BaseCard]) -> void:
 #region Defense Methods
 
 func add_to_defense(cards : Array[BaseCard]) -> void:
-	if currentTurn != Turn.PLAYER:
+	if currentTurn != Global.Turn.PLAYER:
 		return
 	
 	var defense : int = (cards.front().PointValue / 10) * cards.size()
@@ -166,7 +158,7 @@ func add_to_defense(cards : Array[BaseCard]) -> void:
 	send_update("Player turn completed.")
 	Dispatch.EndPlayerTurn.emit()
 	
-	if currentTurn != Turn.NONE:
+	if currentTurn != Global.Turn.NONE:
 		start_enemy_turn()
 
 #endregion
@@ -174,7 +166,7 @@ func add_to_defense(cards : Array[BaseCard]) -> void:
 #region Attack and Defense
 
 func add_defense_and_perform_attack(cards : Array[BaseCard]) -> void:
-	if currentTurn != Turn.PLAYER:
+	if currentTurn != Global.Turn.PLAYER:
 		return
 	
 	var defense : int = (cards.front().PointValue / 10) * cards.size()
@@ -198,10 +190,10 @@ func add_defense_and_perform_attack(cards : Array[BaseCard]) -> void:
 	await Deck.discard_selected_cards(cards)
 	await one_frame()
 	send_update("Player turn completed.")
-	Dispatch.UpdatePlayerAttack.emit(0)
+	Dispatch.UpdatePlayerAttack.emit(0 - Field.PlayerAttackDebuff)
 	Dispatch.EndPlayerTurn.emit()
 	
-	if currentTurn != Turn.NONE:
+	if currentTurn != Global.Turn.NONE:
 		start_enemy_turn()
 
 #endregion
@@ -225,10 +217,10 @@ func get_values(card : BaseCard) -> Array[int]:
 func perform_enemy_turn() -> void:
 	if Player.CurrentHealth < 0:
 		send_update("Player has died!")
-		change_turn(Turn.NONE)
+		change_turn(Global.Turn.NONE)
 		return
 	
-	if currentTurn != Turn.ENEMY:
+	if currentTurn != Global.Turn.ENEMY:
 		return
 	
 	await get_tree().create_timer(1.2).timeout
@@ -236,14 +228,23 @@ func perform_enemy_turn() -> void:
 	if SaveData.TutorialOn:
 		Dispatch.EnemyAttacked.emit()
 	
-	await Field.show_enemy_attack()
+	var action : BaseEnemy.Action = CurrentEnemy.perform_action(false)
+	match action:
+		BaseEnemy.Action.ATTACK:
+			await Field.show_enemy_attack()
+		BaseEnemy.Action.DEFEND:
+			var poss : Array[int] = [5,10,15]
+			await Field.show_enemy_defense(poss.pick_random())
+		BaseEnemy.Action.SPECIAL:
+			await get_tree().create_timer(1.0).timeout
+	
 	await one_frame()
 	if Player.CurrentHealth < 0:
 		send_update("Player has died!")
-		change_turn(Turn.NONE)
+		change_turn(Global.Turn.NONE)
 	else:
 		send_update("Enemy turn completed.")
-		change_turn(Turn.PLAYER)
+		change_turn(Global.Turn.PLAYER)
 
 #endregion
 
@@ -252,7 +253,7 @@ func perform_enemy_turn() -> void:
 func on_enemy_died(enemy : BaseEnemy) -> void:
 	Deck.CanDeal = false
 	send_update(enemy.Name + " has been defeated!")
-	change_turn(Turn.NONE)
+	change_turn(Global.Turn.NONE)
 	await get_tree().create_timer(1.5).timeout
 	Dispatch.EnemyDied.emit()
 
