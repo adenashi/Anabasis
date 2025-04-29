@@ -1,17 +1,6 @@
 class_name FieldController extends Node2D
 
 
-#region Constants
-
-const EFFECTS : Dictionary = {
-	"Star": preload("res://assets/effects/star_particle_2.tscn"),
-	"Beam": preload("res://assets/effects/beam_particle.tscn"),
-	"Circle": preload("res://assets/effects/circle_particle.tscn"),
-	"Slash": preload("res://assets/effects/twirl_particle.tscn")
-}
-
-#endregion
-
 #region Exports
 
 @export var Path : Path2D
