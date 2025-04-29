@@ -2,7 +2,7 @@ class_name EnemyData extends Resource
 
 var ID : int
 var Name : String
-var Attacks : Array[int]
+var Attacks : Array
 var MaxHealth : int
 var MaxDefense : int
 var SpecialMove : String

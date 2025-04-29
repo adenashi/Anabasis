@@ -98,7 +98,9 @@ func show_player_double_action(cards : Array[BaseCard]) -> void:
 
 func show_enemy_attack() -> void:
 	var attack : int = Enemy.current_attack()
+	send_update(str(attack) + " Damage to Player")
 	Dispatch.UpdateEnemyAttack.emit(attack)
+	
 	var starStart : CPUParticles2D = EFFECTS.Star.instantiate()
 	var starEnd : CPUParticles2D = EFFECTS.Star.instantiate()
 	var beam : CPUParticles2D = EFFECTS.Beam.instantiate()
@@ -115,10 +117,13 @@ func show_enemy_attack() -> void:
 	starEnd.emitting = true
 	AM.play_sfx("Game", "Impact", 2)
 	await starEnd.finished
+	
 	Player.take_damage(attack)
+	
 	starStart.queue_free()
 	beam.queue_free()
 	starEnd.queue_free()
+	
 	Dispatch.UpdateEnemyAttack.emit(0)
 
 
@@ -146,6 +151,8 @@ func reset_points() -> void:
 
 #region Debugging TODO: Delete Later!
 
-
+func send_update(update : String) -> void:
+	var color :String = Util.COLORS.colors[3].to_html(false)
+	print_rich("[color=#"+color+"]FC: " + update + "[/color]")
 
 #endregion

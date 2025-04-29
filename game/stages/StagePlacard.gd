@@ -115,7 +115,7 @@ func prepare_start_placard() -> void:
 func show_stage_start() -> void:
 	await get_tree().create_timer(1.0).timeout
 	await set_enemy_name(currentEnemy.Name)
-	await set_enemy_attack(currentEnemy.Attack)
+	await set_enemy_attack(currentEnemy.Attacks[2])
 	await set_enemy_armor(currentEnemy.MaxDefense)
 	await set_enemy_health(currentEnemy.MaxHealth)
 	StageStartButton.show()

@@ -229,7 +229,7 @@ func one_frame() -> void:
 #region Debugging TODO: Delete Later!
 
 func send_update(update : String) -> void:
-	var color : String = Util.COLORS.colors[2].to_html(false)
+	var color : String = Util.COLORS.colors[4].to_html(false)
 	print_rich("[color=#"+color+"]PV: " + update + "[/color]")
 
 #endregion

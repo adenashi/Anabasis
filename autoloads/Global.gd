@@ -58,6 +58,7 @@ func change_state(newState : GameState) -> void:
 	install_sounds(get_node(root_path))
 	
 	CurrentState = newState
+	send_update("Entering " + GameState.keys()[CurrentState].capitalize() + " State.")
 	match CurrentState:
 		GameState.IDLE:
 			AM.cross_fade_ambience("Menus")

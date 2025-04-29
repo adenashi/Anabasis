@@ -14,7 +14,7 @@ signal EnemyDied(enemy : BaseEnemy)
 var Name : String
 var Data : EnemyData
 
-var Attacks : Array[int]
+var Attacks : Array
 
 var MaxHealth : int
 var CurrentHealth : int
@@ -273,7 +273,7 @@ func bolt() -> void:
 #region Debugging TODO: Delete Later!
 
 func send_update(update : String) -> void:
-	var color : String = Util.COLORS.colors[5].to_html(false)
+	var color : String = Util.COLORS.colors[2].to_html(false)
 	print_rich("[color=#"+color+"]CE: " + update + "[/color]")
 
 #endregion

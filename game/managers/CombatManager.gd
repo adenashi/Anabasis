@@ -236,10 +236,8 @@ func perform_enemy_turn() -> void:
 	
 	await get_tree().create_timer(1.2).timeout
 	send_update("Enemy Turn begins.")
-	var enemyAttack : int = CurrentEnemy.BaseAttack - currentEnemyDebuff
 	if SaveData.TutorialOn:
 		Dispatch.EnemyAttacked.emit()
-	send_update(str(enemyAttack) + " Damage to Player.")
 	
 	await Field.show_enemy_attack()
 	await one_frame()
@@ -274,7 +272,7 @@ func one_frame() -> void:
 #region Debugging TODO: Delete Later!
 
 func send_update(update : String) -> void:
-	var color :String = Util.COLORS.colors[3].to_html(false)
+	var color :String = Util.COLORS.colors[2].to_html(false)
 	print_rich("[color=#"+color+"]CM: " + update + "[/color]")
 
 #endregion

@@ -55,7 +55,8 @@ func create_deck() -> void:
 #region Dealing Cards
 
 func deal_card_to_hand(number_of_cards : int) -> void:
-	if Global.CurrentState != Global.GameState.IN_GAME:
+	if Global.CurrentState != Global.GameState.STARTING and Global.CurrentState != Global.GameState.IN_GAME:
+		send_update("Outside of Game - not dealing cards.")
 		return
 	
 	if PlayerDeck.size() < number_of_cards:
@@ -72,8 +73,8 @@ func deal_card_to_hand(number_of_cards : int) -> void:
 			Dispatch.UpdateDeckCount.emit(PlayerDeck.size())
 			await get_tree().create_timer(0.01).timeout
 	
-	CardsDealt.emit()
 	send_update("{x} cards dealt.".format({"x": cardsDealt}))
+	CardsDealt.emit()
 
 #endregion
 

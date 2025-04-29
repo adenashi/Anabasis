@@ -23,7 +23,7 @@ func on_new_enemy(enemy : EnemyData) -> void:
 	var img = load(enemy.Portrait)
 	CardImage.texture = img
 	EnemyName.text = enemy.Name
-	Attack.text = str(enemy.Attack)
+	Attack.text = str(0)
 	update_health(enemy.MaxHealth, enemy.MaxHealth)
 	update_defense(enemy.MaxDefense, enemy.MaxDefense)
 

@@ -137,7 +137,6 @@ func reorder_hand() -> void:
 func discard_cards(cards : Array[BaseCard]) -> void:
 	for card:BaseCard in cards:
 		discard_card(card)
-		send_update("Discarded " + card.Name + ".")
 
 
 func discard_card(card : BaseCard) -> void:

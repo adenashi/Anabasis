@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://guh7jvkhdo7b"]
 
-[ext_resource type="Script" uid="uid://b4psrspcm4q81" path="res://game/managers/GameManager.gd" id="1_l8g03"]
+[ext_resource type="Script" uid="uid://c44lf1lkig5k4" path="res://game/managers/newGM.gd" id="1_qf6n1"]
 [ext_resource type="Texture2D" uid="uid://dsjpgnlgjiyti" path="res://assets/backgrounds/stage_esmuri.png" id="2_3vho3"]
 [ext_resource type="Script" uid="uid://bwayfna8g0pxy" path="res://game/managers/PlayValidator.gd" id="2_j8tme"]
 [ext_resource type="Script" uid="uid://do8q05e3rp6m2" path="res://game/managers/CombatManager.gd" id="3_3vho3"]
@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cg4jooyqj4b75" path="res://game/field/field.tscn" id="10_qf6n1"]
 
 [node name="Game" type="Node" node_paths=PackedStringArray("Validator", "Combat", "Deck", "Stage", "CurrentEnemy", "Player", "GameTimer", "HUD")]
-script = ExtResource("1_l8g03")
+script = ExtResource("1_qf6n1")
 Validator = NodePath("PlayValidator")
 Combat = NodePath("CombatManager")
 Deck = NodePath("DeckManager")
