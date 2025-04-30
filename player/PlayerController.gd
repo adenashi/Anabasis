@@ -65,6 +65,7 @@ func update_max_defense(maxDefense : int) -> void:
 
 func add_defense(defense : int) -> void:
 	CurrentDefense += defense
+	CurrentDefense = max(0, CurrentDefense)
 	if CurrentDefense > MaxDefense:
 		CurrentDefense = MaxDefense
 	Dispatch.UpdatePlayerDefense.emit(MaxDefense, CurrentDefense)
@@ -72,6 +73,7 @@ func add_defense(defense : int) -> void:
 
 func add_health(health : int) -> void:
 	CurrentHealth += health
+	CurrentHealth = max(0, CurrentHealth)
 	if CurrentHealth > MaxHealth:
 		CurrentHealth = MaxHealth
 	Dispatch.UpdatePlayerHealth.emit(MaxHealth, CurrentHealth)
@@ -96,6 +98,7 @@ func take_damage(damage : int) -> void:
 			Dispatch.UpdatePlayerHealth.emit(MaxHealth, CurrentHealth)
 		else:
 			CurrentDefense -= damage
+			CurrentDefense = max(0, CurrentDefense)
 			Dispatch.UpdatePlayerDefense.emit(MaxDefense, CurrentDefense)
 	else:
 		CurrentHealth -= damage

@@ -224,6 +224,11 @@ func reset_hud() -> void:
 func thunderclap() -> void:
 	var cards : Array[BaseCard] = select_random_card(BaseCard.CardSuit.SPADES)
 	
+	if cards.is_empty():
+		send_update("No matching cards available.")
+		do_attack()
+		return
+	
 	var attack : Dictionary = {
 		"Cards": cards,
 		"Effect": BaseCard.StatusEffect.ROLLING,
@@ -236,6 +241,11 @@ func thunderclap() -> void:
 
 func barrage() -> void:
 	var cards : Array[BaseCard] = select_random_card(BaseCard.CardSuit.HEARTS, 3)
+	
+	if cards.is_empty():
+		send_update("No matching cards available.")
+		do_attack()
+		return
 	
 	var attack : Dictionary = {
 		"Cards": cards,
@@ -250,6 +260,11 @@ func barrage() -> void:
 func shackle() -> void:
 	var cards : Array[BaseCard] = select_highest(BaseCard.CardSuit.HEARTS)
 	
+	if cards.is_empty():
+		send_update("No matching cards available.")
+		do_attack()
+		return
+	
 	var attack : Dictionary = {
 		"Cards": cards,
 		"Effect": BaseCard.StatusEffect.LOCKED,
@@ -262,6 +277,11 @@ func shackle() -> void:
 
 func betrayal() -> void:
 	var cards : Array[BaseCard] = select_random(1)
+	
+	if cards.is_empty():
+		send_update("No matching cards available.")
+		do_attack()
+		return
 	
 	var attack : Dictionary = {
 		"Cards": cards,
@@ -276,6 +296,11 @@ func betrayal() -> void:
 func transform() -> void:
 	var cards : Array[BaseCard] = select_highest(BaseCard.CardSuit.CLUBS)
 	
+	if cards.is_empty():
+		send_update("No matching cards available.")
+		do_attack()
+		return
+	
 	var attack : Dictionary = {
 		"Cards": cards,
 		"Effect": BaseCard.StatusEffect.ROLLING,
@@ -288,6 +313,11 @@ func transform() -> void:
 
 func scorch() -> void:
 	var cards : Array[BaseCard] = select_random_card(BaseCard.CardSuit.CLUBS, 2)
+	
+	if cards.is_empty():
+		send_update("No matching cards available.")
+		do_attack()
+		return
 	
 	var attack : Dictionary = {
 		"Cards": cards,
@@ -302,6 +332,11 @@ func scorch() -> void:
 func eclipse() -> void:
 	var cards : Array[BaseCard] = select_lowest(BaseCard.CardSuit.DIAMONDS)
 	
+	if cards.is_empty():
+		send_update("No matching cards available.")
+		do_attack()
+		return
+	
 	var attack : Dictionary = {
 		"Cards": cards,
 		"Effect": BaseCard.StatusEffect.ROLLING,
@@ -314,6 +349,11 @@ func eclipse() -> void:
 
 func whirlwind() -> void:
 	var cards : Array[BaseCard] = select_random_card(BaseCard.CardSuit.DIAMONDS, 4)
+	
+	if cards.is_empty():
+		send_update("No matching cards available.")
+		do_attack()
+		return
 	
 	var attack : Dictionary = {
 		"Cards": cards,
@@ -328,6 +368,11 @@ func whirlwind() -> void:
 func slice() -> void:
 	var cards : Array[BaseCard] = select_highest(BaseCard.CardSuit.SPADES)
 	
+	if cards.is_empty():
+		send_update("No matching cards available.")
+		do_attack()
+		return
+	
 	var attack : Dictionary = {
 		"Cards": cards,
 		"Effect": BaseCard.StatusEffect.LOCKED,
@@ -340,6 +385,11 @@ func slice() -> void:
 
 func seism() -> void:
 	var cards : Array[BaseCard] = select_random(0, 3)
+	
+	if cards.is_empty():
+		send_update("No matching cards available.")
+		do_attack()
+		return
 	
 	var attack : Dictionary = {
 		"Cards": cards,
@@ -354,6 +404,11 @@ func seism() -> void:
 func dispel() -> void:
 	var cards : Array[BaseCard] = select_lowest(BaseCard.CardSuit.HEARTS, 2)
 	
+	if cards.is_empty():
+		send_update("No matching cards available.")
+		do_attack()
+		return
+	
 	var attack : Dictionary = {
 		"Cards": cards,
 		"Effect": BaseCard.StatusEffect.ROLLING,
@@ -366,6 +421,11 @@ func dispel() -> void:
 
 func fury() -> void:
 	var cards : Array[BaseCard] = select_random_card(BaseCard.CardSuit.CLUBS, -1)
+	
+	if cards.is_empty():
+		send_update("No matching cards available.")
+		do_attack()
+		return
 	
 	var attack : Dictionary = {
 		"Cards": cards,
@@ -380,6 +440,11 @@ func fury() -> void:
 func burst() -> void:
 	var cards : Array[BaseCard] = select_highest(BaseCard.CardSuit.DIAMONDS, 3)
 	
+	if cards.is_empty():
+		send_update("No matching cards available.")
+		do_attack()
+		return
+	
 	var attack : Dictionary = {
 		"Cards": cards,
 		"Effect": BaseCard.StatusEffect.ROLLING,
@@ -392,6 +457,11 @@ func burst() -> void:
 
 func sunder() -> void:
 	var cards : Array[BaseCard] = select_random(-1, 3)
+	
+	if cards.is_empty():
+		send_update("No matching cards available.")
+		do_attack()
+		return
 	
 	var attack : Dictionary = {
 		"Cards": cards,
@@ -406,6 +476,11 @@ func sunder() -> void:
 func salvo() -> void:
 	var cards : Array[BaseCard] = select_random(-1, 3)
 	
+	if cards.is_empty():
+		send_update("No matching cards available.")
+		do_attack()
+		return
+	
 	var attack : Dictionary = {
 		"Cards": cards,
 		"Effect": BaseCard.StatusEffect.ROLLING,
@@ -418,6 +493,11 @@ func salvo() -> void:
 
 func bane() -> void:
 	var cards : Array[BaseCard] = select_random_card(BaseCard.CardSuit.HEARTS, -1)
+	
+	if cards.is_empty():
+		send_update("No matching cards available.")
+		do_attack()
+		return
 	
 	var attack : Dictionary = {
 		"Cards": cards,
@@ -432,6 +512,11 @@ func bane() -> void:
 func blight() -> void:
 	var cards : Array[BaseCard] = select_random_card(BaseCard.CardSuit.CLUBS, -1)
 	
+	if cards.is_empty():
+		send_update("No matching cards available.")
+		do_attack()
+		return
+	
 	var attack : Dictionary = {
 		"Cards": cards,
 		"Effect": BaseCard.StatusEffect.ROLLING,
@@ -444,6 +529,11 @@ func blight() -> void:
 
 func blizzard() -> void:
 	var cards : Array[BaseCard] = select_random_card(BaseCard.CardSuit.DIAMONDS, -1)
+	
+	if cards.is_empty():
+		send_update("No matching cards available.")
+		do_attack()
+		return
 	
 	var attack : Dictionary = {
 		"Cards": cards,
@@ -458,6 +548,11 @@ func blizzard() -> void:
 func purge() -> void:
 	var cards : Array[BaseCard] = Deck.CurrentHand
 	
+	if cards.is_empty():
+		send_update("No matching cards available.")
+		do_attack()
+		return
+	
 	var attack : Dictionary = {
 		"Cards": cards,
 		"Effect": BaseCard.StatusEffect.ROLLING,
@@ -470,6 +565,11 @@ func purge() -> void:
 
 func bolt() -> void:
 	var cards : Array[BaseCard] = select_random_card(BaseCard.CardSuit.SPADES, -1)
+	
+	if cards.is_empty():
+		send_update("No matching cards available.")
+		do_attack()
+		return
 	
 	var attack : Dictionary = {
 		"Cards": cards,
@@ -486,10 +586,13 @@ func select_random_card(suit : BaseCard.CardSuit, quantity : int = 1) -> Array[B
 	
 	var c : Array[BaseCard] = []
 	for card:BaseCard in Deck.CurrentHand:
-		if card.Suit == suit:
+		if card.Suit == suit and card.CurrentStatus == BaseCard.StatusEffect.NONE:
 			c.append(card)
 	
 	if quantity == -1:
+		return c
+	
+	if c.is_empty():
 		return c
 	
 	for i in range(quantity):
@@ -501,13 +604,17 @@ func select_random_card(suit : BaseCard.CardSuit, quantity : int = 1) -> Array[B
 	
 	return cards
 
+
 func select_highest(suit : BaseCard.CardSuit, quantity : int = 1) -> Array[BaseCard]:
 	var cards : Array[BaseCard] = []
 	
 	var c : Array[BaseCard] = []
 	for card:BaseCard in Deck.CurrentHand:
-		if card.Suit == suit:
+		if card.Suit == suit and card.CurrentStatus == BaseCard.StatusEffect.NONE:
 			c.append(card)
+	
+	if c.is_empty():
+		return c
 	
 	for i in range(quantity):
 		var x : BaseCard = c.back()
@@ -525,8 +632,11 @@ func select_lowest(suit : BaseCard.CardSuit, quantity : int = 1) -> Array[BaseCa
 	var c : Array[BaseCard] = []
 	Deck.CurrentHand.sort_custom(Util.sort_by_rank)
 	for card:BaseCard in Deck.CurrentHand:
-		if card.Suit == suit:
+		if card.Suit == suit and card.CurrentStatus == BaseCard.StatusEffect.NONE:
 			c.append(card)
+	
+	if c.is_empty():
+		return c
 	
 	for i in range(quantity):
 		var x : BaseCard = c.front()
@@ -553,8 +663,9 @@ func select_random(pos : int, quantity : int = 1) -> Array[BaseCard]:
 				x = c.pick_random()
 			1:
 				x = c.back()
-		cards.append(x)
-		c.erase(x)
+		if  x.CurrentStatus == BaseCard.StatusEffect.NONE:
+			cards.append(x)
+			c.erase(x)
 		if c.is_empty():
 			break
 	
