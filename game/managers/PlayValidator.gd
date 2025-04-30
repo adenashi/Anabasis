@@ -117,10 +117,10 @@ func on_card_deselected(card : BaseCard) -> void:
 
 
 func on_discard_selected_cards() -> void:
+	Dispatch.UpdatePlayerAttack.emit(0)
 	await Deck.discard_selected_cards(selectedCards)
 	await one_frame()
 	send_update("Clearing Selected Cards Array.")
-	Dispatch.UpdatePlayerAttack.emit(0)
 	selectedCards.clear()
 
 

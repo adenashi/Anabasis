@@ -113,7 +113,7 @@ func perform_attack(cards : Array[BaseCard]) -> void:
 	
 	for card:BaseCard in cards:
 		var values : Array[int] = get_values(card)
-		send_update(CurrentEnemy.Name + " takes " + str(values[0] - Field.PlayerAttackDebuff) + " damage.")
+		send_update(CurrentEnemy.Name + " takes " + str(max(0, values[0] - Field.PlayerAttackDebuff)) + " damage.")
 		points += values[1]
 	
 	if cards.size() > 3:
@@ -177,7 +177,7 @@ func add_defense_and_perform_attack(cards : Array[BaseCard]) -> void:
 	for card:BaseCard in cards:
 		var values : Array[int] = get_values(card)
 		points += values[1]
-		send_update(CurrentEnemy.Name + " takes " + str(values[0]) + " damage.")
+		send_update(CurrentEnemy.Name + " takes " + str(max(0, (card.PointValue / 10) - Field.PlayerAttackDebuff)) + " damage.")
 	
 	if cards.size() > 3:
 		var bonus = cards.size() - 3
@@ -255,7 +255,7 @@ func on_enemy_died(enemy : BaseEnemy) -> void:
 	Deck.CanDeal = false
 	send_update(enemy.Name + " has been defeated!")
 	change_turn(Global.Turn.NONE)
-	await get_tree().create_timer(1.5).timeout
+	await get_tree().create_timer(2.0).timeout
 	Dispatch.EnemyDied.emit()
 
 #endregion

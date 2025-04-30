@@ -50,6 +50,7 @@ var TotalScore : int
 #region Initialization
 
 func _ready() -> void:
+	Global.NextStage = 1
 	subscribe_to_dispatch_signals()
 	subscribe_to_stage_signals()
 	set_references()
@@ -198,6 +199,8 @@ func on_score_increased(amount : int) -> void:
 
 
 func on_deck_reshuffled() -> void:
+	if Global.CurrentState == Global.GameState.INTERSTAGE:
+		return
 	GameReshuffles += 1
 	Dispatch.UpdateMoves.emit(GameReshuffles)
 

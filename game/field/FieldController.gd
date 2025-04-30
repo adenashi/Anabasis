@@ -107,7 +107,8 @@ func show_player_double_action(cards : Array[BaseCard]) -> void:
 
 func show_enemy_attack() -> void:
 	var attack : int = Enemy.current_attack()
-	send_update(str(attack - EnemyAttackDebuff) + " Damage to Player")
+	attack = max(0, attack - EnemyAttackDebuff)
+	send_update(str(attack) + " Damage to Player")
 	Dispatch.UpdateEnemyAttack.emit(attack)
 	
 	var starStart : CPUParticles2D = VFX.Impacts.Star.instantiate()
@@ -127,7 +128,7 @@ func show_enemy_attack() -> void:
 	AM.play_sfx("Game", "Impact", 2)
 	await starEnd.finished
 	
-	Player.take_damage(max(0, attack - EnemyAttackDebuff))
+	Player.take_damage(attack)
 	
 	starStart.queue_free()
 	beam.queue_free()
