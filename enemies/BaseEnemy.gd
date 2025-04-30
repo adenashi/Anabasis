@@ -115,7 +115,7 @@ func perform_action(doMove : bool = true) -> Action:
 	var chance : int = randi_range(0,100)
 	var message : String
 	var action : Action
-	if chance >= 70:
+	if chance >= 70 and CurrentDefense > 0:
 		message = "Performing Special Attack"
 		action = Action.SPECIAL
 		if doMove:
@@ -174,6 +174,9 @@ func do_defense() -> void:
 
 
 func do_special_move() -> void:
+	if CurrentDefense <= 0:
+		do_attack()
+		return
 	Deck.CurrentHand.sort_custom(Util.sort_by_suit)
 	SpecialMove.call()
 
@@ -546,7 +549,7 @@ func blizzard() -> void:
 
 
 func purge() -> void:
-	var cards : Array[BaseCard] = Deck.CurrentHand
+	var cards : Array[BaseCard] = select_random_card(BaseCard.CardSuit.SPADES, -1)
 	
 	if cards.is_empty():
 		send_update("No matching cards available.")

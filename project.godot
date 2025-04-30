@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Anabasis"
-config/version="dev0.7"
+config/version="dev0.8"
 run/main_scene="uid://br0j6dibws3lw"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/bg_color=Color(0.117647, 0.117647, 0.12549, 1)

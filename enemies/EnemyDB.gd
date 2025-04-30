@@ -203,7 +203,7 @@ const DB : Dictionary = {
 		"MaxDefense": 70,
 		"MaxHealth": 30,
 		"SpecialMove": "Purge",
-		"SpecialMoveDesc": "[p align=center]Rolls all cards in your hand.[/p]",
+		"SpecialMoveDesc": "[p align=center]Rolls all [img=16]res://cards/assets/suits/Spades64.png[/img] Spades in your hand.[/p]",
 		"PointValue": 1000,
 		"Portrait": "res://assets/ui/CardSilhouette.png",
 		"Stage": "Nahel",
